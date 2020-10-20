@@ -1,0 +1,60 @@
+﻿<Page x:Class="LL.LLEvent" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <RelativePanel>
+        <SplitView x:Name="RightPane"
+                   PanePlacement="Right"
+                   OpenPaneLength="200"
+                   DisplayMode="Inline"
+                   IsPaneOpen="True">
+            <SplitView.Pane>
+                <RelativePanel>
+                    <UserControl x:Name="RPane"
+                                 RelativePanel.AlignTopWithPanel="True"
+                                 RelativePanel.Above="FixPane" />
+                    <ToggleSwitch x:Name="FixPane" x:Uid="Fix" Margin="10,0,0,0"
+                                  RelativePanel.AlignBottomWithPanel="True"/>
+                </RelativePanel>
+            </SplitView.Pane>
+            <RelativePanel>
+                <StackPanel x:Name="TH"
+                            Orientation="Horizontal"
+                            RelativePanel.AlignTopWithPanel="True"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignRightWithPanel="True">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEADF;" FontWeight="Normal" FontStyle="Normal"/>
+                    <TextBlock x:Uid="AllEvents" Margin="10,0,0,0" FontSize="20"/>
+                </StackPanel>
+                <ListView x:Name="EL" Margin="0,0,0,0"
+                          Loaded="EventList_Loaded"
+                          RelativePanel.Below="TH"
+                          RelativePanel.Above="BS"
+                          RelativePanel.AlignLeftWithPanel="True">
+                </ListView>
+                <StackPanel x:Name="BS"
+                            Orientation="Horizontal"
+                            RelativePanel.AlignBottomWithPanel="True"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignRightWithPanel="True"
+                            HorizontalAlignment="Right">
+                    <Button x:Name="BTNewEvent"
+                            Background="{x:Null}"
+                            Click="BTNewEvent_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;" FontSize="11"/>
+                            <TextBlock x:Uid="NewEvent" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="BTSearch" 
+                            Background="{x:Null}" 
+                            Click="BTSearch_Click" >
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE721;" FontSize="11"/>
+                            <TextBlock x:Uid="Search" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </RelativePanel>
+        </SplitView>
+    </RelativePanel>
+</Page>

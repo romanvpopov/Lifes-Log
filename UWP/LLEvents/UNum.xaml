@@ -1,0 +1,11 @@
+﻿<local:EventBody
+    x:Class="LL.LLEvents.UNum"
+    xmlns:local="using:LL.LLEvents"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Grid.Row="1" Grid.ColumnSpan="4">
+    <StackPanel Orientation="Horizontal" Width="400">
+        <TextBlock x:Uid="Value"  VerticalAlignment="Center"/>
+        <TextBox x:Name="Qty" InputScope="Number" KeyUp="Qty_KeyUp" HorizontalAlignment="Right"/>
+    </StackPanel>
+</local:EventBody>

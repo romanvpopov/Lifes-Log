@@ -1,0 +1,12 @@
+﻿<Page
+    x:Class="LL.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <NavigationView x:Name="NV" 
+        SelectionChanged="NV_SelectionChanged"
+        OpenPaneLength="140"
+        BackRequested="NV_BackRequested"
+        IsBackEnabled="True" PaneDisplayMode="Left" >
+        <Frame x:Name="MainFrame"/>
+    </NavigationView>
+</Page>

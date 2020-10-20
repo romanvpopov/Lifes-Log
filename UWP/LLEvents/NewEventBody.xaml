@@ -1,0 +1,38 @@
+﻿<UserControl
+    x:Class="LL.LLEvents.NewEventBody"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <TextBlock x:Uid="NewEvent"
+                       Margin="2,2,2,2"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+            <Button x:Uid="BTCancel"
+                    Content="Отмена"
+                    HorizontalAlignment="Right"
+                    Background="{x:Null}"
+                    Click="Button_Click"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <FontIcon Margin="2,2,2,2"
+                  FontFamily="Segoe MDL2 Assets" Glyph="&#xE70F;" FontSize="11"/>
+            <StackPanel x:Name="PE" Orientation="Horizontal" Margin="2,2,2,2"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <FontIcon Margin="2,2,2,2"
+                  FontFamily="Segoe MDL2 Assets" Glyph="&#xE805;" FontSize="11"/>
+            <StackPanel x:Name="PS" Orientation="Horizontal" Margin="2,2,2,2"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <FontIcon Margin="2,2,2,2"
+                  FontFamily="Segoe MDL2 Assets" Glyph="&#xE95E;" FontSize="11"/>
+            <StackPanel x:Name="PH" Orientation="Horizontal" Margin="2,2,2,2"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <FontIcon Margin="2,2,2,2"
+                  FontFamily="Segoe MDL2 Assets" Glyph="&#xEF40;" FontSize="11"/>
+            <StackPanel x:Name="PM" Orientation="Horizontal" Margin="2,2,2,2"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,22 @@
+﻿<Application
+    x:Class="LL.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LL">
+    <Application.Resources>
+        <Style TargetType="Button">
+            <Setter Property="CornerRadius" Value="2,2,2,2"/>
+            <Setter Property="Margin" Value="2,2,2,2"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="CornerRadius" Value="2,2,2,2"/>
+            <Setter Property="Margin" Value="2,2,2,2"/>
+            <Setter Property="BorderThickness" Value="1,1,1,1"/>
+        </Style>
+        <Style TargetType="CalendarDatePicker">
+            <Setter Property="CornerRadius" Value="2,2,2,2"/>
+            <Setter Property="Margin" Value="2,2,2,2"/>
+            <Setter Property="BorderThickness" Value="1,1,1,1"/>
+        </Style>
+    </Application.Resources>
+</Application>
