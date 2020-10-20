@@ -167,6 +167,9 @@
     <Compile Include="LLEvents\UShaving.xaml.cs">
       <DependentUpon>UShaving.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LLEvents\UTraining.xaml.cs">
+      <DependentUpon>UTraining.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LLEvents\UTono.xaml.cs">
       <DependentUpon>UTono.xaml</DependentUpon>
     </Compile>
@@ -306,6 +309,10 @@
     <Page Include="LLEvents\UShaving.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LLEvents\UTraining.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="LLEvents\UTono.xaml">
       <SubType>Designer</SubType>
