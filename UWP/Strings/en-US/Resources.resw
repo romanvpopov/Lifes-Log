@@ -199,7 +199,10 @@
     <value>Event types</value>
   </data>
   <data name="Evnts.Text" xml:space="preserve">
-    <value>Events</value>
+    <value>Notes</value>
+  </data>
+  <data name="Filter.Text" xml:space="preserve">
+    <value>Filter</value>
   </data>
   <data name="Fix.OffContent" xml:space="preserve">
     <value>Float</value>
@@ -242,6 +245,9 @@
   </data>
   <data name="Morning.Text" xml:space="preserve">
     <value>Morning</value>
+  </data>
+  <data name="MoveTo.Text" xml:space="preserve">
+    <value>Move to</value>
   </data>
   <data name="NewEvent.Text" xml:space="preserve">
     <value>New event</value>

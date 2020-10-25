@@ -6,7 +6,8 @@
         SelectionChanged="NV_SelectionChanged"
         OpenPaneLength="140"
         BackRequested="NV_BackRequested"
-        IsBackEnabled="True" PaneDisplayMode="Left" >
+        IsBackEnabled="True"
+        PaneDisplayMode="Left" >
         <Frame x:Name="MainFrame"/>
     </NavigationView>
 </Page>

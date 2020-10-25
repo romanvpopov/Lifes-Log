@@ -199,7 +199,10 @@
     <value>Типы событий</value>
   </data>
   <data name="Evnts.Text" xml:space="preserve">
-    <value>События</value>
+    <value>Заметки</value>
+  </data>
+  <data name="Filter.Text" xml:space="preserve">
+    <value>Фильтр</value>
   </data>
   <data name="Fix.OffContent" xml:space="preserve">
     <value>Освободить</value>
@@ -242,6 +245,9 @@
   </data>
   <data name="Morning.Text" xml:space="preserve">
     <value>Утро</value>
+  </data>
+  <data name="MoveTo.Text" xml:space="preserve">
+    <value>Перейти</value>
   </data>
   <data name="NewEvent.Text" xml:space="preserve">
     <value>Новое событие</value>

@@ -38,6 +38,7 @@ namespace LL
             Dt = dt;
             Body.Content = new UNote(tp, this);
             exp = true;
+            BD.Background = (SolidColorBrush)Resources["TextBoxBackgroundThemeBrush"];
         }
 
 
@@ -46,6 +47,7 @@ namespace LL
             if (!exp & Code > 0) {
                 Body.Content = new UNote(Code, this);
                 BD.BorderBrush = (SolidColorBrush)Resources["ButtonBorderThemeBrush"];
+                BD.Background = (SolidColorBrush)Resources["TextBoxBackgroundThemeBrush"];
                 exp = true;
             }
         }
@@ -65,6 +67,8 @@ namespace LL
                 }
             else { Body.Content = null; }
             exp = false;
+            BD.Background = null;
+            BD.BorderBrush = (SolidColorBrush)Resources["ContentDialogBorderThemeBrush"];
         }
 
         private void Border_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e) {

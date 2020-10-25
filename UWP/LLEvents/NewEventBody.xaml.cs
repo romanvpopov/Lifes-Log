@@ -20,9 +20,8 @@ namespace LL.LLEvents
                 sq.Open();
                 var cmd = sq.CreateCommand();
                 cmd.CommandText = $"Select lt.Code,lt.{lang}_ShortName,lt.ClassName,lt.HSM,lt.{lang}_Name " +
-                "From LLUserEventType lu join LLEventType lt on lu.EventTypeCode=lt.Code " +
-                "Where lt.ClassName<>'' " +
-                $"Order by lu.Turn,lt.{lang}_ShortName";
+                "From LLEventType lt Where lt.ClassName<>'' and lt.Turn>0 " +
+                $"Order by lt.Turn,lt.{lang}_ShortName";
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -30,7 +29,6 @@ namespace LL.LLEvents
                     bt.Content = (reader.GetString(1) == "" ? reader.GetString(4) : reader.GetString(1));
                     bt.Name = reader.GetString(2);
                     bt.Tag = reader.GetInt16(0);
-                    bt.Background = null;
                     bt.Click += Bt_Click;
                     switch (reader.GetString(3)) {
                         case "S": PS.Children.Add(bt); break;

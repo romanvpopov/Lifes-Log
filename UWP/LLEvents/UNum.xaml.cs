@@ -12,8 +12,9 @@ namespace LL.LLEvents
         public UNum(SqlCommand cmd, Int32 Code, Int16 ntp)
         {
             this.InitializeComponent();
-            cmd.CommandText = $"Select lf.Code,isNull(lv.FieldValue,'')" +
-                $"From LLFieldEvent lf left join LLEventValue lv on lf.Code = lv.FieldEventCode and lv.EventCode={Code} " +
+            cmd.CommandText = $"Select lf.Code,isNull(lv.FieldValue,''),lu.Code " +
+                $"From LLFieldEvent lf left join LLUnit lu on lf.UnitCode=lu.Code " +
+                $"left join LLEventValue lv on lf.Code = lv.FieldEventCode and lv.EventCode={Code} " +
                 $"Where lf.EventTypeCode ={ntp}";
             var rd = cmd.ExecuteReader();
             if (rd.Read()) {

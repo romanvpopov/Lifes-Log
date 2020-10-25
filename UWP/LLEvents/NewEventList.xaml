@@ -4,30 +4,80 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ScrollViewer>
         <StackPanel Orientation="Vertical">
-            <TextBlock x:Uid="NewEvent"
-                    Margin="2,2,2,2"/>
-            <CalendarDatePicker x:Name="DateEvent"/>
+            <TextBlock x:Uid="NewEvent" Margin="2"/>
+            <CalendarDatePicker x:Name="DateEvent" Margin="2"/>
             <StackPanel Orientation="Horizontal">
-                <FontIcon Margin="2,2,2,2" FontFamily="Segoe MDL2 Assets" Glyph="&#xE70F;" FontSize="11"/>
+                <FontIcon Margin="10,0,0,0"
+                          FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xE70F;"
+                          FontSize="11"/>
                 <TextBlock x:Uid="Evnts" Margin="10,0,0,0"/>
             </StackPanel>
-            <StackPanel x:Name="PE" Orientation="Vertical" Margin="20,2,2,2"/>
+            <RelativePanel>
+                <Border x:Name="BL"
+                    Width="1" Margin="20,10,0,10" 
+                    Background="Blue"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"/>
+                <StackPanel x:Name="PE"
+                            Orientation="Vertical"
+                            RelativePanel.RightOf="BL"/>
+            </RelativePanel>
             <StackPanel Orientation="Horizontal">
-                <FontIcon Margin="2,2,2,2" FontFamily="Segoe MDL2 Assets" Glyph="&#xE805;" FontSize="11"/>
+                <FontIcon Margin="10,0,0,0"
+                          FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xE805;"
+                          FontSize="11"/>
                 <TextBlock x:Uid="SportT" Margin="10,0,0,0"/>
             </StackPanel>
-            <StackPanel x:Name="PS" Orientation="Vertical" Margin="20,2,2,2"/>
+            <RelativePanel>
+                <Border x:Name="BLS"
+                    Width="1" Margin="20,10,0,10" 
+                    Background="Blue"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"/>
+                <StackPanel x:Name="PS"
+                            Orientation="Vertical"
+                            RelativePanel.RightOf="BLS"/>
+            </RelativePanel>
             <StackPanel Orientation="Horizontal">
-                <FontIcon Margin="2,2,2,2" FontFamily="Segoe MDL2 Assets" Glyph="&#xE95E;" FontSize="11"/>
+                <FontIcon Margin="10,0,0,0"
+                          FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xE95E;"
+                          FontSize="11"/>
                 <TextBlock x:Uid="Hlth" Margin="10,0,0,0"/>
             </StackPanel>
-            <StackPanel x:Name="PH" Orientation="Vertical" Margin="20,2,2,2"/>
+            <RelativePanel>
+                <Border x:Name="BLH"
+                    Width="1" Margin="20,10,0,10" 
+                    Background="Blue"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"/>
+                <StackPanel x:Name="PH"
+                            Orientation="Vertical"
+                            RelativePanel.RightOf="BLH"/>
+            </RelativePanel>
             <StackPanel Orientation="Horizontal">
-                <FontIcon  Margin="2,2,2,2"
-              FontFamily="Segoe MDL2 Assets" Glyph="&#xEF40;" FontSize="11"/>
+                <FontIcon  Margin="10,0,0,0"
+                           FontFamily="Segoe MDL2 Assets"
+                           Glyph="&#xEF40;"
+                           FontSize="11"/>
                 <TextBlock x:Uid="Mny" Margin="10,0,0,0"/>
             </StackPanel>
-            <StackPanel x:Name="PM" Orientation="Vertical" Margin="20,2,2,2"/>
+            <RelativePanel>
+                <Border x:Name="BLM"
+                    Width="1" Margin="20,10,0,10" 
+                    Background="Blue"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"/>
+                <StackPanel x:Name="PM"
+                            Orientation="Vertical"
+                            RelativePanel.RightOf="BLM"/>
+            </RelativePanel>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

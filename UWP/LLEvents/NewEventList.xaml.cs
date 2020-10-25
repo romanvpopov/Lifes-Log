@@ -8,11 +8,12 @@ namespace LL.LLEvents
     {
         private readonly string lang = (App.Current as App).lang;
         private ListView lv;
+        private LLEvent le;
         private Button bt;
 
-        public NewEventList(ListView EL)
+        public NewEventList(ListView EL,LLEvent LE)
         {
-            lv = EL;
+            lv = EL; le = LE;
             this.InitializeComponent();
             DateEvent.Date = DateTime.Today;
             using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr))
@@ -20,8 +21,7 @@ namespace LL.LLEvents
                 sq.Open();
                 var cmd = sq.CreateCommand();
                 cmd.CommandText = $"Select lt.Code,lt.{lang}_Name,lt.ClassName,lt.HSM " +
-                "From LLUserEventType lu join LLEventType lt on lu.EventTypeCode=lt.Code " +
-                "Where lt.ClassName<>'' " +
+                "From LLEventType lt Where lt.ClassName<>'' and lt.Turn>0" +
                 $"Order by lt.Turn,lt.{lang}_Name";
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -30,7 +30,6 @@ namespace LL.LLEvents
                     bt.Content = reader.GetString(1);
                     bt.Name = reader.GetString(2);
                     bt.Tag = reader.GetInt16(0);
-                    bt.Background = null;
                     bt.Click += Bt_Click;
                     switch (reader.GetString(3)) {
                         case "S": PS.Children.Add(bt); break;
@@ -50,15 +49,11 @@ namespace LL.LLEvents
                     dy.AddEvent(Convert.ToInt16((sender as Button).Tag.ToString()));
                     lv.SelectedItem = dy;
                     lv.ScrollIntoView(lv.SelectedItem);
+                    le.HidePane();
                     break;
                 }
             }
             
-        }
-
-        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            //ne.Collapse();
         }
     }
 }
