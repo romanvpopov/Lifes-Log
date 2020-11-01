@@ -15,8 +15,8 @@ namespace LL
     sealed partial class App : Application {
 
         public string ConStr;
-        public Int16 User = 1;
         public string lang;
+        public int lenpage;
         private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
 
         public App()
@@ -80,13 +80,6 @@ namespace LL
         public Msg(string Uid)
         {
             Content = new TextBlock() { Text = ResourceLoader.GetForCurrentView().GetString(Uid) };
-        }
-    }
-    public class MsgErr : Flyout
-    {
-        public MsgErr(string err)
-        {
-            Content = new TextBlock() { Text = err };
         }
     }
 }

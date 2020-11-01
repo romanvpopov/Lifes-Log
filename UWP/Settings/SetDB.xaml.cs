@@ -36,7 +36,7 @@ namespace LL.Settings
             ls.Values["InitialCatalog"] = InitialCatalog.Text;
             ls.Values["Login"] = Login.Text;
             ls.Values["Password"] = Password.Password;
-            new Msg("Done").ShowAt(BTApply);
+            //new Msg("Done").ShowAt(BTApply);
             
         }
 

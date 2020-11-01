@@ -246,6 +246,9 @@
   <data name="Money" xml:space="preserve">
     <value>Деньги</value>
   </data>
+  <data name="More.Text" xml:space="preserve">
+    <value>Еще</value>
+  </data>
   <data name="Morning.Text" xml:space="preserve">
     <value>Утро</value>
   </data>
@@ -260,6 +263,9 @@
   </data>
   <data name="NewEvnt.Label" xml:space="preserve">
     <value>Новое событие</value>
+  </data>
+  <data name="NF" xml:space="preserve">
+    <value>Ничего не найдено</value>
   </data>
   <data name="Notes.Text" xml:space="preserve">
     <value>Заметки</value>

@@ -12,7 +12,7 @@ namespace LL
         private Boolean exp;
         public Int32 Code;
         public DateTime Dt;
-        private Int16 tp;
+        public Int16 tp;
         private readonly string lang = (App.Current as App).lang;
 
         public Event(String st, Int32 EventCode, Int16 EventType)
