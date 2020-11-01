@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
 using LL.LLEvents;
-using Windows.ApplicationModel.Resources;
+using Windows.Storage;
+using Windows.UI.Xaml;
 
 namespace LL { 
     /// 
@@ -13,8 +13,11 @@ namespace LL {
     public sealed partial class LLEvent : Page {
 
         private readonly string lang = (App.Current as App).lang;
-        private readonly Int16 usr = (App.Current as App).User;
+        private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
         public string etps, prds, srchs;
+        private EventFilter ef;
+        private NewEventList ne;
+        private MoveTo mt;
 
         public LLEvent() {
             InitializeComponent();
@@ -22,18 +25,55 @@ namespace LL {
 
         private void EventList_Loaded(object _1, Windows.UI.Xaml.RoutedEventArgs _2)
         {
-            prds = "DateDiff(day, c.Dat, GETDATE()) between 0 and 365";
             etps = ""; srchs = "";
-            using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr))
-            {
+            EL.Items.Add(new More());
+            using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr))  {
                 sq.Open();
-                for (int i = -365; i <= 0; i++)
-                    EL.Items.Add(new Day(sq, DateTime.Today.Add(TimeSpan.FromDays(i))));
+                for (int i = -31; i <= 0; i++)
+                    EL.Items.Add(new Day(sq, DateTime.Today.Add(TimeSpan.FromDays(i)),""));
             }
-            EL.SelectedItem = EL.Items.Last();
-            EL.ScrollIntoView(EL.SelectedItem);
+            EL.Items.Add(new More());
+            ef = new EventFilter();  ef.Apply = ApplyFilter;
+            mt = new MoveTo();       mt.Move = Move;
+            ne = new NewEventList(); ne.Add=Add;
+            RPane.Content = ne;
+            if (ls.Values.ContainsKey("FixPane")) FixPane.IsOn = (bool) ls.Values["FixPane"];
+            Move("Today");
+        }
 
-            RPane.Content = new NewEventList(EL,this);
+        private void Add(DateTime dt, Int16 tp)
+        { 
+            foreach (object dy in EL.Items) {
+                if (dy.GetType().Name == "Day") {
+                    if ((dy as Day).dt == dt) {
+                        (dy as Day).AddEvent(tp);
+                        EL.SelectedItem = dy;
+                        EL.ScrollIntoView(EL.SelectedItem);
+                        HidePane();
+                        break;
+                    }
+}
+            }
+        }
+
+        private void Move(String ss) 
+        {
+            if (ss == "Today") {
+                foreach (object d in EL.Items) {
+                    if (d.GetType().Name == "Day") {
+                        if ((d as Day).dt == DateTime.Today) {
+                            EL.SelectedItem = d;
+                            EL.ScrollIntoView(EL.SelectedItem);
+                            HidePane();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ApplyFilter(String tpd)
+        { 
         }
 
         public void HidePane()
@@ -41,53 +81,39 @@ namespace LL {
             if (!FixPane.IsOn) RightPane.IsPaneOpen = false;
         }
 
-        private void BTMove_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void FixPane_Toggled(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            var mf = new MenuFlyout();
-            var fi = new MenuFlyoutItem() { Text = ResourceLoader.GetForCurrentView().GetString("Last365") };
-            //; fi.Click += Last365_Click;
-            mf.Items.Add(fi);
-            mf.Items.Add(new MenuFlyoutSeparator());
-            mf.Items.Add(new ToggleMenuFlyoutItem() { Text = ResourceLoader.GetForCurrentView().GetString("WCalendar"), IsChecked = true });
-            using (var sq = new SqlConnection((App.Current as App).ConStr))
-            {
-                sq.Open();
-                var cmd = sq.CreateCommand();
-                cmd.CommandText = $"Select Distinct Convert(varchar,Datepart(year,DateEvent)) as DY From LLEvent Order by DY ";
-                var rd = cmd.ExecuteReader();
-                while (rd.Read())
-                {
-                    fi = new MenuFlyoutItem() { Text = rd.GetString(0) };
-                    //                    fi.Click += Year_Click;
-                    mf.Items.Add(fi);
-                }
-            }
-            BTMove.Flyout = mf;
-
+            ls.Values["FixPane"] = FixPane.IsOn;
         }
 
-        private void BTNewEvent_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void BTMove_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            if (RPane.Content.GetType().Name == "NewEventList")
-            {
+            if (RPane.Content.GetType().Name == "MoveTo") {
                 RightPane.IsPaneOpen = !RightPane.IsPaneOpen;
-            }
-            else
-            {
-                RPane.Content = new NewEventList(EL, this);
+            } else {
+                RPane.Content = mt;
                 RightPane.IsPaneOpen = true;
             }
         }
 
-        private void BTSearch_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+
+        private void BTNewEvent_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            if (RPane.Content.GetType().Name == "EventFilter")
-            {
+            if (RPane.Content.GetType().Name == "NewEventList")  {
                 RightPane.IsPaneOpen = !RightPane.IsPaneOpen;
+            } else {
+                RPane.Content = ne;
+                RightPane.IsPaneOpen = true;
             }
-            else
-            {
-                RPane.Content = new EventFilter(this);
+        }
+
+        private void BTFilter_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if (RPane.Content.GetType().Name == "EventFilter") {
+                RightPane.IsPaneOpen = !RightPane.IsPaneOpen;
+            } else {
+                RPane.Content = ef;
+                RightPane.IsPaneOpen = true;
             }
         }
     }

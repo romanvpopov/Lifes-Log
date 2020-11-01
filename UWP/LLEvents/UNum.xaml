@@ -5,13 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Grid.Row="1" Grid.ColumnSpan="4">
     <StackPanel Orientation="Horizontal">
-        <TextBlock x:Uid="Value"
+        <TextBlock x:Name="Value"
                    Margin="2"
                    VerticalAlignment="Center"/>
         <TextBox x:Name="Qty"
                  InputScope="Number"
                  KeyUp="Qty_KeyUp"
                  Margin="2"
-                 HorizontalAlignment="Right"/>
+                 TextAlignment="Right"/>
     </StackPanel>
 </local:EventBody>

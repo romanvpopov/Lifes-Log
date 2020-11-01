@@ -40,32 +40,32 @@ namespace LL
         public void CreateNav() {
             NV.MenuItems.Clear();
             
-            var icn = new FontIcon { FontFamily = new FontFamily("Segoe MDL2 Assets"), Glyph = "\xEADF" };
+            var icn = new FontIcon { Glyph = "\xEADF" };
             var nvi = new NavigationViewItem {Tag = "Events", Icon=icn,  
                 Content = ResourceLoader.GetForCurrentView().GetString("Events")};
             NV.MenuItems.Add(nvi);
             
-            icn = new FontIcon { FontFamily = new FontFamily("Segoe MDL2 Assets"), Glyph = "\xE805" };
+            icn = new FontIcon { Glyph = "\xE805" };
             nvi = new NavigationViewItem { Tag = "Sport", Icon = icn,
                 Content = ResourceLoader.GetForCurrentView().GetString("Sport")};
             NV.MenuItems.Add(nvi);
             
-            icn = new FontIcon { FontFamily = new FontFamily("Segoe MDL2 Assets"), Glyph = "\xE95E" };
+            icn = new FontIcon { Glyph = "\xE95E" };
             nvi = new NavigationViewItem { Tag = "Health", Icon = icn,
                 Content = ResourceLoader.GetForCurrentView().GetString("Health")};
             NV.MenuItems.Add(nvi);
             
-            icn = new FontIcon { FontFamily = new FontFamily("Segoe MDL2 Assets"), Glyph = "\xEF40" };
+            icn = new FontIcon { Glyph = "\xEF40" };
             nvi = new NavigationViewItem { Tag = "Money", Icon = icn,
                 Content = ResourceLoader.GetForCurrentView().GetString("Money")};
             NV.MenuItems.Add(nvi);
 
-            icn = new FontIcon { FontFamily = new FontFamily("Segoe MDL2 Assets"), Glyph = "\xE787" };
+            icn = new FontIcon { Glyph = "\xE787" };
             nvi = new NavigationViewItem { Tag = "Calendar", Icon = icn,
                 Content = ResourceLoader.GetForCurrentView().GetString("Calendar")};
             NV.MenuItems.Add(nvi);
 
-            icn = new FontIcon { FontFamily = new FontFamily("Segoe MDL2 Assets"), Glyph = "\xF3B1" };
+            icn = new FontIcon { Glyph = "\xF3B1" };
             nvi = new NavigationViewItem {Tag = "Logout", Icon = icn,
                 Content = ResourceLoader.GetForCurrentView().GetString("Log out")};
             NV.MenuItems.Add(nvi);

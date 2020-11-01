@@ -17,6 +17,10 @@
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="2"/>
         </Style>
+        <Style TargetType="FontIcon">
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="11"/>
+        </Style>
         <Style TargetType="CalendarDatePicker">
             <Setter Property="CornerRadius" Value="2"/>
             <Setter Property="BorderThickness" Value="1"/>

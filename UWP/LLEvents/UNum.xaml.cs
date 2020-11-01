@@ -8,19 +8,20 @@ namespace LL.LLEvents
     {
         private Int32 vc;
         public override void GetFocus() { Qty.Focus(FocusState.Programmatic); }
+        private readonly string lang = (App.Current as App).lang;
 
         public UNum(SqlCommand cmd, Int32 Code, Int16 ntp)
         {
             this.InitializeComponent();
-            cmd.CommandText = $"Select lf.Code,isNull(lv.FieldValue,''),lu.Code " +
-                $"From LLFieldEvent lf left join LLUnit lu on lf.UnitCode=lu.Code " +
-                $"left join LLEventValue lv on lf.Code = lv.FieldEventCode and lv.EventCode={Code} " +
+            cmd.CommandText = $"Select lf.Code,isNull(lv.FieldValue,''),lf.{lang}_FieldName " +
+                $"From LLFieldEvent lf left join LLEventValue lv on lf.Code = lv.FieldEventCode and lv.EventCode={Code} " +
                 $"Where lf.EventTypeCode ={ntp}";
             var rd = cmd.ExecuteReader();
             if (rd.Read()) {
-                    vc = rd.GetInt32(0);
-                    Qty.Text = rd.GetString(1);
-            }
+                vc = rd.GetInt32(0);
+                Qty.Text = rd.GetString(1);
+                Value.Text = rd.GetString(2);
+                }
         }
 
         public override void InsertBody(SqlCommand cmd, Int32 cd)

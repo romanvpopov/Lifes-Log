@@ -13,17 +13,17 @@ namespace LL.LLEvents
         private String ss;
         public DateTime dt;
 
-        public Day(SqlConnection sq, DateTime dts)
+        public Day(SqlConnection sq, DateTime dts, String etps)
         {
             this.InitializeComponent();
             dt = dts;
-            TX.Text = dts.ToString("dddd")+" "+dts.ToString("d");
-            if ((dts.DayOfWeek == System.DayOfWeek.Sunday | dts.DayOfWeek == System.DayOfWeek.Saturday))
-            {
+            TX.Text = dts.ToString("dddd")+" "+dts.ToString("D");
+            if ((dts.DayOfWeek == System.DayOfWeek.Sunday | dts.DayOfWeek == System.DayOfWeek.Saturday)) {
                 BL.Background = new SolidColorBrush(Colors.Red);
             } else {
                 BL.Background = new SolidColorBrush(Colors.Blue); 
             }
+            if (dts.Date == DateTime.Today) BL.Background = new SolidColorBrush(Colors.Green);
             EDL.Children.Add(new NewEvent(this));
             var cmd = sq.CreateCommand();
             cmd.CommandText =
