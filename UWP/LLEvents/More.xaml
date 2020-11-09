@@ -7,6 +7,9 @@
             CornerRadius="2"
             Width="400"
             Background="{ThemeResource AppBarBackgroundThemeBrush}" >
-        <TextBlock x:Uid="More" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="TX" x:Uid="More" HorizontalAlignment="Center"/>
+            <ProgressRing x:Name="PR"/>
+        </StackPanel>
     </Border>
 </UserControl>

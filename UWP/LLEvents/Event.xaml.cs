@@ -1,6 +1,7 @@
 ﻿using LL.LLEvents;
 using Microsoft.Data.SqlClient;
 using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
@@ -21,7 +22,7 @@ namespace LL
             Code = EventCode;
             tp = EventType;
             if (st != "") {
-                Body.Content = new TextBlock { Text = st };
+                Body.Content = new TextBlock { Text = st, TextWrapping=TextWrapping.Wrap };
                 exp = false;
             }
             else {
@@ -63,9 +64,11 @@ namespace LL
                         $"From llEvent l join LLEventType lt on l.EventTypeCode = lt.Code Where l.Code={Code}";
                     var rd = cmd.ExecuteReader();
                     rd.Read();
-                    Body.Content = new TextBlock { Text = (rd.GetString(0) != "" ? rd.GetString(0) + ": " : "") + rd.GetString(1) + " " + rd.GetString(2) };
+                    Body.Content = new TextBlock {
+                        Text = (rd.GetString(0) != "" ? rd.GetString(0) + ": " : "") + rd.GetString(1) + " " + rd.GetString(2),
+                        TextWrapping=TextWrapping.Wrap};
                 }
-            else { Body.Content = null; }
+            else Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             exp = false;
             BD.Background = null;
             BD.BorderBrush = (SolidColorBrush)Resources["ContentDialogBorderThemeBrush"];

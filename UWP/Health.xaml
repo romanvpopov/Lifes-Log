@@ -1,5 +1,5 @@
-﻿<Page
-    x:Class="LL.Sport"
+﻿<Page xmlns:my="using:Microsoft.Toolkit.Uwp.UI.Controls" 
+    x:Class="LL.Health"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -15,8 +15,14 @@
                     RelativePanel.AlignLeftWithPanel="True"
                     RelativePanel.AlignRightWithPanel="True">
             <FontIcon Glyph="&#xE805;" FontSize="16"/>
-            <TextBlock x:Uid="SportT"
+            <TextBlock x:Uid="Hlth"
                        Margin="10,0,0,0" FontSize="16"/>
         </StackPanel>
+        <my:DataGrid x:Name="MG" 
+                     RelativePanel.AlignBottomWithPanel="True"
+                     RelativePanel.AlignLeftWithPanel="True"
+                     RelativePanel.AlignRightWithPanel="True"
+                     RelativePanel.Below="TH"
+                     Margin="4"/>
     </RelativePanel>
 </Page>

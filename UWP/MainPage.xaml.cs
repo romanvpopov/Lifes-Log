@@ -20,14 +20,17 @@ namespace LL
             MainFrame.Navigate(typeof(Login),this);
         }
 
-        private void NV_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args) {
-            if (args.IsSettingsSelected)  MainFrame.Navigate(typeof(SetDB));
+        private void NV_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            if (args.IsSettingsInvoked) MainFrame.Navigate(typeof(SetDB));
             else {
-                switch ((args.SelectedItem as NavigationViewItem).Tag) {
-                    case "Login" : MainFrame.Navigate(typeof(Login),this); break;
+                switch (args.InvokedItemContainer.Tag) {
+                    case "Login" : MainFrame.Navigate(typeof(Login), this); break;
                     case "Logout": LogoutNav(); break;
                     case "Events": MainFrame.Navigate(typeof(LLEvent)); break;
                     case "Sport" : MainFrame.Navigate(typeof(Sport)); break;
+                    case "Health": MainFrame.Navigate(typeof(Health)); break;
+                    case "Money" : MainFrame.Navigate(typeof(Money)); break;
                 }
             }
         }
@@ -78,6 +81,7 @@ namespace LL
             if (MainFrame.CanGoBack)
             MainFrame.GoBack();
         }
+
     }
 }
 

@@ -16,7 +16,7 @@ namespace LL
 
         public string ConStr;
         public string lang;
-        public int lenpage;
+        public Int16 lenpage;
         private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
 
         public App()

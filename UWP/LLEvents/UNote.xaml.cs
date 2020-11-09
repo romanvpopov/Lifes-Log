@@ -23,8 +23,9 @@ namespace LL.LLEvents
             using (var sq = new SqlConnection((App.Current as App).ConStr)) {
                 sq.Open();
                 var cmd = sq.CreateCommand();
-                cmd.CommandText = $"Select L.Descr,LT.{lang}_Name,LT.ClassName,L.EventTypeCode " +
-                        $"From LLEvent L join LLEventType LT on L.EventTypeCode = LT.Code Where L.Code = {cd}";
+                cmd.CommandText =
+                    $"Select L.Descr,LT.{lang}_Name,LT.ClassName,L.EventTypeCode " +
+                    $"From LLEvent L join LLEventType LT on L.EventTypeCode = LT.Code Where L.Code = {cd}";
                 var rd = cmd.ExecuteReader();
                 rd.Read();
                 GNote.Text = rd.GetString(0);
@@ -32,19 +33,7 @@ namespace LL.LLEvents
                 cname = rd.GetString(2);
                 ntp = rd.GetInt16(3);
                 rd.Close();
-                if (cname != "Note") {
-                    var lle = Type.GetType("LL.LLEvents.U" + cname, false, true);
-                    if (lle != null) {
-                        var ci = lle.GetConstructor(new Type[] { typeof(SqlCommand), typeof(Int32), typeof(Int16) });
-                        if (ci != null) {
-                            try {
-                                Bd = (EventBody)ci.Invoke(new object[] { cmd, cd, ntp });
-                                Bd.Sf = SetGNoteFocus;
-                                MainGrid.Children.Add(Bd);
-                            } catch { }
-                        } else { }
-                    } else { }
-                }
+                UBody(cmd, cd, ntp);
             }
         }
 
@@ -63,20 +52,19 @@ namespace LL.LLEvents
                 TypeNote.Text = rd.GetString(0);
                 cname = rd.GetString(1);
                 rd.Close();
-                if (cname != "Note") {
-                    var lle = Type.GetType("LL.LLEvents.U" + cname, false, true);
-                    if (lle != null) {
-                        var ci = lle.GetConstructor(new Type[] { typeof(SqlCommand), typeof(Int32), typeof(Int16) });
-                        if (ci != null) {
-                            try {
-                                Bd = (EventBody)ci.Invoke(new object[] { cmd, cd, tp });
-                                Bd.Sf = SetGNoteFocus;
-                                MainGrid.Children.Add(Bd);
-                            } catch { }
-                        } else { }
-                    } else { }
-                }
+                UBody(cmd, cd, ntp);
             }
+        }
+
+        private void UBody(SqlCommand cmd,Int32 cd,Int16 ntp) {
+            switch (cname) {
+                case "Num": Bd = new UNum(cmd, cd, ntp); break;
+                case "Tono": Bd = new UTono(cmd, cd, ntp); break;
+                case "Shaving": Bd = new UShaving(cmd, cd, ntp); break;
+                case "Training": Bd = new UTraining(cmd, cd, ntp); break;
+                case "List": Bd = new UList(cmd, cd, ntp); break;
+            }
+            if (Bd != null) { Bd.Sf = SetGNoteFocus; MainGrid.Children.Add(Bd); }
         }
 
         public void SetGNoteFocus() { GNote.Focus(FocusState.Programmatic); }
@@ -84,10 +72,6 @@ namespace LL.LLEvents
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (Bd == null) SetGNoteFocus(); else Bd.GetFocus(); 
-        }
-
-        protected void EditEvent(Int32 cd)
-        {
         }
 
         private void Log_Click(object _1, Windows.UI.Xaml.RoutedEventArgs _2)
@@ -99,8 +83,7 @@ namespace LL.LLEvents
                 var tr = sq.BeginTransaction(IsolationLevel.ReadCommitted);
                 var cmd = sq.CreateCommand();
                 cmd.Transaction = tr;
-                if (cd == 0)
-                {
+                if (cd == 0) {
                     cmd.CommandText = "Select Max(Code)+1 as Code From LLEvent";
                     var rd = cmd.ExecuteReader(); rd.Read();
                     cd = rd.GetInt32(0);
@@ -110,9 +93,7 @@ namespace LL.LLEvents
                         "Insert into LLEvent (Code,    DateT,                  DateEvent,Comment,        Descr, EventTypeCode,UserCode) " +
                                     $"Values ({cd},GETDATE(),'{dt.ToString("yyyyMMdd")}','{cmt}','{GNote.Text}',        {ntp},1)";
                     cmd.ExecuteNonQuery();
-                }
-                else
-                {
+                } else { 
                     cmd.CommandText = $"Update LLEvent Set Comment='{cmt}',Descr='{GNote.Text}' Where Code={cd}";
                     cmd.ExecuteNonQuery();
                     cmd.CommandText = $"Delete From LLEventValue Where EventCode={cd}";
@@ -128,8 +109,7 @@ namespace LL.LLEvents
 
         private void Delete_Click(object _1, Windows.UI.Xaml.RoutedEventArgs _2)
         {
-            using (var sq = new SqlConnection((App.Current as App).ConStr))
-            {
+            using (var sq = new SqlConnection((App.Current as App).ConStr)) {
                 sq.Open();
                 var cmd = sq.CreateCommand();
                 cmd.CommandText = $"Delete From LLEventValue Where EventCode={cd}";

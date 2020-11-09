@@ -26,9 +26,13 @@ namespace LL.LLEvents
             } else {
                 BL.Background = new SolidColorBrush(Colors.Blue); 
             }
-            if (dts.Date == DateTime.Today) BL.Background = new SolidColorBrush(Colors.Green);
+            if (dts.Date == DateTime.Today) {
+                BL.Background = new SolidColorBrush(Colors.Green);
+                BL.Width = 4;
+            }
             EDL.Children.Add(new NewEvent(this));
-            using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr)) {
+            using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr))
+            {
                 sq.Open();
                 var cmd = sq.CreateCommand();
                 var tps = (etps == "0") ? "" : $" and l.EventTypeCode in ({etps})";

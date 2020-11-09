@@ -134,12 +134,16 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="DB.cs" />
+    <Compile Include="Health.xaml.cs">
+      <DependentUpon>Health.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LLEvent.xaml.cs">
       <DependentUpon>LLEvent.xaml</DependentUpon>
     </Compile>
     <Compile Include="LLEvents\Day.xaml.cs">
       <DependentUpon>Day.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LLEvents\DayList.cs" />
     <Compile Include="LLEvents\Event.xaml.cs">
       <DependentUpon>Event.xaml</DependentUpon>
     </Compile>
@@ -184,6 +188,9 @@
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Money.xaml.cs">
+      <DependentUpon>Money.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\SetAccount.xaml.cs">
@@ -272,6 +279,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Health.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LLEvent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -339,6 +350,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Money.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Settings\SetAccount.xaml">
       <SubType>Designer</SubType>

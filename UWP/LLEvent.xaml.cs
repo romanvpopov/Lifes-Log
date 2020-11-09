@@ -4,6 +4,7 @@ using System.Linq;
 using Windows.UI.Xaml.Controls;
 using LL.LLEvents;
 using Windows.Storage;
+using System.Threading.Tasks;
 
 namespace LL { 
     /// 
@@ -13,37 +14,25 @@ namespace LL {
 
         private readonly string lang = (App.Current as App).lang;
         private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
-        public string etps, prds;
-        private EventFilter ef;
-        private NewEventList ne;
-        private MoveTo mt;
-        private int lp;
+        private readonly DayList ds;
+        private readonly EventFilter ef;
+        private readonly NewEventList ne;
+        private readonly MoveTo mt;
 
         public LLEvent() {
             InitializeComponent();
+            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            ds = new DayList();
+            ef = new EventFilter { Apply = ApplyFilter, Reset = ResetFilter };
+            mt = new MoveTo { Move = Move };
+            ne = new NewEventList { Add = Add };
+            if (ls.Values.ContainsKey("FixPane")) FixPane.IsOn = (bool)ls.Values["FixPane"];
+            RPane.Content = ne;
         }
 
         private void EventList_Loaded(object _1, Windows.UI.Xaml.RoutedEventArgs _2)
         {
-            (App.Current as App).lenpage = 31;
-            lp = (App.Current as App).lenpage;
-            etps = "0"; 
-            var dt = DateTime.Today.Add(TimeSpan.FromDays(lp));
-            var mr = new More(dt) { Up = More };
-            EL.Items.Add(mr);
-            using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr))  {
-                sq.Open();
-                for (int i = -lp; i <= 0; i++) {
-                    dt = DateTime.Today.Add(TimeSpan.FromDays(i));
-                    EL.Items.Add(new Day(dt, etps));
-                }
-            }
-            ef = new EventFilter { Apply = ApplyFilter, Reset=ResetFilter };
-            mt = new MoveTo { Move = Move };
-            ne = new NewEventList { Add = Add };
-            RPane.Content = ne;
-            if (ls.Values.ContainsKey("FixPane")) FixPane.IsOn = (bool) ls.Values["FixPane"];
-            Move("Today");
+            EL.ItemsSource=ds;
         }
 
         private void Add(DateTime dt, Int16 tp)
@@ -61,46 +50,28 @@ namespace LL {
             }
         }
 
-        private void Move(String ss) 
+        private void Move(String ss)
         {
             if (ss == "Today") {
-                foreach (object d in EL.Items) {
-                    if (d.GetType().Name == "Day") {
-                        if ((d as Day).dt == DateTime.Today) {
-                            EL.SelectedItem = d;
-                            EL.ScrollIntoView(EL.SelectedItem);
-                            HidePane();
-                            break;
-                        }
-                    }
-                }
+                if (!EL.Items.Where(n => (n as Day)?.dt == DateTime.Today).Select(n => n).Any()) { }
+            } else {
+                var d = new DateTime(Int32.Parse(ss), 12, 31);
+                if (!EL.Items.Where(n => (n as Day)?.dt == d).Select(n => n).Any()) { }
             }
+            HidePane();
         }
 
         private void ApplyFilter(String tpd)
         {
-            etps = tpd;
-            foreach (object d in EL.Items) if (d.GetType().Name == "Day") (d as Day).ApllyFilter(tpd);
+            ds.etps = tpd;
+            foreach (object d in EL.Items) 
+            if (d.GetType().Name == "Day") (d as Day).ApllyFilter(tpd);
         }
 
         private void ResetFilter()
         {
-            etps = "0";
+            ds.etps = "0";
             foreach (object d in EL.Items) if (d.GetType().Name == "Day") (d as Day).ResetFilter();
-        }
-
-        private void More(DateTime dt)
-        {
-            using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr))
-            {
-                sq.Open();
-                for (int i = -lp; i <= 0; i++) {
-                    dt = dt.Add(TimeSpan.FromDays(-1));
-                    EL.Items.Insert(1,new Day(dt, etps));
-                }
-            }
-            EL.SelectedItem = EL.Items.ElementAt(lp);
-            EL.ScrollIntoView(EL.SelectedItem);
         }
 
         public void HidePane()
@@ -146,7 +117,7 @@ namespace LL {
                     var rd = cmd.ExecuteReader();
                     if (rd.HasRows) {
                         EL.Items.Clear();
-                        while (rd.Read()) EL.Items.Add(new Day(rd.GetDateTime(0), etps));
+                        while (rd.Read()) EL.Items.Add(new Day(rd.GetDateTime(0), "0"));
                         EL.SelectedItem = EL.Items.Last();
                         EL.ScrollIntoView(EL.SelectedItem);
                     }

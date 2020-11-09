@@ -3,10 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:LL">
     <SplitView x:Name="RightPane"
-                   PanePlacement="Right"
-                   OpenPaneLength="160"
-                   DisplayMode="Inline"
-                   IsPaneOpen="True">
+               PanePlacement="Right"
+               OpenPaneLength="160"
+               DisplayMode="Inline"
+               IsPaneOpen="True">
         <SplitView.Pane>
             <RelativePanel>
                 <UserControl x:Name="RPane"
@@ -20,13 +20,14 @@
         <RelativePanel>
             <StackPanel x:Name="TH"
                         Orientation="Horizontal"
+                        Margin="4" CornerRadius="2"
+                        Background="{ThemeResource AppBarBackgroundThemeBrush}"
                         RelativePanel.AlignTopWithPanel="True"
                         RelativePanel.AlignLeftWithPanel="True"
                         RelativePanel.AlignRightWithPanel="True">
                 <FontIcon Glyph="&#xEADF;" Margin="4" FontSize="16"/>
                 <TextBlock x:Uid="AllEvents" Margin="4" FontSize="16"/>
             </StackPanel>
-            <ListView></ListView>
             <ListView x:Name="EL" 
                           Loaded="EventList_Loaded"
                           RelativePanel.Below="TH"
