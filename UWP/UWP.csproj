@@ -137,6 +137,9 @@
     <Compile Include="Health.xaml.cs">
       <DependentUpon>Health.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Healths\HQEvent.xaml.cs">
+      <DependentUpon>HQEvent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LLEvent.xaml.cs">
       <DependentUpon>LLEvent.xaml</DependentUpon>
     </Compile>
@@ -149,9 +152,6 @@
     </Compile>
     <Compile Include="LLEvents\EventFilter.xaml.cs">
       <DependentUpon>EventFilter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LLEvents\More.xaml.cs">
-      <DependentUpon>More.xaml</DependentUpon>
     </Compile>
     <Compile Include="LLEvents\MoveTo.xaml.cs">
       <DependentUpon>MoveTo.xaml</DependentUpon>
@@ -193,6 +193,9 @@
       <DependentUpon>Money.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search.xaml.cs">
+      <DependentUpon>Search.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings\SetAccount.xaml.cs">
       <DependentUpon>SetAccount.xaml</DependentUpon>
     </Compile>
@@ -283,6 +286,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Healths\HQEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LLEvent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -296,10 +303,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LLEvents\EventFilter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LLEvents\More.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -344,14 +347,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Login.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Money.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Search.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

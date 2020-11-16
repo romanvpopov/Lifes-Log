@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.Data.SqlClient;
-using Windows.Services.Store;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -17,7 +15,7 @@ namespace LL.LLEvents
 
         public Day(DateTime dts, String etps)
         {
-            this.InitializeComponent();
+            InitializeComponent();
             dt = dts;
             TX.Text = dts.ToString("dddd")+" "+dts.ToString("D");
             if ((dts.DayOfWeek == System.DayOfWeek.Sunday | dts.DayOfWeek == System.DayOfWeek.Saturday)) {

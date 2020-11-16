@@ -133,6 +133,9 @@
     <value>Применить</value>
   </data>
   <data name="BTCancel.Content" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
+  <data name="BTClose.Content" xml:space="preserve">
     <value>Закрыть</value>
   </data>
   <data name="BTDay.Content" xml:space="preserve">
@@ -164,6 +167,9 @@
   </data>
   <data name="Comment.Text" xml:space="preserve">
     <value>Примечание</value>
+  </data>
+  <data name="Connect.Text" xml:space="preserve">
+    <value>Подключаюсь</value>
   </data>
   <data name="DBManage.Text" xml:space="preserve">
     <value>Управление базами данных</value>
@@ -201,6 +207,9 @@
   <data name="Evnts.Text" xml:space="preserve">
     <value>Событий</value>
   </data>
+  <data name="Expense.Label" xml:space="preserve">
+    <value>Расход</value>
+  </data>
   <data name="Filter.Text" xml:space="preserve">
     <value>Фильтр</value>
   </data>
@@ -218,6 +227,9 @@
   </data>
   <data name="Hlth.Text" xml:space="preserve">
     <value>Здоровье</value>
+  </data>
+  <data name="Income.Label" xml:space="preserve">
+    <value>Доход</value>
   </data>
   <data name="Last365" xml:space="preserve">
     <value>Последние 365 дней</value>
@@ -311,6 +323,9 @@
   </data>
   <data name="TonoSystole.Text" xml:space="preserve">
     <value>Верхнее</value>
+  </data>
+  <data name="Transfer.Label" xml:space="preserve">
+    <value>Перемещение</value>
   </data>
   <data name="Value.Text" xml:space="preserve">
     <value>Значение</value>

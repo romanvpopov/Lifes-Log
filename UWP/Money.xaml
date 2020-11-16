@@ -6,17 +6,51 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <RelativePanel>
-        <StackPanel x:Name="TH"
+    <SplitView x:Name="RightPane"
+               PanePlacement="Right"
+               OpenPaneLength="160"
+               DisplayMode="Inline"
+               IsPaneOpen="True">
+        <SplitView.Pane>
+            <RelativePanel>
+                <ToggleSwitch x:Name="FixPane" x:Uid="Fix"
+                              Margin="10,2,2,2"
+                              RelativePanel.AlignBottomWithPanel="True"/>
+            </RelativePanel>
+        </SplitView.Pane>
+        <RelativePanel>
+            <StackPanel x:Name="TH"
                     Orientation="Horizontal"
                     Margin="4" CornerRadius="2"
                     Background="{ThemeResource AppBarBackgroundThemeBrush}"
                     RelativePanel.AlignTopWithPanel="True"
                     RelativePanel.AlignLeftWithPanel="True"
                     RelativePanel.AlignRightWithPanel="True">
-            <FontIcon Glyph="&#xE805;" FontSize="16"/>
-            <TextBlock x:Uid="Mny"
+                <FontIcon Glyph="&#xE805;" FontSize="16"/>
+                <TextBlock x:Uid="Mny"
                        Margin="10,0,0,0" FontSize="16"/>
-        </StackPanel>
-    </RelativePanel>
+            </StackPanel>
+            <CommandBar x:Name="CB" Margin="4"
+                        DefaultLabelPosition="Right"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.AlignLeftWithPanel="True">
+                <AppBarButton x:Uid="Expens">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE710;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Uid="Income">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE8AD;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Uid="Transfer">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE71C;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar>
+        </RelativePanel>
+    </SplitView>
 </Page>

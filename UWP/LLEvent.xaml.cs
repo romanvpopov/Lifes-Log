@@ -14,7 +14,7 @@ namespace LL {
 
         private readonly string lang = (App.Current as App).lang;
         private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
-        private readonly DayList ds;
+        private DayList ds;
         private readonly EventFilter ef;
         private readonly NewEventList ne;
         private readonly MoveTo mt;
@@ -22,7 +22,7 @@ namespace LL {
         public LLEvent() {
             InitializeComponent();
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
-            ds = new DayList();
+            ds = new DayList(DateTime.Today);
             ef = new EventFilter { Apply = ApplyFilter, Reset = ResetFilter };
             mt = new MoveTo { Move = Move };
             ne = new NewEventList { Add = Add };
@@ -52,12 +52,12 @@ namespace LL {
 
         private void Move(String ss)
         {
-            if (ss == "Today") {
-                if (!EL.Items.Where(n => (n as Day)?.dt == DateTime.Today).Select(n => n).Any()) { }
-            } else {
-                var d = new DateTime(Int32.Parse(ss), 12, 31);
-                if (!EL.Items.Where(n => (n as Day)?.dt == d).Select(n => n).Any()) { }
-            }
+            ds.Clear();
+            ds.HasMoreItems = true;
+            if (ss == "Today")
+                ds.dt=DateTime.Today;
+            else 
+                ds.dt = new DateTime(Int32.Parse(ss), 12, 31);
             HidePane();
         }
 
@@ -101,30 +101,6 @@ namespace LL {
             } else {
                 RPane.Content = ne;
                 RightPane.IsPaneOpen = true;
-            }
-        }
-
-        private void TS_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
-        {
-            if (e.Key == Windows.System.VirtualKey.Enter) {
-                using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr))
-                {
-                    sq.Open();
-                    var ss = (sender as TextBox).Text;
-                    var cmd = sq.CreateCommand();
-                    cmd.CommandText =
-                       $"Select DateEvent From llEvent Where Comment like '%{ss}%' or Descr like '%{ss}%' Order by DateEvent";
-                    var rd = cmd.ExecuteReader();
-                    if (rd.HasRows) {
-                        EL.Items.Clear();
-                        while (rd.Read()) EL.Items.Add(new Day(rd.GetDateTime(0), "0"));
-                        EL.SelectedItem = EL.Items.Last();
-                        EL.ScrollIntoView(EL.SelectedItem);
-                    }
-                    else {
-                        new Msg("NF").ShowAt(sender as TextBox);
-                    }
-                }
             }
         }
 

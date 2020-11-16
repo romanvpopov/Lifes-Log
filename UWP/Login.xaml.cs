@@ -14,28 +14,14 @@ namespace LL
         private SqlConnection sq = new SqlConnection();
         private MainPage mp;
 
-        public Login() {
+        public Login()
+        {
 
             InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e) {
-            Msg.Text = "Подключение";
-            var ans = CheckDB();
-            if (ans == "")
-            {
-                if (mp != null) mp.CreateNav();
-            }
-            else { Msg.Text = ans; }
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (e.Parameter != null) mp = (MainPage) e.Parameter;
-        }
-
-        private string CheckDB() {
-
             if (ls.Values.ContainsKey("LocalDB")) {
                 if ((bool)ls.Values["LocalDB"]) {
                     (App.Current as App).ConStr = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=LL;Integrated Security=True;Timeout=5";
@@ -46,22 +32,26 @@ namespace LL
                         $" Password = {(string)ls.Values["Password"] ?? ""}";
                 }
             }
-            //(App.Current as App).ConStr = "Data Source = sql.mt-soft.ru,44433; Initial Catalog = LL; User Id=sa; Password=P12455p93; Integrated Security=False";
-            sq = new SqlConnection((App.Current as App).ConStr);
-            try
-            {
-            sq.Open();
-            if (sq.State == System.Data.ConnectionState.Open) { return ""; }
-                else { return "error"; }
-            } catch (Exception e) { return e.Message; }
+            using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr))
+                try {
+                    await sq.OpenAsync();
+                    while (sq.State == System.Data.ConnectionState.Connecting) { }
+                    if (sq.State == System.Data.ConnectionState.Open)
+                        mp.CreateNav();
+                    else {
+                        PB.IsActive = false;
+                        Msg.Text = "Connection error";
+                    }
+                }
+                catch (Exception ex) {
+                    PB.IsActive = false;
+                    Msg.Text = ex.Message;
+                }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
-            var ans = CheckDB();
-            if (ans == "") {
-                if (mp != null)  mp.CreateNav(); 
-            }
-            else { Msg.Text = ans; }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter != null) mp = (MainPage)e.Parameter;
         }
     }
 }

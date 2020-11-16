@@ -1,19 +1,38 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Controls;
-using System.Collections.ObjectModel;
+﻿using System;
+using System.Linq;
+using Microsoft.Data.SqlClient;
+using Windows.UI;
 using Windows.UI.Xaml.Controls;
-
+using Windows.UI.Xaml.Media;
 
 namespace LL
 {
     public sealed partial class Health : Page
     {
+        private readonly string lang = (App.Current as App).lang;
+
         public Health()
         {
             this.InitializeComponent();
-            //MG.Columns.Add(new cl);
         }
 
-        public DataGridColumn cl;
-    }
+        private void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr)) {
+                sq.Open();
+                var cmd = sq.CreateCommand();
+                cmd.CommandText =
+                   $"Select Distinct lt.Code,lt.Turn,lt.{lang}_name From LLEventType lt" +
+                   $" join LLFieldEvent le on lt.Code = le.EventTypeCode" +
+                   $" join LLUnit lu on le.UnitCode = lu.Code" +
+                   $" Where lt.Turn > 0 and lt.HSM = 'H' Order by Turn";
+                var rd = cmd.ExecuteReader();
+                while (rd.Read()) {
+                    EL.Items.Add(new LL.Healths.HQEvent(sq, rd.GetInt16(0), rd.GetString(2)));
+                }
+                rd.Close();
 
+            }
+        }
+    }
 }

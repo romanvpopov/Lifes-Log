@@ -10,6 +10,7 @@ namespace LL.Settings
     public sealed partial class SetDB : Page
     {
         readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
+        private MainPage mp;
 
         public SetDB() {
             this.InitializeComponent();
@@ -27,7 +28,7 @@ namespace LL.Settings
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter != null) Args.Text = e.Parameter.ToString();
+            mp = e.Parameter as MainPage;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
@@ -36,8 +37,7 @@ namespace LL.Settings
             ls.Values["InitialCatalog"] = InitialCatalog.Text;
             ls.Values["Login"] = Login.Text;
             ls.Values["Password"] = Password.Password;
-            //new Msg("Done").ShowAt(BTApply);
-            
+            mp.Login();           
         }
 
         private void Language_SelectionChanged(object sender, SelectionChangedEventArgs e) {

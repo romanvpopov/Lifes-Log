@@ -39,12 +39,6 @@
                         RelativePanel.AlignBottomWithPanel="True"
                         RelativePanel.AlignRightWithPanel="True"
                         RelativePanel.AlignLeftWithPanel="True">
-                <CommandBar.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="&#xE721;" Margin="10,0,0,0" FontSize="18"/>
-                        <TextBox x:Name="TS" Margin="10,4,14,4" KeyUp="TS_KeyUp"/>
-                    </StackPanel>
-                </CommandBar.Content>
                 <AppBarButton x:Uid="NewEvnt" Click="BTNewEvent_Click">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE710;"/>

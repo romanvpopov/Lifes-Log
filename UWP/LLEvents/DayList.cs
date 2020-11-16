@@ -10,16 +10,16 @@ namespace LL.LLEvents
 {
     public class DayList : ObservableCollection<Day>, ISupportIncrementalLoading
     {
-        private DateTime dt;
+        public DateTime dt;
         public String etps;
-        public DayList()
+        public DayList(DateTime Dt)
         {
             HasMoreItems = true;
-            dt = DateTime.Today;
+            dt = Dt;
             etps = "0";
         }
 
-        public bool HasMoreItems { get; }
+        public bool HasMoreItems { get; set; }
 
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
@@ -30,10 +30,10 @@ namespace LL.LLEvents
                     await dsp.RunAsync(
                         CoreDispatcherPriority.Normal,
                         () =>  {
-                            for (int i = 0; i > -50; i--) Add(new Day(dt.AddDays(i), etps));
-                            dt = dt.AddDays(-50);
+                            for (int i = 0; i > -count; i--) Add(new Day(dt.AddDays(i), etps));
+                            dt = dt.AddDays(-count);
                         });
-                    return new LoadMoreItemsResult() { Count = 50 };
+                    return new LoadMoreItemsResult() { Count = count };
 
                 }).AsAsyncOperation<LoadMoreItemsResult>();
         }

@@ -135,6 +135,9 @@
   <data name="BTCancel.Content" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="BTClose.Content" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="BTDay.Content" xml:space="preserve">
     <value>Midday</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Comment.Text" xml:space="preserve">
     <value>Comment</value>
+  </data>
+  <data name="Connect.Text" xml:space="preserve">
+    <value>Connecting</value>
   </data>
   <data name="DBManage.Text" xml:space="preserve">
     <value>Database manage</value>
@@ -201,6 +207,9 @@
   <data name="Evnts.Text" xml:space="preserve">
     <value>Events count</value>
   </data>
+  <data name="Expense.Label" xml:space="preserve">
+    <value>Expens</value>
+  </data>
   <data name="Filter.Text" xml:space="preserve">
     <value>Filter</value>
   </data>
@@ -218,6 +227,9 @@
   </data>
   <data name="Hlth.Text" xml:space="preserve">
     <value>Health</value>
+  </data>
+  <data name="Income.Label" xml:space="preserve">
+    <value>Income</value>
   </data>
   <data name="Last365" xml:space="preserve">
     <value>Last 365 days</value>
@@ -311,6 +323,9 @@
   </data>
   <data name="TonoSystole.Text" xml:space="preserve">
     <value>Upper</value>
+  </data>
+  <data name="Transfer.Label" xml:space="preserve">
+    <value>Transfer</value>
   </data>
   <data name="Value.Text" xml:space="preserve">
     <value>Value</value>
