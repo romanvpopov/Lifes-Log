@@ -14,7 +14,7 @@ namespace LL {
 
         private readonly string lang = (App.Current as App).lang;
         private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
-        private DayList ds;
+        private readonly DayList ds;
         private readonly EventFilter ef;
         private readonly NewEventList ne;
         private readonly MoveTo mt;

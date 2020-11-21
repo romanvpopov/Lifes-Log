@@ -24,9 +24,8 @@ namespace LL.LLEvents
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
             var dsp = Window.Current.Dispatcher;
-            return Task.Run<LoadMoreItemsResult>(
-                async () =>
-                {
+            return Task.Run(
+                async () => {
                     await dsp.RunAsync(
                         CoreDispatcherPriority.Normal,
                         () =>  {
@@ -34,7 +33,6 @@ namespace LL.LLEvents
                             dt = dt.AddDays(-count);
                         });
                     return new LoadMoreItemsResult() { Count = count };
-
                 }).AsAsyncOperation<LoadMoreItemsResult>();
         }
     }

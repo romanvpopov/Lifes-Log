@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Windows.UI;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
@@ -18,6 +21,7 @@ namespace LL
 
         private void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            var dsp = Window.Current.Dispatcher;
             using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr)) {
                 sq.Open();
                 var cmd = sq.CreateCommand();
@@ -28,7 +32,7 @@ namespace LL
                    $" Where lt.Turn > 0 and lt.HSM = 'H' Order by Turn";
                 var rd = cmd.ExecuteReader();
                 while (rd.Read()) {
-                    EL.Items.Add(new LL.Healths.HQEvent(sq, rd.GetInt16(0), rd.GetString(2)));
+                    EL.Items.Add(new LL.Healths.HQEvent(rd.GetInt16(0), rd.GetString(2)));
                 }
                 rd.Close();
 

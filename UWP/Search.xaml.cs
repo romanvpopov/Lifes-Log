@@ -22,15 +22,15 @@ namespace LL
                 var cmd = sq.CreateCommand();
                 cmd.CommandText =
                    $"Select DateEvent From llEvent Where Comment like '%{ss}%' or Descr like '%{ss}%' Order by DateEvent";
-                var rd = cmd.ExecuteReader();
-                if (rd.HasRows)
+                try
                 {
-                    while (rd.Read()) EL.Items.Add(new Day(rd.GetDateTime(0), "0"));
+                    var rd = cmd.ExecuteReader();
+                    if (rd.HasRows)
+                    {
+                        while (rd.Read()) EL.Items.Add(new Day(rd.GetDateTime(0), "0"));
+                    }
                 }
-                else
-                {
-                    
-                }
+                catch { }
             }
         }
     }

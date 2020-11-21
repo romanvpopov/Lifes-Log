@@ -137,8 +137,18 @@
     <Compile Include="Health.xaml.cs">
       <DependentUpon>Health.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Healths\HQDay.xaml.cs">
+      <DependentUpon>HQDay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Healths\HQDayList.cs" />
     <Compile Include="Healths\HQEvent.xaml.cs">
       <DependentUpon>HQEvent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Healths\HQHead.xaml.cs">
+      <DependentUpon>HQHead.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Healths\HQValue.xaml.cs">
+      <DependentUpon>HQValue.xaml</DependentUpon>
     </Compile>
     <Compile Include="LLEvent.xaml.cs">
       <DependentUpon>LLEvent.xaml</DependentUpon>
@@ -286,7 +296,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Healths\HQDay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Healths\HQEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Healths\HQHead.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Healths\HQValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

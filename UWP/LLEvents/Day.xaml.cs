@@ -37,7 +37,7 @@ namespace LL.LLEvents
                 cmd.CommandText =
                    $"Select L.Code,lt.ClassName,lt.{lang}_ShortName,l.Comment,l.Descr,l.EventTypeCode " +
                    $"From llEvent l join LLEventType lt on l.EventTypeCode = lt.Code " +
-                   $"Where l.DateEvent='{dts.ToString("yyyyMMdd")}' Order by l.Code";
+                   $"Where l.DateEvent='{dts:yyyyMMdd}' Order by l.Code";
                 var rd = cmd.ExecuteReader();
                 while (rd.Read()) {
                     ss = (rd.GetString(2) != "" ? rd.GetString(2) + ": " : "") + rd.GetString(3) + " " + rd.GetString(4);

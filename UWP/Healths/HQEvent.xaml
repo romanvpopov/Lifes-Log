@@ -8,18 +8,35 @@
         CornerRadius="2"
         Background="{ThemeResource AppBarBackgroundThemeBrush}">
         <Border x:Name="BL"
-                Width="2"
-                Margin="0,0,4,0" 
+                Width="2" Margin="0,0,4,0" 
+                Background="Blue"
             RelativePanel.AlignLeftWithPanel="True"
             RelativePanel.AlignTopWithPanel="True"
             RelativePanel.AlignBottomWithPanel="True"/>
-        <TextBlock x:Name="TX"
+        <Border x:Name="SP"
             Margin="2"
             RelativePanel.RightOf="BL"
-            RelativePanel.AlignTopWithPanel="True"/>
-        <Border Width="400" Height="100"
-                BorderThickness="1"
-                BorderBrush="Black"
-                CornerRadius="2"/>
+            RelativePanel.AlignTopWithPanel="True">
+            <TextBlock x:Name="TX"/>
+        </Border>
+        <StackPanel x:Name="HD"
+            Margin="2" Width="200" 
+            Orientation="Vertical"
+            RelativePanel.Below="SP">
+        </StackPanel>
+        <ListView x:Name="DS"
+                  RelativePanel.RightOf="HD"
+                  RelativePanel.AlignTopWithPanel="True"
+                  RelativePanel.AlignBottomWithPanel="True"
+                  ScrollViewer.HorizontalScrollMode="Enabled" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                  ScrollViewer.VerticalScrollMode="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
     </RelativePanel>
 </UserControl>
