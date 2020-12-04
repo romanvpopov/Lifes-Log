@@ -5,13 +5,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Grid.Row="1" Grid.ColumnSpan="4">
     <Grid KeyDown="Grid_KeyDown">
-        <ListView x:Name="FieldList" Grid.Row="1" Grid.ColumnSpan="4" Width="400" MaxHeight="500">
+        <ListView x:Name="FieldList"
+                  Grid.Row="1" Grid.ColumnSpan="4"
+                  Width="400" MaxHeight="500">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:ListBodyField">
                     <ListViewItem KeyUp="ListViewItem_KeyUp">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{x:Bind Path=Name}" Width="300" VerticalAlignment="Center"/>
-                            <TextBox x:Name="Val" Text="{x:Bind Path=Value, Mode=TwoWay}" HorizontalAlignment="Right" TextAlignment="Right" KeyUp="TextBox_KeyUp"/>
+                            <TextBox x:Name="Val"
+                                     Text="{x:Bind Path=Value, Mode=TwoWay}"
+                                     HorizontalAlignment="Right"
+                                     TextAlignment="Right"
+                                     KeyUp="TextBox_KeyUp"/>
                         </StackPanel>
                     </ListViewItem>
                 </DataTemplate>

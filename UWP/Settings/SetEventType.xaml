@@ -1,14 +1,21 @@
-﻿<Page
+﻿<Page xmlns:my1="using:Telerik.UI.Xaml.Controls.Input"  xmlns:my="using:Telerik.UI.Xaml.Controls.Data" 
     x:Class="LL.Settings.SetEventType"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:LL.Settings"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Grid>
-
-    </Grid>
+    <RelativePanel>
+        <StackPanel x:Name="TH"
+                    Orientation="Horizontal"
+                    Margin="4" CornerRadius="2"
+                    Background="{ThemeResource AppBarBackgroundThemeBrush}"
+                    RelativePanel.AlignTopWithPanel="True"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True">
+            <TextBlock x:Uid="EManage"
+                       Margin="10,0,0,0" FontSize="16"/>
+        </StackPanel><ParallaxView />
+    </RelativePanel>
 </Page>

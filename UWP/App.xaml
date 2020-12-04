@@ -8,6 +8,12 @@
             <Setter Property="CornerRadius" Value="2"/>
             <Setter Property="Background" Value="{x:Null}"/>
         </Style>
+        <Style TargetType="Border">
+            <Setter Property="CornerRadius" Value="2"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderThemeBrush}"/>
+        </Style>
         <Style TargetType="TextBox">
             <Setter Property="CornerRadius" Value="2"/>
             <Setter Property="Margin" Value="2"/>
@@ -19,7 +25,7 @@
         </Style>
         <Style TargetType="FontIcon">
             <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontSize" Value="16"/>
         </Style>
         <Style TargetType="CalendarDatePicker">
             <Setter Property="CornerRadius" Value="2"/>

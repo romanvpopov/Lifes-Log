@@ -10,11 +10,11 @@
         <Border x:Name="BL"
                 Width="2" Margin="0,0,4,0" 
                 Background="Blue"
+                BorderBrush="{x:Null}"
             RelativePanel.AlignLeftWithPanel="True"
             RelativePanel.AlignTopWithPanel="True"
             RelativePanel.AlignBottomWithPanel="True"/>
         <Border x:Name="SP"
-            Margin="2"
             RelativePanel.RightOf="BL"
             RelativePanel.AlignTopWithPanel="True">
             <TextBlock x:Name="TX"/>

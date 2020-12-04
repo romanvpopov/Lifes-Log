@@ -1,5 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
+using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
@@ -8,10 +10,16 @@ namespace LL.Healths
 {
     public sealed partial class HQDay : UserControl
     {
-        public HQDay(Int32 cd, DateTime dt, String etp, Int32 cdf)
+        private String cmt;
+        public HQDay(Int32 cd, DateTime dt, String etp, Int32 cdf, String Cmt)
         {
             this.InitializeComponent();
             DT.Text = dt.ToString("d");
+            cmt = Cmt;
+            if (cmt != "") {
+                DT.Foreground = new SolidColorBrush { Color = Colors.Blue };
+                ToolTipService.SetToolTip(DT, new ToolTip { Content = cmt});
+            }
             using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr))
             {
                 sq.Open();
@@ -37,5 +45,6 @@ namespace LL.Healths
         {
             (sender as Border).BorderBrush = (SolidColorBrush)Resources["ButtonBorderThemeBrush"];
         }
+
     }
 }

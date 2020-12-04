@@ -3,20 +3,19 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ScrollViewer>
-        <StackPanel Orientation="Vertical" Margin="4">
+        <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <FontIcon Margin="10,0,0,0"
-                          Glyph="&#xE710;"
-                          FontSize="12"/>
-                <TextBlock x:Uid="NewEvent" Margin="10,0,0,0"/>
+                          Glyph="&#xE710;"/>
+                <TextBlock x:Uid="NewEvent" Margin="10"/>
             </StackPanel>
             <CalendarDatePicker x:Name="DateEvent"
                                 Margin="2" HorizontalAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
                 <FontIcon Margin="10,0,0,0"
-                          Glyph="&#xE70F;"
-                          FontSize="12"/>
-                <TextBlock x:Uid="Notes" Margin="10,0,0,0"/>
+                          Glyph="&#xE70F;"/>
+                <TextBlock x:Uid="Notes"
+                           Margin="10,0,0,0"/>
             </StackPanel>
             <RelativePanel>
                 <Border x:Name="BL"
@@ -31,9 +30,9 @@
             </RelativePanel>
             <StackPanel Orientation="Horizontal">
                 <FontIcon Margin="10,0,0,0"
-                          Glyph="&#xE805;"
-                          FontSize="12"/>
-                <TextBlock x:Uid="SportT" Margin="10,0,0,0"/>
+                          Glyph="&#xE805;"/>
+                <TextBlock x:Uid="SportT"
+                           Margin="10,0,0,0"/>
             </StackPanel>
             <RelativePanel>
                 <Border x:Name="BLS"
@@ -48,9 +47,9 @@
             </RelativePanel>
             <StackPanel Orientation="Horizontal">
                 <FontIcon Margin="10,0,0,0"
-                          Glyph="&#xE95E;"
-                          FontSize="12"/>
-                <TextBlock x:Uid="Hlth" Margin="10,0,0,0"/>
+                          Glyph="&#xE95E;"/>
+                <TextBlock x:Uid="Hlth"
+                           Margin="10,0,0,0"/>
             </StackPanel>
             <RelativePanel>
                 <Border x:Name="BLH"
@@ -65,8 +64,7 @@
             </RelativePanel>
             <StackPanel Orientation="Horizontal">
                 <FontIcon  Margin="10,0,0,0"
-                           Glyph="&#xEF40;"
-                           FontSize="12"/>
+                           Glyph="&#xEF40;"/>
                 <TextBlock x:Uid="Mny" Margin="10,0,0,0"/>
             </StackPanel>
             <RelativePanel>
@@ -80,6 +78,8 @@
                             Orientation="Vertical"
                             RelativePanel.RightOf="BLM"/>
             </RelativePanel>
+            <Button x:Name="MN"
+                    x:Uid="Manage" Click="MN_Click"/>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

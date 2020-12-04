@@ -25,7 +25,9 @@ namespace LL {
             ds = new DayList(DateTime.Today);
             ef = new EventFilter { Apply = ApplyFilter, Reset = ResetFilter };
             mt = new MoveTo { Move = Move };
-            ne = new NewEventList { Add = Add };
+            ne = new NewEventList { Add = Add,
+                Manage = () => { Frame.Navigate(typeof(Settings.SetEventType)); }
+            };
             if (ls.Values.ContainsKey("FixPane")) FixPane.IsOn = (bool)ls.Values["FixPane"];
             RPane.Content = ne;
         }

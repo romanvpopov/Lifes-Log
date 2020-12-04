@@ -4,9 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Tapped="UserControl_Tapped">
     <Border x:Name="BD"
-            CornerRadius="2" Margin="2"
-            BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
-            BorderThickness="1" Padding="4"
+            Padding="2"
             PointerEntered="Border_PointerEntered"
             PointerExited="Border_PointerExited">
         <UserControl x:Name="Body"/>

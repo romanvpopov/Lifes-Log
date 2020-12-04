@@ -189,6 +189,9 @@
   <data name="Done" xml:space="preserve">
     <value>Done</value>
   </data>
+  <data name="EManage.Text" xml:space="preserve">
+    <value>Events manage</value>
+  </data>
   <data name="Evening.Text" xml:space="preserve">
     <value>Evening</value>
   </data>
@@ -251,6 +254,9 @@
   </data>
   <data name="Login.Text" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="Manage.Content" xml:space="preserve">
+    <value>Manage</value>
   </data>
   <data name="Mny.Text" xml:space="preserve">
     <value>Money</value>

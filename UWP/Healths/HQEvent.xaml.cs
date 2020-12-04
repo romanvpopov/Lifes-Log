@@ -13,6 +13,7 @@ namespace LL.Healths
     {
         private String etp;
         private Int16 tp;
+        private readonly string lang = (App.Current as App).lang;
 
         public HQEvent(Int16 Tp, String HName)
         { 
@@ -34,7 +35,7 @@ namespace LL.Healths
             using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr)) {
                 sq.Open();
                 var cmd = sq.CreateCommand();
-                cmd.CommandText = "Select Distinct le.Code,le.ru_FieldName " +
+                cmd.CommandText = $"Select Distinct le.Code,le.{lang}_FieldName " +
                     "From LLFieldEvent le join LLUnit lu on le.UnitCode = lu.Code " +
                     "join LLEvent l on l.EventTypeCode = le.EventTypeCode "+
                     "join LLEventValue lv on lv.EventCode = l.Code and lv.FieldEventCode = le.Code "+

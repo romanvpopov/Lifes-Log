@@ -38,17 +38,17 @@ namespace LL.Healths
                             using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr)) {
                                 sq.Open();
                                 var cmd = sq.CreateCommand();
-                                cmd.CommandText = $"Select Distinct Top {count} l.Code,l.DateEvent " +
+                                cmd.CommandText = $"Select Distinct Top {count} l.Code,l.DateEvent,l.Descr " +
                                     "From LLFieldEvent le join LLUnit lu on le.UnitCode = lu.Code " +
                                     "join LLEvent l on l.EventTypeCode = le.EventTypeCode " +
                                     "join LLEventValue lv on lv.EventCode = l.Code and lv.FieldEventCode = le.Code " +
-                                    $"Where l.EventTypeCode = {tp} and  l.DateEvent<'{dt:yyyyMMdd}' " +
+                                    $"Where l.EventTypeCode = {tp} and  l.DateEvent<='{dt:yyyyMMdd}' " +
                                     $"Order by l.DateEvent Desc";
                                 var rd = cmd.ExecuteReader();
                                 if (rd.HasRows) {
                                     while (rd.Read()) {
-                                        Add(new HQDay(rd.GetInt32(0), rd.GetDateTime(1), etp, cd));
-                                        dt = rd.GetDateTime(1);
+                                        Add(new HQDay(rd.GetInt32(0), rd.GetDateTime(1), etp, cd, rd.GetString(2)));
+                                        dt = rd.GetDateTime(1).AddDays(-1);
                                     }                                    
                                 }
                                 else { HasMoreItems = false; }

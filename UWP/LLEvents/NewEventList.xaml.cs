@@ -7,6 +7,7 @@ namespace LL.LLEvents
     public sealed partial class NewEventList : UserControl
     {
         public Action<DateTime, Int16> Add;
+        public Action Manage;
         private readonly string lang = (App.Current as App).lang;
         private readonly Button bt;
 
@@ -42,6 +43,11 @@ namespace LL.LLEvents
         private void Bt_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Add(DateEvent.Date?.Date??DateTime.Today, Convert.ToInt16((sender as Button).Tag.ToString()));
+        }
+
+        private void MN_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Manage();
         }
     }
 }

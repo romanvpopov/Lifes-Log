@@ -22,7 +22,8 @@ namespace LL.LLEvents
                 BL.Background = new SolidColorBrush(Colors.Red);
                 BL.Width = 4;
             } else {
-                BL.Background = new SolidColorBrush(Colors.Blue); 
+                BL.Background = new SolidColorBrush(Colors.Blue);
+                BL.Width = 3;
             }
             if (dts.Date == DateTime.Today) {
                 BL.Background = new SolidColorBrush(Colors.Green);

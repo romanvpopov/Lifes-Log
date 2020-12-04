@@ -1,7 +1,6 @@
 ﻿<Page x:Class="LL.LLEvent" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:LL">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SplitView x:Name="RightPane"
                PanePlacement="Right"
                OpenPaneLength="160"
@@ -9,52 +8,35 @@
                IsPaneOpen="True">
         <SplitView.Pane>
             <RelativePanel>
+                <ToggleSwitch x:Name="FixPane"
+                              x:Uid="Fix" Margin="4"
+                              Toggled="FixPane_Toggled"/>
                 <UserControl x:Name="RPane"
-                             RelativePanel.AlignTopWithPanel="True"
-                             RelativePanel.Above="FixPane" />
-                <ToggleSwitch x:Name="FixPane" x:Uid="Fix"
-                              Margin="10,2,2,2"
-                              RelativePanel.AlignBottomWithPanel="True" Toggled="FixPane_Toggled"/>
+                             RelativePanel.Below="FixPane"
+                             RelativePanel.AlignBottomWithPanel="True"/>
             </RelativePanel>
         </SplitView.Pane>
         <RelativePanel>
-            <StackPanel x:Name="TH"
-                        Orientation="Horizontal"
-                        Margin="4" CornerRadius="2"
-                        Background="{ThemeResource AppBarBackgroundThemeBrush}"
-                        RelativePanel.AlignTopWithPanel="True"
+            <CommandBar x:Name="CB" Margin="4"
+                        CornerRadius="2"
+                        DefaultLabelPosition="Right"
                         RelativePanel.AlignLeftWithPanel="True"
                         RelativePanel.AlignRightWithPanel="True">
-                <FontIcon Glyph="&#xEADF;" Margin="4" FontSize="16"/>
-                <TextBlock x:Uid="AllEvents" Margin="4" FontSize="16"/>
-            </StackPanel>
-            <ListView x:Name="EL" 
-                          Loaded="EventList_Loaded"
-                          RelativePanel.Below="TH"
-                          RelativePanel.Above="CB"
-                          RelativePanel.AlignLeftWithPanel="True">
-            </ListView>
-            <CommandBar x:Name="CB" Margin="4"
-                        DefaultLabelPosition="Right"
-                        RelativePanel.AlignBottomWithPanel="True"
-                        RelativePanel.AlignRightWithPanel="True"
-                        RelativePanel.AlignLeftWithPanel="True">
-                <AppBarButton x:Uid="NewEvnt" Click="BTNewEvent_Click">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE710;"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <AppBarButton x:Uid="MveTo" Click="BTMove_Click">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE8AD;"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <AppBarButton x:Uid="Fltr" Click="BTFilter_Click">
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE71C;"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                <CommandBar.Content>
+                    <StackPanel x:Name="TH" Margin="6"
+                        Orientation="Horizontal">
+                        <FontIcon Glyph="&#xEADF;" FontSize="16"/>
+                        <TextBlock x:Uid="AllEvents" FontSize="16"/>
+                    </StackPanel>
+                </CommandBar.Content>
+                <AppBarButton x:Uid="NewEvnt" Icon="Add" Click="BTNewEvent_Click"/>
+                <AppBarButton x:Uid="MveTo" Icon="Go" Click="BTMove_Click"/>
+                <AppBarButton x:Uid="Fltr" Icon="Filter" Click="BTFilter_Click"/>
             </CommandBar>
+            <ListView x:Name="EL" 
+                      Loaded="EventList_Loaded"
+                      RelativePanel.Below="CB"
+                      RelativePanel.AlignBottomWithPanel="True"/>
         </RelativePanel>
     </SplitView>
 </Page>

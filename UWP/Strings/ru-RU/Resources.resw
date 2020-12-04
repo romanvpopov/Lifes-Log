@@ -189,6 +189,9 @@
   <data name="Done" xml:space="preserve">
     <value>Готово</value>
   </data>
+  <data name="EManage.Text" xml:space="preserve">
+    <value>Управление событиями</value>
+  </data>
   <data name="Evening.Text" xml:space="preserve">
     <value>Вечер</value>
   </data>
@@ -217,7 +220,7 @@
     <value>Освободить</value>
   </data>
   <data name="Fix.OnContent" xml:space="preserve">
-    <value>Фиксировать</value>
+    <value>Закрепить</value>
   </data>
   <data name="Fltr.Label" xml:space="preserve">
     <value>Фильтр</value>
@@ -251,6 +254,9 @@
   </data>
   <data name="Login.Text" xml:space="preserve">
     <value>Имя учетной записи</value>
+  </data>
+  <data name="Manage.Content" xml:space="preserve">
+    <value>Управлять</value>
   </data>
   <data name="Mny.Text" xml:space="preserve">
     <value>Деньги</value>

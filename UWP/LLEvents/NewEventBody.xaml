@@ -16,7 +16,7 @@
                        RelativePanel.AlignLeftWithPanel="True"
                        RelativePanel.AlignVerticalCenterWith="BT"/>
             <Border x:Name="BL"
-                    Height="1" Margin="2"
+                    Height="1" 
                     Background="LightBlue"
                     RelativePanel.AlignLeftWithPanel="True"
                     RelativePanel.AlignBottomWithPanel="True"
@@ -26,7 +26,7 @@
                     Orientation="Horizontal"
                     RelativePanel.Below="HD">
             <FontIcon Margin="2"
-                  FontFamily="Segoe MDL2 Assets" Glyph="&#xE70F;" FontSize="11"/>
+                      Glyph="&#xE70F;"/>
             <StackPanel x:Name="PE"
                         Orientation="Horizontal" Margin="2"/>
         </StackPanel>
@@ -34,7 +34,7 @@
                     Orientation="Horizontal"
                     RelativePanel.Below="SPE">
             <FontIcon Margin="2"
-                  FontFamily="Segoe MDL2 Assets" Glyph="&#xE805;" FontSize="11"/>
+                      Glyph="&#xE805;"/>
             <StackPanel x:Name="PS"
                         Orientation="Horizontal" Margin="2"/>
         </StackPanel>
@@ -42,17 +42,19 @@
                     Orientation="Horizontal"
                     RelativePanel.Below="SPS">
             <FontIcon Margin="2"
-                  FontFamily="Segoe MDL2 Assets" Glyph="&#xE95E;" FontSize="11"/>
+                      Glyph="&#xE95E;"/>
             <StackPanel x:Name="PH"
-                        Orientation="Horizontal" Margin="2"/>
+                        Orientation="Horizontal"
+                        Margin="2"/>
         </StackPanel>
         <StackPanel x:Name="SPM"
                     Orientation="Horizontal"
                     RelativePanel.Below="SPH">
             <FontIcon Margin="2"
-                  FontFamily="Segoe MDL2 Assets" Glyph="&#xEF40;" FontSize="11"/>
+                      Glyph="&#xEF40;"/>
             <StackPanel x:Name="PM"
-                        Orientation="Horizontal" Margin="2"/>
+                        Orientation="Horizontal"
+                        Margin="2"/>
         </StackPanel>
     </RelativePanel>
 </UserControl>
