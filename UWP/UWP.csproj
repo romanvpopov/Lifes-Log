@@ -175,6 +175,9 @@
     <Compile Include="LLEvents\NewEventBody.xaml.cs">
       <DependentUpon>NewEventBody.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LLEvents\UExercise.xaml.cs">
+      <DependentUpon>UExercise.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LLEvents\UList.xaml.cs">
       <DependentUpon>UList.xaml</DependentUpon>
     </Compile>
@@ -341,6 +344,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="LLEvents\NewEventBody.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LLEvents\UExercise.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
