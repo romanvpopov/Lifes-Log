@@ -218,6 +218,9 @@
     <Compile Include="Settings\SetEventType.xaml.cs">
       <DependentUpon>SetEventType.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings\SetSHM.xaml.cs">
+      <DependentUpon>SetSHM.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sport.xaml.cs">
       <DependentUpon>Sport.xaml</DependentUpon>
     </Compile>
@@ -229,7 +232,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <None Include="LL_TemporaryKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\BadgeLogo.scale-100.png" />
     <Content Include="Assets\BadgeLogo.scale-125.png" />
@@ -403,6 +405,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Settings\SetSHM.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Sport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -429,6 +435,9 @@
   <ItemGroup>
     <PRIResource Include="Strings\en-US\Resources.resw" />
     <PRIResource Include="Strings\ru-RU\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Sports\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

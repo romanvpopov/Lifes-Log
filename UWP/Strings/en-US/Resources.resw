@@ -276,6 +276,9 @@
   <data name="MveTo.Label" xml:space="preserve">
     <value>Move to</value>
   </data>
+  <data name="NewET.Content" xml:space="preserve">
+    <value>New event type</value>
+  </data>
   <data name="NewEvent.Text" xml:space="preserve">
     <value>New event</value>
   </data>
