@@ -8,7 +8,8 @@ namespace LL
 {
     public sealed partial class MainPage : Page {
 
-        public MainPage() {
+        public MainPage()
+        {
             InitializeComponent();
         }
 

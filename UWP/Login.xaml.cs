@@ -16,7 +16,6 @@ namespace LL
 
         public Login()
         {
-
             InitializeComponent();
         }
 
@@ -27,7 +26,7 @@ namespace LL
                     (App.Current as App).ConStr = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=LL;Integrated Security=True;Timeout=5";
                 } else {
                     (App.Current as App).ConStr = $"Data Source={(string)ls.Values["DataSource"] ?? ""};" +
-                        $" Initial Catalog={(string)ls.Values["InitialCatalog"] ?? ""};" +
+                        $" Initial Catalog={(string)ls.Values["InitialCatalog"] ?? ""};Encrypt=false;" +
                         $" User Id={(string)ls.Values["Login"] ?? ""};" +
                         $" Password = {(string)ls.Values["Password"] ?? ""}";
                 }

@@ -8,7 +8,7 @@
 
   <Identity
     Name="26241MT-SOFT.RU.Lifes-Log"
-    Publisher="CN=rem"
+    Publisher="CN=rem_p"
     Version="1.3.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="293c98d8-2835-4655-acf5-2de82b9f4d5e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>

@@ -33,7 +33,7 @@ namespace LL.LLEvents
                             dt = dt.AddDays(-count);
                         });
                     return new LoadMoreItemsResult() { Count = count };
-                }).AsAsyncOperation<LoadMoreItemsResult>();
+                }).AsAsyncOperation();
         }
     }
 }

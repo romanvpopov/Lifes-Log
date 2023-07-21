@@ -8,6 +8,7 @@ namespace LL.LLEvents
     {
         public Action<DateTime, Int16> Add;
         public Action Manage;
+        public DateTime DatePic { set => DateEvent.Date = value; }
         private readonly string lang = (App.Current as App).lang;
         private readonly Button bt;
 

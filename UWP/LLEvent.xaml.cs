@@ -56,9 +56,11 @@ namespace LL {
         {
             ds.Clear();
             ds.HasMoreItems = true;
-            if (ss == "Today")
-                ds.dt=DateTime.Today;
-            else 
+            if (ss == "Today") {
+                ds.dt = DateTime.Today;
+                ne.DatePic = DateTime.Today;
+            }
+            else
                 ds.dt = new DateTime(Int32.Parse(ss), 12, 31);
             HidePane();
         }

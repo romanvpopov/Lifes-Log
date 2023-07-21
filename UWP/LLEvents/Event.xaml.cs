@@ -18,7 +18,7 @@ namespace LL
 
         public Event(String st, Int32 EventCode, Int16 EventType)
         {
-            this.InitializeComponent();
+            InitializeComponent();
             Code = EventCode;
             tp = EventType;
             if (st != "") {
@@ -33,13 +33,13 @@ namespace LL
 
         public Event(Int16 EventType, DateTime dt)
         {
-            this.InitializeComponent();
+            InitializeComponent();
             Code = 0;
             tp = EventType;
             Dt = dt;
             Body.Content = new UNote(tp, this);
             exp = true;
-            BD.Background = (SolidColorBrush)Resources["TextBoxBackgroundThemeBrush"];
+            //BD.Background = (SolidColorBrush)Resources["TextBoxBackgroundThemeBrush"];
         }
 
 
@@ -48,7 +48,7 @@ namespace LL
             if (!exp & Code > 0) {
                 Body.Content = new UNote(Code, this);
                 BD.BorderBrush = (SolidColorBrush)Resources["ButtonBorderThemeBrush"];
-                BD.Background = (SolidColorBrush)Resources["TextBoxBackgroundThemeBrush"];
+                //BD.Background = (SolidColorBrush)Resources["TextBoxBackgroundThemeBrush"];
                 exp = true;
             }
         }
@@ -70,7 +70,7 @@ namespace LL
                 }
             else Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             exp = false;
-            BD.Background = null;
+            //BD.Background = null;
             BD.BorderBrush = (SolidColorBrush)Resources["ContentDialogBorderThemeBrush"];
         }
 
