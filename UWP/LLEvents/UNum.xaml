@@ -1,4 +1,5 @@
 ﻿<local:EventBody
+    xmlns:my="using:Microsoft.UI.Xaml.Controls" 
     x:Class="LL.LLEvents.UNum"
     xmlns:local="using:LL.LLEvents"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -10,6 +11,6 @@
         <TextBox x:Name="Qty"
                  InputScope="Number"
                  KeyUp="Qty_KeyUp"
-                 TextAlignment="Right"/>
+                 TextAlignment="Right" BeforeTextChanging="Qty_BeforeTextChanging"/>
     </StackPanel>
 </local:EventBody>

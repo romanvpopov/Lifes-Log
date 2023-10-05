@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
+using System.Linq;
 using Windows.UI.Xaml;
 
 namespace LL.LLEvents
@@ -35,6 +36,11 @@ namespace LL.LLEvents
         private void Qty_KeyUp(object _, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter) { Sf?.Invoke(); }
+        }
+
+        private void Qty_BeforeTextChanging(Windows.UI.Xaml.Controls.TextBox sender, Windows.UI.Xaml.Controls.TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
         }
     }
 }   
