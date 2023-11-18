@@ -1,10 +1,7 @@
 ﻿using System;
-using Microsoft.Data.SqlClient;
-using System.Linq;
 using Windows.UI.Xaml.Controls;
 using LL.LLEvents;
 using Windows.Storage;
-using System.Threading.Tasks;
 
 namespace LL { 
     /// 

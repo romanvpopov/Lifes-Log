@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
+﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -12,18 +11,14 @@ namespace LL.LLEvents
         public MoveTo()
         {
             this.InitializeComponent();
-            using (var sq = new SqlConnection((App.Current as App).ConStr)) {
-                sq.Open();
-                var cmd = sq.CreateCommand();
-                cmd.CommandText = "Select S.DY,Count(S.Code) From " +
-                    "(Select Convert(varchar, Datepart(year, DateEvent)) as DY, Code From LLEvent) as S " +
-                    "Group by S.DY Order by S.DY";
-                var rd = cmd.ExecuteReader();
-                while (rd.Read()) {
-                    bt = new Button() { Content = rd.GetString(0), Name = rd.GetString(0) };
-                    bt.Click += Year_Click;
-                    YS.Children.Add(bt);
-                }
+            var cmd = (App.Current as App).npds.CreateCommand(
+             $@"Select Distinct date_part('year', event_time)::varchar as dy From ll_event order by dy");
+            var rd = cmd.ExecuteReader();
+            while (rd.Read())
+            {
+                bt = new Button() { Content = rd.GetString(0), Name = rd.GetString(0) };
+                bt.Click += Year_Click;
+                YS.Children.Add(bt);
             }
         }
 

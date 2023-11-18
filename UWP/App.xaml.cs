@@ -8,6 +8,7 @@ using Windows.Globalization;
 using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using System.Linq;
+using Npgsql;
 
 namespace LL
 {
@@ -17,6 +18,7 @@ namespace LL
         public string ConStr;
         public string lang;
         public Int16 lenpage;
+        public NpgsqlDataSource npds;
         private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
 
         public App()

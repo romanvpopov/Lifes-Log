@@ -19,10 +19,14 @@ namespace LL
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ls.Values.ContainsKey("LocalDB")) {
-                if ((bool)ls.Values["LocalDB"]) {
+            if (ls.Values.ContainsKey("LocalDB"))
+            {
+                if ((bool)ls.Values["LocalDB"])
+                {
                     (App.Current as App).ConStr = "Host=localhost;Username=postgres;Password='';Database=LL";
-                } else {
+                }
+                else
+                {
                     (App.Current as App).ConStr = $"Host={(string)ls.Values["DataSource"] ?? ""};" +
                         $" Database={(string)ls.Values["InitialCatalog"] ?? ""};" +
                         $" Username={(string)ls.Values["Login"] ?? ""};" +
@@ -32,15 +36,17 @@ namespace LL
 
             (App.Current as App).ConStr = "Host=localhost;Username=postgres;Password=;Database=ll";
             var dataSourceBuilder = new NpgsqlDataSourceBuilder((App.Current as App).ConStr);
-            var dataSource = dataSourceBuilder.Build();
-                try {
-                await dataSource.OpenConnectionAsync();
+            (App.Current as App).npds = dataSourceBuilder.Build();
+            try
+            {
+                await (App.Current as App).npds.OpenConnectionAsync();
                 mp.CreateNav();
-                }
-                catch (Exception ex) {
-                    PB.IsActive = false;
-                    Msg.Text = ex.Message;
-                }
+            }
+            catch (Exception ex)
+            {
+                PB.IsActive = false;
+                Msg.Text = ex.Message;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

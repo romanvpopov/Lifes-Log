@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.Data.SqlClient;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -17,25 +16,24 @@ namespace LL.LLEvents
         {
             this.InitializeComponent();
             BTRS.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr)) {
-                sq.Open();
-                var cmd = sq.CreateCommand();
-                cmd.CommandText = $"Select lt.Code,lt.{lang}_Name,lt.ClassName,lt.HSM " +
-                "From LLEventType lt Where lt.ClassName<>'' and lt.Turn>0" +
-                $"Order by lt.Turn,lt.{lang}_Name";
-                var reader = cmd.ExecuteReader();
-                while (reader.Read()) {
-                    bt = new CheckBox {
-                        Content = reader.GetString(1),
-                        Tag = reader.GetInt16(0)
-                    };
-                    switch (reader.GetString(3))
-                    {
-                        case "S": PS.Children.Add(bt); break;
-                        case "H": PH.Children.Add(bt); break;
-                        case "M": PM.Children.Add(bt); break;
-                        default: PE.Children.Add(bt); break;
-                    }
+            var cmd = (App.Current as App).npds.CreateCommand(
+            $@"Select lt.id,lt.{lang}_name as nm,lt.class_name,lt.hsm
+               From ll_event_type lt Where lt.priority>0
+               Order by lt.priority,lt.{lang}_Name");
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                bt = new CheckBox
+                {
+                    Content = reader["id"],
+                    Tag = reader["nm"]
+                };
+                switch (reader["hsm"])
+                {
+                    case "S": PS.Children.Add(bt); break;
+                    case "H": PH.Children.Add(bt); break;
+                    case "M": PM.Children.Add(bt); break;
+                    default: PE.Children.Add(bt); break;
                 }
             }
         }
