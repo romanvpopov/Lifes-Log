@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Npgsql;
 using System;
 using Windows.UI.Xaml;
 
@@ -6,7 +6,7 @@ namespace LL.LLEvents
 {
     public sealed partial class UTono : EventBody
     {
-        public UTono(SqlCommand cmd, Int32 Code, Int16 ntp)
+        public UTono(NpgsqlCommand cmd, Int32 Code, Int16 ntp)
         {
             InitializeComponent();
             if (Code > 0) {
@@ -34,7 +34,7 @@ namespace LL.LLEvents
             }
         }
 
-        public override void InsertBody(SqlCommand cmd, Int32 cd)
+        public override void InsertBody(NpgsqlCommand cmd, Int32 cd)
         {
             if (MS.Text != "")
             {

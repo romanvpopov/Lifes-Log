@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
+﻿using System;
 using Windows.UI.Xaml.Controls;
 
 namespace LL.LLEvents
@@ -15,27 +14,24 @@ namespace LL.LLEvents
         {
             this.InitializeComponent();
             ne = Ne; pd = Pd;
-            using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr))
+            var cmd = (App.Current as App).npds.CreateCommand(
+            $@"Select lt.id,lt.{lang}_short_name,lt.class_name,lt.hsm,lt.{lang}_Name
+               From ll_event_type lt Where lt.class_name<>'' and lt.priority>0
+               Order by lt.priority,lt.{lang}_short_name");
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                sq.Open();
-                var cmd = sq.CreateCommand();
-                cmd.CommandText = $"Select lt.Code,lt.{lang}_ShortName,lt.ClassName,lt.HSM,lt.{lang}_Name " +
-                "From LLEventType lt Where lt.ClassName<>'' and lt.Turn>0 " +
-                $"Order by lt.Turn,lt.{lang}_ShortName";
-                var reader = cmd.ExecuteReader();
-                while (reader.Read())
+                bt = new Button();
+                bt.Content = (reader.GetString(1) == "" ? reader.GetString(4) : reader.GetString(1));
+                bt.Name = reader.GetString(2);
+                bt.Tag = reader.GetInt16(0);
+                bt.Click += Bt_Click;
+                switch (reader.GetString(3))
                 {
-                    bt = new Button();
-                    bt.Content = (reader.GetString(1) == "" ? reader.GetString(4) : reader.GetString(1));
-                    bt.Name = reader.GetString(2);
-                    bt.Tag = reader.GetInt16(0);
-                    bt.Click += Bt_Click;
-                    switch (reader.GetString(3)) {
-                        case "S": PS.Children.Add(bt); break;
-                        case "H": PH.Children.Add(bt); break;
-                        case "M": PM.Children.Add(bt); break;
-                        default : PE.Children.Add(bt); break;
-                    }
+                    case "S": PS.Children.Add(bt); break;
+                    case "H": PH.Children.Add(bt); break;
+                    case "M": PM.Children.Add(bt); break;
+                    default: PE.Children.Add(bt); break;
                 }
             }
         }

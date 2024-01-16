@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using Microsoft.Data.SqlClient;
+using Npgsql;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -19,22 +20,19 @@ namespace LL.LLEvents
         public UNote(Int32 Cd, Event Et)
         {
             this.InitializeComponent();
-            cd = Cd;  et = Et;
-            using (var sq = new SqlConnection((App.Current as App).ConStr)) {
-                sq.Open();
-                var cmd = sq.CreateCommand();
-                cmd.CommandText =
-                    $"Select L.Descr,LT.{lang}_Name,LT.ClassName,L.EventTypeCode " +
-                    $"From LLEvent L join LLEventType LT on L.EventTypeCode = LT.Code Where L.Code = {cd}";
-                var rd = cmd.ExecuteReader();
-                rd.Read();
-                GNote.Text = rd.GetString(0);
-                TypeNote.Text = rd.GetString(1);
-                cname = rd.GetString(2);
-                ntp = rd.GetInt16(3);
-                rd.Close();
-                UBody(cmd, cd, ntp);
-            }
+            cd = Cd; et = Et;
+            var cmd = (App.Current as App).npds.CreateCommand(
+                $@"Select l.comment,lt.{lang}_name as nm,lt.class_name,l.event_type_id
+                From ll_event l join ll_event_type lt on l.event_type_id = lt.id
+                Where l.id = {cd}");
+            var rd = cmd.ExecuteReader();
+            rd.Read();
+            GNote.Text = rd["comment"].ToString();
+            TypeNote.Text = rd["nm"].ToString();
+            cname = rd["class_name"].ToString();
+            ntp = (short)rd["event_type_id"];
+            rd.Close();
+            UBody(cmd, cd, ntp);
         }
 
         public UNote(Int16 tp, Event Et)
@@ -43,22 +41,21 @@ namespace LL.LLEvents
             this.InitializeComponent();
             cd = 0; dt = et.Dt;
             DelBt.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            using (var sq = new SqlConnection((App.Current as App).ConStr)) {
-                sq.Open();
-                var cmd = sq.CreateCommand();
-                cmd.CommandText = $"Select {lang}_Name,ClassName From LLEventType Where Code = {ntp}";
-                var rd = cmd.ExecuteReader();
-                rd.Read();
-                TypeNote.Text = rd.GetString(0);
-                cname = rd.GetString(1);
-                rd.Close();
-                UBody(cmd, cd, ntp);
-            }
+            var cmd = (App.Current as App).npds.CreateCommand(
+            $@"Select {lang}_name as nm,class_name From ll_event_type Where id = {ntp}");
+            var rd = cmd.ExecuteReader();
+            rd.Read();
+            TypeNote.Text = rd["nm"].ToString();
+            cname = rd["class_name"].ToString();
+            rd.Close();
+            UBody(cmd, cd, ntp);
         }
 
-        private void UBody(SqlCommand cmd,Int32 cd,Int16 ntp) {
-            switch (cname) {
-                case "Num": Bd = new UNum(cmd, cd, ntp); break;
+        private void UBody(NpgsqlCommand cmd, Int32 cd, Int16 ntp)
+        {
+            switch (cname)
+            {
+                case "Num": Bd = new UNum(cd, ntp); break;
                 case "Tono": Bd = new UTono(cmd, cd, ntp); break;
                 case "Shaving": Bd = new UShaving(cmd, cd, ntp); break;
                 case "Training": Bd = new UTraining(cmd, cd, ntp); break;
@@ -72,45 +69,48 @@ namespace LL.LLEvents
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Bd == null) SetGNoteFocus(); else Bd.GetFocus(); 
+            if (Bd == null) SetGNoteFocus(); else Bd.GetFocus();
         }
 
         private void Log_Click(object _1, Windows.UI.Xaml.RoutedEventArgs _2)
         {
             var cmt = Bd == null ? "" : Bd.ToString();
-            using (var sq = new SqlConnection((App.Current as App).ConStr))
+            //var tr = sq.BeginTransaction(IsolationLevel.ReadCommitted);
+            //cmd.Transaction = tr;
+            if (cd == 0)
             {
-                sq.Open();
-                var tr = sq.BeginTransaction(IsolationLevel.ReadCommitted);
-                var cmd = sq.CreateCommand();
-                cmd.Transaction = tr;
-                if (cd == 0) {
-                    cmd.CommandText = "Select Max(Code)+1 as Code From LLEvent";
-                    var rd = cmd.ExecuteReader(); rd.Read();
-                    cd = rd.GetInt32(0);
-                    et.Code = cd;
-                    rd.Close();
-                    cmd.CommandText =
-                        "Insert into LLEvent (Code,    DateT,                  DateEvent,Comment,        Descr, EventTypeCode,UserCode) " +
-                                    $"Values ({cd},GETDATE(),'{dt.ToString("yyyyMMdd")}','{cmt}','{GNote.Text}',        {ntp},1)";
-                    cmd.ExecuteNonQuery();
-                } else { 
-                    cmd.CommandText = $"Update LLEvent Set Comment='{cmt}',Descr='{GNote.Text}' Where Code={cd}";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = $"Delete From LLEventValue Where EventCode={cd}";
-                    cmd.ExecuteNonQuery();
-                }
-                if (Bd != null) {
-                   Bd.InsertBody(cmd, cd);
-                }
-                tr.Commit();
+                var cmd = (App.Current as App).npds.CreateCommand(
+                 "Select Max(Code)+1 as Code From LLEvent");
+                var rd = cmd.ExecuteReader(); rd.Read();
+                cd = rd.GetInt32(0);
+                et.Code = cd;
+                rd.Close();
+                cmd.CommandText =
+                    "Insert into LLEvent (Code,    DateT,                  DateEvent,Comment,        Descr, EventTypeCode,UserCode) " +
+                                $"Values ({cd},GETDATE(),'{dt.ToString("yyyyMMdd")}','{cmt}','{GNote.Text}',        {ntp},1)";
+                cmd.ExecuteNonQuery();
             }
+            else
+            {
+                var cmd = (App.Current as App).npds.CreateCommand(
+                $"Update LLEvent Set Comment='{cmt}',Descr='{GNote.Text}' Where Code={cd}");
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = $"Delete From LLEventValue Where EventCode={cd}";
+                cmd.ExecuteNonQuery();
+            }
+            if (Bd != null)
+            {
+                var cmd = (App.Current as App).npds.CreateCommand("");
+                Bd.InsertBody(cmd, cd);
+            }
+            //tr.Commit();
             et.Collapse();
         }
 
         private void Delete_Click(object _1, Windows.UI.Xaml.RoutedEventArgs _2)
         {
-            using (var sq = new SqlConnection((App.Current as App).ConStr)) {
+            using (var sq = new SqlConnection((App.Current as App).ConStr))
+            {
                 sq.Open();
                 var cmd = sq.CreateCommand();
                 cmd.CommandText = $"Delete From LLEventValue Where EventCode={cd}";
@@ -136,11 +136,10 @@ namespace LL.LLEvents
     }
     public class EventBody : UserControl
     {
-        public virtual void SelectBody(SqlCommand cmd, Int32 Code, Int16 ntp) { }
-        public virtual void InsertBody(SqlCommand cmd, Int32 Code) { }
+        public virtual void SelectBody(NpgsqlCommand cmd, Int32 Code, Int16 ntp) { }
+        public virtual void InsertBody(NpgsqlCommand cmd, Int32 Code) { }
         public virtual void GetFocus() { }
         public Action Sf;
     }
 }
 
- 

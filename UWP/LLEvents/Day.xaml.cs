@@ -35,7 +35,7 @@ namespace LL.LLEvents
                 BL.Width = 4;
             }
             EDL.Children.Add(new NewEvent(this));
-            var tps = (etps == "0") ? "" : $" and l.EventTypeCode in ({etps})";
+            //var tps = (etps == "0") ? "" : $" and l.EventTypeCode in ({etps})";
             var cmd = (App.Current as App).npds.CreateCommand(
                    $@"Select l.id,lt.class_name,lt.{lang}_short_name,l.comment,l.description,l.event_type_id
                       From ll_event l join ll_event_type lt on l.event_type_id = lt.id

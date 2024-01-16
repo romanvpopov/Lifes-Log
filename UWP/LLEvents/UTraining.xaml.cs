@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Npgsql;
 using System;
 using Windows.UI.Xaml;
 
@@ -8,7 +8,7 @@ namespace LL.LLEvents
     {
         private string lang = (App.Current as App).lang;
 
-        public UTraining(SqlCommand cmd, Int32 Code, Int16 ntp)
+        public UTraining(NpgsqlCommand cmd, Int32 Code, Int16 ntp)
         {
             InitializeComponent();
             cmd.CommandText =
@@ -40,7 +40,7 @@ namespace LL.LLEvents
 
         public override void GetFocus() { VCalories.Focus(FocusState.Programmatic); }
 
-        public override void InsertBody(SqlCommand cmd, Int32 cd)
+        public override void InsertBody(NpgsqlCommand cmd, Int32 cd)
         {
                 cmd.CommandText = $"Insert into LLEventValue (EventCode,FieldEventCode,FieldValue) Values({cd},{VCalories.Tag},'{VCalories.Text}')";
                 cmd.ExecuteNonQuery();

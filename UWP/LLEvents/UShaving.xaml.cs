@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Npgsql;
 using System;
 using Windows.ApplicationModel.Resources;
 
@@ -6,7 +6,7 @@ namespace LL.LLEvents
 {
     public sealed partial class UShaving : EventBody
     {
-        public UShaving(SqlCommand cmd, Int32 Code, Int16 ntp)
+        public UShaving(NpgsqlCommand cmd, Int32 Code, Int16 ntp)
         {
             this.InitializeComponent();
             BTM.IsChecked = true;
@@ -24,7 +24,7 @@ namespace LL.LLEvents
                 }
             }
         }
-        public override void InsertBody(SqlCommand cmd, Int32 Code)
+        public override void InsertBody(NpgsqlCommand cmd, Int32 Code)
         {
             cmd.CommandText = $"Update LLEvent Set Comment='{ToString()}' Where Code={Code}";
             cmd.ExecuteNonQuery();

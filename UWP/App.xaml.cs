@@ -77,11 +77,4 @@ namespace LL
         }
 
     }
-    public class Msg : Flyout
-    {
-        public Msg(string Uid)
-        {
-            Content = new TextBlock() { Text = ResourceLoader.GetForCurrentView().GetString(Uid) };
-        }
-    }
 }

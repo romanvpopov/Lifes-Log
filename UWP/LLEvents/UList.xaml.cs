@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Npgsql;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace LL.LLEvents
         private string lang = (App.Current as App).lang;
         private readonly ObservableCollection<ListBodyField> lsts = new ObservableCollection<ListBodyField>();
 
-        public UList(SqlCommand cmd, Int32 Code, Int16 ntp)
+        public UList(NpgsqlCommand cmd, Int32 Code, Int16 ntp)
         {
             this.InitializeComponent();
             cmd.CommandText = $"Select lf.Code,isNull(lf.{lang}_FieldName,''),isNull(lf.{lang}_FieldSmallName,''),isNull(lv.FieldValue,'')" +
@@ -25,7 +25,7 @@ namespace LL.LLEvents
             FieldList.ItemsSource = lsts;
         }
 
-        public override void InsertBody(SqlCommand cmd, Int32 cd)
+        public override void InsertBody(NpgsqlCommand cmd, Int32 cd)
         {
             foreach (ListBodyField s in FieldList.Items)
             {
