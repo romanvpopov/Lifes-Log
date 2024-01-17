@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.Data.SqlClient;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Npgsql;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+using System;
 
-namespace LL.LLEvents
+namespace WinUI3.LLEvents
 {
     public partial class UNote : UserControl
     {
@@ -39,7 +38,7 @@ namespace LL.LLEvents
             ntp = tp; et = Et;
             this.InitializeComponent();
             cd = 0; dt = et.Dt;
-            DelBt.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            DelBt.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
             var cmd = (App.Current as App).npds.CreateCommand(
             $@"Select {lang}_name as nm,class_name From ll_event_type Where id = {ntp}");
             var rd = cmd.ExecuteReader();
@@ -52,15 +51,15 @@ namespace LL.LLEvents
 
         private void UBody(NpgsqlCommand cmd, Int32 cd, Int16 ntp)
         {
-            switch (cname)
-            {
-                case "Num": Bd = new UNum(cd, ntp); break;
-                case "Tono": Bd = new UTono(cmd, cd, ntp); break;
-                case "Shaving": Bd = new UShaving(cmd, cd, ntp); break;
-                case "Training": Bd = new UTraining(cmd, cd, ntp); break;
-                case "Exercise": Bd = new UExercise(cmd, cd, ntp); break;
-                case "List": Bd = new UList(cmd, cd, ntp); break;
-            }
+            //switch (cname)
+            //{
+            //    case "Num": Bd = new UNum(cd, ntp); break;
+            //    case "Tono": Bd = new UTono(cmd, cd, ntp); break;
+            //    case "Shaving": Bd = new UShaving(cmd, cd, ntp); break;
+            //    case "Training": Bd = new UTraining(cmd, cd, ntp); break;
+            //    case "Exercise": Bd = new UExercise(cmd, cd, ntp); break;
+            //    case "List": Bd = new UList(cmd, cd, ntp); break;
+            //}
             if (Bd != null) { Bd.Sf = SetGNoteFocus; MainGrid.Children.Add(Bd); }
         }
 
@@ -71,7 +70,7 @@ namespace LL.LLEvents
             if (Bd == null) SetGNoteFocus(); else Bd.GetFocus();
         }
 
-        private void Log_Click(object _1, Windows.UI.Xaml.RoutedEventArgs _2)
+        private void Log_Click(object _1, Microsoft.UI.Xaml.RoutedEventArgs _2)
         {
             var cmt = Bd == null ? "" : Bd.ToString();
             //var tr = sq.BeginTransaction(IsolationLevel.ReadCommitted);
@@ -106,9 +105,9 @@ namespace LL.LLEvents
             et.Collapse();
         }
 
-        private void Delete_Click(object _1, Windows.UI.Xaml.RoutedEventArgs _2)
+        private void Delete_Click(object _1, Microsoft.UI.Xaml.RoutedEventArgs _2)
         {
-            using (var sq = new SqlConnection((App.Current as App).ConStr))
+            /*using (var sq = new SqlConnection((App.Current as App).ConStr))
             {
                 sq.Open();
                 var cmd = sq.CreateCommand();
@@ -116,18 +115,18 @@ namespace LL.LLEvents
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = $"Delete From LLEvent Where Code={cd}";
                 cmd.ExecuteNonQuery();
-            }
+            }*/
             cd = 0;
             et.Code = 0;
             et.Collapse();
         }
 
-        private void Cancel_Click(object _1, Windows.UI.Xaml.RoutedEventArgs _2)
+        private void Cancel_Click(object _1, Microsoft.UI.Xaml.RoutedEventArgs _2)
         {
             et.Collapse();
         }
 
-        private void GNote_KeyUp(object _1, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        private void GNote_KeyUp(object _1, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter) { LogBt.Focus(FocusState.Programmatic); }
         }
@@ -141,4 +140,3 @@ namespace LL.LLEvents
         public Action Sf;
     }
 }
-

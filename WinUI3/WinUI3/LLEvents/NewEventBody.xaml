@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="WinUI3.LLEvents.NewEventBody"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUI3.LLEvents"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <RelativePanel>
+        <RelativePanel x:Name="HD"
+                    RelativePanel.AlignTopWithPanel="True"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True" >
+            <Button x:Name="BT" x:Uid="BTCancel"
+                    Click="Button_Click"
+                    RelativePanel.AlignRightWithPanel="True"/>
+            <TextBlock x:Uid="NewEvent"
+                       Margin="2"
+                       VerticalAlignment="Center"
+                       RelativePanel.AlignLeftWithPanel="True"
+                       RelativePanel.AlignVerticalCenterWith="BT"/>
+            <Border x:Name="BL"
+                    Height="1" 
+                    Background="LightBlue"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"/>
+        </RelativePanel>
+        <StackPanel x:Name="SPE"
+                    Orientation="Horizontal"
+                    RelativePanel.Below="HD">
+            <FontIcon Margin="2"
+                      Glyph="&#xE70F;"/>
+            <StackPanel x:Name="PE"
+                        Orientation="Horizontal" Margin="2"/>
+        </StackPanel>
+        <StackPanel x:Name="SPS"
+                    Orientation="Horizontal"
+                    RelativePanel.Below="SPE">
+            <FontIcon Margin="2"
+                      Glyph="&#xE805;"/>
+            <StackPanel x:Name="PS"
+                        Orientation="Horizontal" Margin="2"/>
+        </StackPanel>
+        <StackPanel x:Name="SPH"
+                    Orientation="Horizontal"
+                    RelativePanel.Below="SPS">
+            <FontIcon Margin="2"
+                      Glyph="&#xE95E;"/>
+            <StackPanel x:Name="PH"
+                        Orientation="Horizontal"
+                        Margin="2"/>
+        </StackPanel>
+        <StackPanel x:Name="SPM"
+                    Orientation="Horizontal"
+                    RelativePanel.Below="SPH">
+            <FontIcon Margin="2"
+                      Glyph="&#xEF40;"/>
+            <StackPanel x:Name="PM"
+                        Orientation="Horizontal"
+                        Margin="2"/>
+        </StackPanel>
+    </RelativePanel>
+</UserControl>

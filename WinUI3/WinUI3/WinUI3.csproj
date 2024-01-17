@@ -10,17 +10,102 @@
     <UseWinUI>true</UseWinUI>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="LLEvent.xaml" />
+    <None Remove="LLEvents\Day.xaml" />
+    <None Remove="LLEvents\Event.xaml" />
+    <None Remove="LLEvents\EventFilter.xaml" />
+    <None Remove="LLEvents\MoveTo.xaml" />
+    <None Remove="LLEvents\NewEvent.xaml" />
+    <None Remove="LLEvents\NewEventBody.xaml" />
+    <None Remove="LLEvents\NewEventList.xaml" />
+    <None Remove="LLEvents\UNote.xaml" />
+    <None Remove="Login.xaml" />
     <None Remove="Settings\SetDB.xaml" />
+    <None Remove="Settings\SetEventType.xaml" />
+    <None Remove="Settings\SetSHM.xaml" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230913002" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
+    <PackageReference Include="Npgsql" Version="8.0.1" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="LLEvents\UNote.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Settings\SetSHM.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Settings\SetEventType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\NewEventList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\NewEventBody.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\NewEvent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\MoveTo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\EventFilter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\Event.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="Settings\SetDB.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\Day.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

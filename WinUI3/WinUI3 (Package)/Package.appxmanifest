@@ -34,8 +34,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="WinUI3 (Package)"
-        Description="WinUI3 (Package)"
+        DisplayName="Lifes-log"
+        Description="Lifes-log (WinUI3 app)"
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
         Square44x44Logo="Images\Square44x44Logo.png">

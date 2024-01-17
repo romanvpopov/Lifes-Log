@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="WinUI3.Settings.SetEventType"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUI3.Settings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <RelativePanel>
+        <StackPanel x:Name="TH"
+                    Orientation="Horizontal"
+                    Margin="4" CornerRadius="2"
+                    Background="{ThemeResource AppBarBackgroundThemeBrush}"
+                    RelativePanel.AlignTopWithPanel="True"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True">
+            <TextBlock x:Uid="EManage"
+                       Margin="10,0,0,0" FontSize="16"/>
+        </StackPanel>
+        <UserControl x:Name="U1"
+                     RelativePanel.Below="TH"/>
+        <UserControl x:Name="U2"
+                     RelativePanel.Below="TH"
+                     RelativePanel.RightOf="U1"/>
+        <UserControl x:Name="U3"
+                     RelativePanel.Below="TH"
+                     RelativePanel.RightOf="U2"/>
+    </RelativePanel>
+</Page>
