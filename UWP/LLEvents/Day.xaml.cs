@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.Data.SqlClient;
-using Npgsql;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;

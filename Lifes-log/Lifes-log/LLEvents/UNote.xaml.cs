@@ -51,15 +51,16 @@ namespace WinUI3.LLEvents
 
         private void UBody(NpgsqlCommand cmd, Int32 cd, Int16 ntp)
         {
-            //switch (cname)
-            //{
-            //    case "Num": Bd = new UNum(cd, ntp); break;
-            //    case "Tono": Bd = new UTono(cmd, cd, ntp); break;
-            //    case "Shaving": Bd = new UShaving(cmd, cd, ntp); break;
-            //    case "Training": Bd = new UTraining(cmd, cd, ntp); break;
-            //    case "Exercise": Bd = new UExercise(cmd, cd, ntp); break;
-            //    case "List": Bd = new UList(cmd, cd, ntp); break;
-            //}
+        /*    switch (cname)
+            {
+                case "Num": Bd = new UNum(cd, ntp); break;
+                case "Tono": Bd = new UTono(cmd, cd, ntp); break;
+                case "Shaving": Bd = new UShaving(cmd, cd, ntp); break;
+                case "Training": Bd = new UTraining(cmd, cd, ntp); break;
+                case "Exercise": Bd = new UExercise(cmd, cd, ntp); break;
+                case "List": Bd = new UList(cmd, cd, ntp); break;
+            }
+        */
             if (Bd != null) { Bd.Sf = SetGNoteFocus; MainGrid.Children.Add(Bd); }
         }
 

@@ -4,6 +4,8 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using Windows.Storage;
 using Npgsql;
+using Windows.Globalization;
+using System.Linq;
 
 namespace WinUI3
 {
@@ -19,6 +21,12 @@ namespace WinUI3
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            switch (ls.Values["LLang"])
+            {
+                case 1: ApplicationLanguages.PrimaryLanguageOverride = "en"; (App.Current as App).lang = "en"; break;
+                case 2: ApplicationLanguages.PrimaryLanguageOverride = "ru"; (App.Current as App).lang = "ru"; break;
+                default: (App.Current as App).lang = ApplicationLanguages.Languages.First().Substring(0, 2); break;
+            }
             if (ls.Values.ContainsKey("LocalDB"))
             {
                 if ((bool)ls.Values["LocalDB"])
