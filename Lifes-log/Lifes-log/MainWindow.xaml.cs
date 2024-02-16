@@ -13,7 +13,7 @@ namespace Lifes_log
 
         private void NV_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            if (args.IsSettingsInvoked) MainFrame.Navigate(typeof(WinUI3.Settings.SetDB), this);
+            if (args.IsSettingsInvoked) MainFrame.Navigate(typeof(Settings.SetDB), this);
             else
             {
                 //switch (args.InvokedItemContainer.Tag)

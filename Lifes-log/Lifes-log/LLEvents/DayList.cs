@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
-namespace WinUI3.LLEvents
+namespace Lifes_log.LLEvents
 {
     public class DayList: ObservableCollection<Day>
     {

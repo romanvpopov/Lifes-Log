@@ -8,7 +8,7 @@ using Lifes_log;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace WinUI3.LLEvents
+namespace Lifes_log.LLEvents
 {
     public sealed partial class Day : UserControl
     {

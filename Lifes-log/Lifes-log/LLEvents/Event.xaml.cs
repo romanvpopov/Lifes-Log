@@ -4,7 +4,7 @@ using Microsoft.UI.Xaml.Media;
 using System;
 using Lifes_log;
 
-namespace WinUI3.LLEvents
+namespace Lifes_log.LLEvents
 {
     public sealed partial class Event : UserControl
     {

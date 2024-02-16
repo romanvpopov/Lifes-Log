@@ -213,6 +213,9 @@
   <data name="Expense.Label" xml:space="preserve">
     <value>Расход</value>
   </data>
+  <data name="Filter.Content" xml:space="preserve">
+    <value>Фильтр</value>
+  </data>
   <data name="Filter.Label" xml:space="preserve">
     <value>Фильтр</value>
   </data>
@@ -270,10 +273,10 @@
   <data name="Morning.Text" xml:space="preserve">
     <value>Утро</value>
   </data>
-  <data name="MoveTo.Label" xml:space="preserve">
+  <data name="MoveTo.Content" xml:space="preserve">
     <value>Перейти</value>
   </data>
-  <data name="MoveTo.Text" xml:space="preserve">
+  <data name="MoveTo.Label" xml:space="preserve">
     <value>Перейти</value>
   </data>
   <data name="NewET.Content" xml:space="preserve">
@@ -282,14 +285,14 @@
   <data name="NewEvent.Label" xml:space="preserve">
     <value>Новое событие</value>
   </data>
-  <data name="NewEvent.Text" xml:space="preserve">
-    <value>Новое событие</value>
-  </data>
   <data name="NF" xml:space="preserve">
     <value>Ничего не найдено</value>
   </data>
   <data name="Notes.Text" xml:space="preserve">
     <value>Заметки</value>
+  </data>
+  <data name="NwEvnt.Text" xml:space="preserve">
+    <value>Новое событие</value>
   </data>
   <data name="Password.Text" xml:space="preserve">
     <value>Пароль</value>

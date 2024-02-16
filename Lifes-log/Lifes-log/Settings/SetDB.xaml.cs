@@ -6,7 +6,7 @@ using Windows.Globalization;
 using Windows.Storage;
 using Lifes_log;
 
-namespace WinUI3.Settings
+namespace Lifes_log.Settings
 {
     public sealed partial class SetDB : Page
     {

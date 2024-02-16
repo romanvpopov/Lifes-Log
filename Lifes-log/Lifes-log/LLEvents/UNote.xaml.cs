@@ -4,7 +4,7 @@ using Npgsql;
 using System;
 using Lifes_log;
 
-namespace WinUI3.LLEvents
+namespace Lifes_log.LLEvents
 {
     public partial class UNote : UserControl
     {

@@ -35,9 +35,9 @@
                         <TextBlock x:Uid="AllEvents" FontSize="16"/>
                     </StackPanel>
                 </CommandBar.Content>
-                <AppBarButton x:Uid="NewEvent" Icon="Add" Click="BTNewEvent_Click"/>
-                <AppBarButton x:Uid="MoveTo" Icon="Go" Click="BTMove_Click"/>
-                <AppBarButton x:Uid="Filter" Icon="Filter" Click="BTFilter_Click"/>
+                <AppBarButton x:Uid="NewEventC" Icon="Add" Click="BTNewEvent_Click"/>
+                <AppBarButton x:Uid="MoveToC" Icon="Go" Click="BTMove_Click"/>
+                <AppBarButton x:Uid="FilterC" Icon="Filter" Click="BTFilter_Click"/>
             </CommandBar>
             <ListView x:Name="El" 
                       Loaded="EL_Loaded"

@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using Lifes_log;
 
-namespace WinUI3.LLEvents
+namespace Lifes_log.LLEvents
 {
     public sealed partial class MoveTo : UserControl
     {

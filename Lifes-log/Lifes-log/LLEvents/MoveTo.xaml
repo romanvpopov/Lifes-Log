@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <UserControl
-    x:Class="WinUI3.LLEvents.MoveTo"
+    x:Class="Lifes_log.LLEvents.MoveTo"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:WinUI3.LLEvents"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -13,7 +12,7 @@
                 <FontIcon Margin="10,0,0,0"
                           FontFamily="Segoe MDL2 Assets"
                           Glyph="&#xE8AD;" FontSize="11"/>
-                <TextBlock x:Uid="MoveTo" Margin="10,0,0,0"/>
+                <TextBlock x:Uid="MoveToT" Margin="10,0,0,0"/>
             </StackPanel>
             <StackPanel x:Name="YS" Orientation="Vertical"/>
             <Button x:Uid="Today" Click="Button_Click"/>

@@ -213,10 +213,13 @@
   <data name="Expense.Label" xml:space="preserve">
     <value>Expens</value>
   </data>
-  <data name="Filter.Label" xml:space="preserve">
+  <data name="FilterC.Content" xml:space="preserve">
     <value>Filter</value>
   </data>
-  <data name="Filter.Text" xml:space="preserve">
+  <data name="FilterL.Label" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="FilterT.Text" xml:space="preserve">
     <value>Filter</value>
   </data>
   <data name="Fix.OffContent" xml:space="preserve">
@@ -270,19 +273,25 @@
   <data name="Morning.Text" xml:space="preserve">
     <value>Morning</value>
   </data>
-  <data name="MoveTo.Label" xml:space="preserve">
+  <data name="MoveToC.Content" xml:space="preserve">
     <value>Move to</value>
   </data>
-  <data name="MoveTo.Text" xml:space="preserve">
+  <data name="MoveToL.Label" xml:space="preserve">
+    <value>Move to</value>
+  </data>
+  <data name="MoveToT.Text" xml:space="preserve">
     <value>Move to</value>
   </data>
   <data name="NewET.Content" xml:space="preserve">
     <value>New event type</value>
   </data>
-  <data name="NewEvent.Label" xml:space="preserve">
+  <data name="NewEventC.Content" xml:space="preserve">
     <value>New event</value>
   </data>
-  <data name="NewEvent.Text" xml:space="preserve">
+  <data name="NewEventL.Label" xml:space="preserve">
+    <value>New event</value>
+  </data>
+  <data name="NewEventT.Text" xml:space="preserve">
     <value>New event</value>
   </data>
   <data name="NF" xml:space="preserve">

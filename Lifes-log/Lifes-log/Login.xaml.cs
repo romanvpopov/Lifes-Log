@@ -5,18 +5,18 @@ using Windows.Storage;
 using Npgsql;
 using Windows.Globalization;
 using System.Linq;
+using Microsoft.UI.Xaml.Controls;
 
 namespace Lifes_log
 {
-    public sealed partial class Login
+    public sealed partial class Login: Page
     {
         private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
         private MainWindow mp;
         private string constr;
 
-        public Login(string constr)
+        public Login()
         {
-            this.constr = constr;
             InitializeComponent();
         }
 
