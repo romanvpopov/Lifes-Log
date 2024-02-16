@@ -1,9 +1,10 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using WinUI3;
 
-namespace WinUI3
+namespace Lifes_log
 {
-    public sealed partial class MainWindow : Window
+    public sealed partial class MainWindow
     {
         public MainWindow()
         {
@@ -12,7 +13,7 @@ namespace WinUI3
 
         private void NV_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            if (args.IsSettingsInvoked) MainFrame.Navigate(typeof(Settings.SetDB), this);
+            if (args.IsSettingsInvoked) MainFrame.Navigate(typeof(WinUI3.Settings.SetDB), this);
             else
             {
                 //switch (args.InvokedItemContainer.Tag)
@@ -27,8 +28,8 @@ namespace WinUI3
 
         public void Login()
         {
-            NV.MenuItems.Clear();
-            NV.AutoSuggestBox.Visibility = Visibility.Collapsed;
+            Nv.MenuItems.Clear();
+            Nv.AutoSuggestBox.Visibility = Visibility.Collapsed;
             int cacheSize = MainFrame.CacheSize;
             MainFrame.CacheSize = 0;
             MainFrame.CacheSize = cacheSize;
@@ -37,39 +38,39 @@ namespace WinUI3
 
         public void CreateNav()
         {
-            NV.MenuItems.Clear();
-            NV.MenuItems.Add(new NavigationViewItem
+            Nv.MenuItems.Clear();
+            Nv.MenuItems.Add(new NavigationViewItem
             {
                 Tag = "Events",
                 Icon = new FontIcon { Glyph = "\xEADF" },
                 Content = "Events"
             });
-            NV.MenuItems.Add(new NavigationViewItem
+            Nv.MenuItems.Add(new NavigationViewItem
             {
                 Tag = "Sport",
                 Icon = new FontIcon { Glyph = "\xE805" },
                 Content = "Sport"
             });
-            NV.MenuItems.Add(new NavigationViewItem
+            Nv.MenuItems.Add(new NavigationViewItem
             {
                 Tag = "Health",
                 Icon = new FontIcon { Glyph = "\xE95E" },
                 Content = "Health"
             });
-            NV.MenuItems.Add(new NavigationViewItem
+            Nv.MenuItems.Add(new NavigationViewItem
             {
                 Tag = "Money",
                 Icon = new FontIcon { Glyph = "\xEF40" },
                 Content = "Money"
             });
-            NV.MenuItems.Add(new NavigationViewItem
+            Nv.MenuItems.Add(new NavigationViewItem
             {
                 Tag = "Calendar",
                 Icon = new FontIcon { Glyph = "\xE787" },
                 Content = "Calendar"
             });
-            MainFrame.Navigate(typeof(LLEvent), this);
-            NV.AutoSuggestBox.Visibility = Visibility.Visible;
+            MainFrame.Navigate(typeof(LlEvent), this);
+            Nv.AutoSuggestBox.Visibility = Visibility.Visible;
         }
 
         private void NV_BackRequested(NavigationView _1, NavigationViewBackRequestedEventArgs _2)

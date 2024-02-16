@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using Windows.Globalization;
 using Windows.Storage;
+using Lifes_log;
 
 namespace WinUI3.Settings
 {

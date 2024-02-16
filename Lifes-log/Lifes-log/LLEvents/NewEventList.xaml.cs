@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml.Controls;
 using System;
+using Lifes_log;
 
 namespace WinUI3.LLEvents
 {
@@ -15,7 +16,7 @@ namespace WinUI3.LLEvents
         {
             this.InitializeComponent();
             DateEvent.Date = DateTime.Today;
-            var cmd = (App.Current as App).npds.CreateCommand(
+            var cmd = (App.Current as App).NpDs.CreateCommand(
               $@"Select lt.id,lt.{lang}_name as nm,lt.class_name,lt.hsm
                From ll_event_type lt Where lt.priority>0
                Order by lt.priority,lt.{lang}_Name");

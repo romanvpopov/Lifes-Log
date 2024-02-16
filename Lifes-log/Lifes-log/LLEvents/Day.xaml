@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WinUI3"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lifesLog="using:Lifes_log"
     mc:Ignorable="d">
     <RelativePanel
         Margin="0,4,0,4"
@@ -22,9 +23,9 @@
             Margin="2"
             RelativePanel.RightOf="BL"
             RelativePanel.AlignTopWithPanel="True"/>
-        <local:WrapPanel x:Name="EDL"
+        <lifesLog:WrapPanel x:Name="EDL"
             RelativePanel.RightOf="BL"
             RelativePanel.Below="TX">
-        </local:WrapPanel>
+        </lifesLog:WrapPanel>
     </RelativePanel>
 </UserControl>

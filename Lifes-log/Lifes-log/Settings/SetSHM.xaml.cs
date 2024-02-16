@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml.Controls;
 using System;
+using Lifes_log;
 
 namespace WinUI3.Settings
 {
@@ -15,7 +16,7 @@ namespace WinUI3.Settings
                 case "S": FI.Glyph = "\xE805"; TX.Text = "Sport"; break;
                 case "H": FI.Glyph = "\xE95E"; TX.Text = "Health"; break;
             }
-            var cmd = (App.Current as App).npds.CreateCommand(
+            var cmd = (App.Current as App).NpDs.CreateCommand(
               $@"Select lt.Code,lt.{lang}_Name,lt.ClassName,lt.HSM
                  From LLEventType lt Where lt.ClassName<>'' and lt.HSM='{et}'
                 Order by lt.Turn,lt.{lang}_Name");

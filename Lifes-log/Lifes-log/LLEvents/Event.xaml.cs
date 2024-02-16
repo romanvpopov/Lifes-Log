@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
+using Lifes_log;
 
 namespace WinUI3.LLEvents
 {
@@ -57,7 +58,7 @@ namespace WinUI3.LLEvents
         {
             if (Code > 0)
             {
-                var cmd = (App.Current as App).npds.CreateCommand(
+                var cmd = (App.Current as App).NpDs.CreateCommand(
                   $@"Select lt.{lang}_ShortName,l.Comment,l.Descr
                    From llEvent l join LLEventType lt on l.EventTypeCode = lt.Code Where l.Code={Code}");
                 var rd = cmd.ExecuteReader();

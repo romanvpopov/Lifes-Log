@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.Linq;
+using Lifes_log;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -37,7 +38,7 @@ namespace WinUI3.LLEvents
             }
             EDL.Children.Add(new NewEvent(this));
             //var tps = (etps == "0") ? "" : $" and l.EventTypeCode in ({etps})";
-            var cmd = (App.Current as App).npds.CreateCommand(
+            var cmd = (App.Current as App).NpDs.CreateCommand(
                    $@"Select l.id,lt.class_name,lt.{lang}_short_name,l.comment,l.description,l.event_type_id
                       From ll_event l join ll_event_type lt on l.event_type_id = lt.id
                       Where l.event_time='{dts:yyyyMMdd}' Order by l.id");

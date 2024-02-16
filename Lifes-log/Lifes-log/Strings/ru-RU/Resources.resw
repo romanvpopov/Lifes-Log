@@ -213,6 +213,9 @@
   <data name="Expense.Label" xml:space="preserve">
     <value>Расход</value>
   </data>
+  <data name="Filter.Label" xml:space="preserve">
+    <value>Фильтр</value>
+  </data>
   <data name="Filter.Text" xml:space="preserve">
     <value>Фильтр</value>
   </data>
@@ -221,9 +224,6 @@
   </data>
   <data name="Fix.OnContent" xml:space="preserve">
     <value>Закрепить</value>
-  </data>
-  <data name="Fltr.Label" xml:space="preserve">
-    <value>Фильтр</value>
   </data>
   <data name="Health" xml:space="preserve">
     <value>Здоровье</value>
@@ -270,19 +270,19 @@
   <data name="Morning.Text" xml:space="preserve">
     <value>Утро</value>
   </data>
-  <data name="MoveTo.Text" xml:space="preserve">
+  <data name="MoveTo.Label" xml:space="preserve">
     <value>Перейти</value>
   </data>
-  <data name="MveTo.Label" xml:space="preserve">
+  <data name="MoveTo.Text" xml:space="preserve">
     <value>Перейти</value>
   </data>
   <data name="NewET.Content" xml:space="preserve">
     <value>Новый тип события</value>
   </data>
-  <data name="NewEvent.Text" xml:space="preserve">
+  <data name="NewEvent.Label" xml:space="preserve">
     <value>Новое событие</value>
   </data>
-  <data name="NewEvnt.Label" xml:space="preserve">
+  <data name="NewEvent.Text" xml:space="preserve">
     <value>Новое событие</value>
   </data>
   <data name="NF" xml:space="preserve">

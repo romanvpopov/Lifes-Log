@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using Lifes_log;
 
 namespace WinUI3.LLEvents
 {
@@ -11,7 +12,7 @@ namespace WinUI3.LLEvents
         public MoveTo()
         {
             this.InitializeComponent();
-            var cmd = (App.Current as App).npds.CreateCommand(
+            var cmd = (App.Current as App).NpDs.CreateCommand(
              $@"Select Distinct date_part('year', event_time)::varchar as dy From ll_event order by dy");
             var rd = cmd.ExecuteReader();
             while (rd.Read())

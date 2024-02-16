@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Npgsql;
 using System;
+using Lifes_log;
 
 namespace WinUI3.LLEvents
 {
@@ -19,7 +20,7 @@ namespace WinUI3.LLEvents
         {
             this.InitializeComponent();
             cd = Cd; et = Et;
-            var cmd = (App.Current as App).npds.CreateCommand(
+            var cmd = (App.Current as App).NpDs.CreateCommand(
                 $@"Select l.comment,lt.{lang}_name as nm,lt.class_name,l.event_type_id
                 From ll_event l join ll_event_type lt on l.event_type_id = lt.id
                 Where l.id = {cd}");
@@ -39,7 +40,7 @@ namespace WinUI3.LLEvents
             this.InitializeComponent();
             cd = 0; dt = et.Dt;
             DelBt.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
-            var cmd = (App.Current as App).npds.CreateCommand(
+            var cmd = (App.Current as App).NpDs.CreateCommand(
             $@"Select {lang}_name as nm,class_name From ll_event_type Where id = {ntp}");
             var rd = cmd.ExecuteReader();
             rd.Read();
@@ -78,7 +79,7 @@ namespace WinUI3.LLEvents
             //cmd.Transaction = tr;
             if (cd == 0)
             {
-                var cmd = (App.Current as App).npds.CreateCommand(
+                var cmd = (App.Current as App).NpDs.CreateCommand(
                  "Select Max(Code)+1 as Code From LLEvent");
                 var rd = cmd.ExecuteReader(); rd.Read();
                 cd = rd.GetInt32(0);
@@ -91,7 +92,7 @@ namespace WinUI3.LLEvents
             }
             else
             {
-                var cmd = (App.Current as App).npds.CreateCommand(
+                var cmd = (App.Current as App).NpDs.CreateCommand(
                 $"Update LLEvent Set Comment='{cmt}',Descr='{GNote.Text}' Where Code={cd}");
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = $"Delete From LLEventValue Where EventCode={cd}";
@@ -99,7 +100,7 @@ namespace WinUI3.LLEvents
             }
             if (Bd != null)
             {
-                var cmd = (App.Current as App).npds.CreateCommand("");
+                var cmd = (App.Current as App).NpDs.CreateCommand("");
                 Bd.InsertBody(cmd, cd);
             }
             //tr.Commit();

@@ -1,13 +1,13 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Collections.Specialized;
+using System.Linq;
 using Windows.Foundation;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 
-namespace WinUI3
+namespace Lifes_log
 {
     /// <summary>
     /// Represents a control that can be used to present a collection of items in wrapped layout.
@@ -22,22 +22,24 @@ namespace WinUI3
         /// </summary>
         public IEnumerable ItemsSource
         {
-            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, value);
         }
-        public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(WrapPanel), new PropertyMetadata(null, ItemsSource_Changed));
+
+        private static readonly DependencyProperty ItemsSourceProperty =
+            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(WrapPanel), new PropertyMetadata(null, ItemsSource_Changed));
 
         /// <summary>
         /// The DataTemplate used to display each item.
         /// </summary>
         public DataTemplate ItemTemplate
         {
-            get { return (DataTemplate)GetValue(ItemTemplateProperty); }
-            set { SetValue(ItemTemplateProperty, value); }
+            get => (DataTemplate)GetValue(ItemTemplateProperty);
+            set => SetValue(ItemTemplateProperty, value);
         }
-        public static readonly DependencyProperty ItemTemplateProperty =
-            DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(WrapPanel), new PropertyMetadata(null));
+
+        private static readonly DependencyProperty ItemTemplateProperty =
+            DependencyProperty.Register(nameof(ItemTemplate), typeof(DataTemplate), typeof(WrapPanel), new PropertyMetadata(null));
 
         /// <summary>
         /// Initializes a new instance of the WrapPanel.WrapPanel class.
@@ -177,7 +179,7 @@ namespace WinUI3
                         var items = ItemsSource.Cast<object>().ToList();
                         foreach (var item in items)
                         {
-                            if (!Children.Any(c => ((FrameworkElement)c).DataContext == item))
+                            if (Children.All(c => ((FrameworkElement)c).DataContext != item))
                                 AddItem(item);
                         }
                     }
@@ -186,8 +188,9 @@ namespace WinUI3
                     {
                         foreach (var item in e.NewItems)
                         {
-                            foreach (FrameworkElement child in Children)
+                            foreach (var uiElement in Children)
                             {
+                                var child = (FrameworkElement)uiElement;
                                 if (elementPositions.TryGetValue(child, out int position) && position >= e.NewStartingIndex)
                                     elementPositions[child] = ++position;
                             }
@@ -203,8 +206,9 @@ namespace WinUI3
                             if (childToRemove != null)
                                 Children.Remove(childToRemove);
 
-                            foreach (FrameworkElement child in Children)
+                            foreach (var uiElement in Children)
                             {
+                                var child = (FrameworkElement)uiElement;
                                 if (elementPositions.TryGetValue(child, out int position) && position > e.OldStartingIndex)
                                     elementPositions[child] = --position;
                             }
@@ -214,8 +218,9 @@ namespace WinUI3
                 case NotifyCollectionChangedAction.Move:
                     {
                         var items = ItemsSource.Cast<object>().ToList();
-                        foreach (FrameworkElement child in Children)
+                        foreach (var uiElement in Children)
                         {
+                            var child = (FrameworkElement)uiElement;
                             var matchingItem = items.FirstOrDefault(i => i == child.DataContext);
                             if (matchingItem != null)
                                 elementPositions[child] = items.IndexOf(matchingItem);
@@ -233,9 +238,9 @@ namespace WinUI3
         /// <returns>Ordered children collection.</returns>
         private IEnumerable<FrameworkElement> GetChildrenOrdered()
         {
-            return Children.Where(c => c is FrameworkElement).Select(c => (FrameworkElement)c).OrderBy(c =>
+            return Children.OfType<FrameworkElement>().OrderBy(c =>
             {
-                if (c is FrameworkElement && elementPositions.TryGetValue(c, out int position))
+                if (elementPositions.TryGetValue(c, out int position))
                     return position;
                 else
                     return -1;

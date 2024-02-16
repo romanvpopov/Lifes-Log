@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
+using Lifes_log;
 
 namespace WinUI3.LLEvents
 {

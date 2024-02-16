@@ -1,22 +1,19 @@
-using Microsoft.UI.Xaml.Controls;
 using System;
-using WinUI3.LLEvents;
 using Windows.Storage;
+using WinUI3.LLEvents;
 
-
-namespace WinUI3
+namespace Lifes_log
 {
-    public sealed partial class LLEvent : Page
+    public sealed partial class LlEvent
     {
 
-        private readonly string lang = (App.Current as App).lang;
         private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
         private readonly DayList ds;
         private readonly EventFilter ef;
         private readonly NewEventList ne;
         private readonly MoveTo mt;
 
-        public LLEvent()
+        public LlEvent()
         {
             InitializeComponent();
             //NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
@@ -26,28 +23,28 @@ namespace WinUI3
             ne = new NewEventList
             {
                 Add = Add,
-                Manage = () => { Frame.Navigate(typeof(Settings.SetEventType)); }
+                Manage = () => { Frame.Navigate(typeof(WinUI3.Settings.SetEventType)); }
             };
-            if (ls.Values.ContainsKey("FixPane")) FixPane.IsOn = (bool)ls.Values["FixPane"];
+            if (ls.Values.TryGetValue("FixPane", out var value)) FixPane.IsOn = (bool)value;
             RPane.Content = ne;
         }
 
         private void EL_Loaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            EL.ItemsSource = ds;
+            El.ItemsSource = ds;
         }
 
         private void Add(DateTime dt, Int16 tp)
         {
-            foreach (object dy in EL.Items)
+            foreach (object dy in El.Items)
             {
                 if (dy.GetType().Name == "Day")
                 {
                     if ((dy as Day).dt == dt)
                     {
                         (dy as Day).AddEvent(tp);
-                        EL.SelectedItem = dy;
-                        EL.ScrollIntoView(EL.SelectedItem);
+                        El.SelectedItem = dy;
+                        El.ScrollIntoView(El.SelectedItem);
                         HidePane();
                         break;
                     }
@@ -55,7 +52,7 @@ namespace WinUI3
             }
         }
 
-        private void Move(String ss)
+        private void Move(string ss)
         {
             ds.Clear();
             ds.HasMoreItems = true;
@@ -72,17 +69,17 @@ namespace WinUI3
         private void ApplyFilter(String tpd)
         {
             ds.etps = tpd;
-            foreach (object d in EL.Items)
+            foreach (object d in El.Items)
                 if (d.GetType().Name == "Day") (d as Day).ApllyFilter(tpd);
         }
 
         private void ResetFilter()
         {
             ds.etps = "0";
-            foreach (object d in EL.Items) if (d.GetType().Name == "Day") (d as Day).ResetFilter();
+            foreach (object d in El.Items) if (d.GetType().Name == "Day") (d as Day).ResetFilter();
         }
 
-        public void HidePane()
+        private void HidePane()
         {
             if (!FixPane.IsOn) RightPane.IsPaneOpen = false;
         }
