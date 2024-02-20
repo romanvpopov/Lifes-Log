@@ -1,10 +1,9 @@
 using Microsoft.UI.Xaml.Controls;
 using System;
-using Lifes_log;
 
 namespace Lifes_log.LLEvents
 {
-    public sealed partial class NewEventList : UserControl
+    public sealed partial class NewEventList
     {
         public Action<DateTime, Int16> Add;
         public Action Manage;
@@ -16,7 +15,7 @@ namespace Lifes_log.LLEvents
         {
             this.InitializeComponent();
             DateEvent.Date = DateTime.Today;
-            var cmd = (App.Current as App).NpDs.CreateCommand(
+            var cmd = ((App)App.Current).NpDs.CreateCommand(
               $@"Select lt.id,lt.{lang}_name as nm,lt.class_name,lt.hsm
                From ll_event_type lt Where lt.priority>0
                Order by lt.priority,lt.{lang}_Name");
@@ -42,7 +41,7 @@ namespace Lifes_log.LLEvents
 
         private void Bt_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            Add(DateEvent.Date?.Date ?? DateTime.Today, Convert.ToInt16((sender as Button).Tag.ToString()));
+            Add(DateEvent.Date?.Date ?? DateTime.Today, Convert.ToInt16((sender as Button)?.Tag.ToString()));
         }
 
         private void MN_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

@@ -5,11 +5,10 @@ using Windows.Storage;
 using Npgsql;
 using Windows.Globalization;
 using System.Linq;
-using Microsoft.UI.Xaml.Controls;
 
 namespace Lifes_log
 {
-    public sealed partial class Login: Page
+    public sealed partial class Login
     {
         private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
         private MainWindow mp;
@@ -32,7 +31,7 @@ namespace Lifes_log
             {
                 if ((bool)value)
                 {
-                    constr = "Host=localhost;Username=postgres;Password='';Database=LL";
+                    constr = "Host=localhost;Username=postgres;Password='';Database=ll";
                 }
                 else
                 {
@@ -43,7 +42,6 @@ namespace Lifes_log
                 }
             }
 
-            constr = "Host=localhost;Username=postgres;Password=;Database=ll";
             var dataSourceBuilder = new NpgsqlDataSourceBuilder(constr);
             (App.Current as App).NpDs = dataSourceBuilder.Build();
             try

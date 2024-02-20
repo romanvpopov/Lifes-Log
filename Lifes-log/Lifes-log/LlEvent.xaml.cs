@@ -16,14 +16,14 @@ namespace Lifes_log
         public LlEvent()
         {
             InitializeComponent();
-            //NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             ds = new DayList(DateTime.Today);
             ef = new EventFilter { Apply = ApplyFilter, Reset = ResetFilter };
             mt = new MoveTo { Move = Move };
             ne = new NewEventList
             {
                 Add = Add,
-                Manage = () => { Frame.Navigate(typeof(WinUI3.Settings.SetEventType)); }
+                Manage = () => { Frame.Navigate(typeof(Settings.SetEventType)); }
             };
             if (ls.Values.TryGetValue("FixPane", out var value)) FixPane.IsOn = (bool)value;
             RPane.Content = ne;
@@ -36,19 +36,15 @@ namespace Lifes_log
 
         private void Add(DateTime dt, Int16 tp)
         {
-            foreach (object dy in El.Items)
+            foreach (var dy in El.Items)
             {
-                if (dy.GetType().Name == "Day")
-                {
-                    if ((dy as Day).dt == dt)
-                    {
-                        (dy as Day).AddEvent(tp);
-                        El.SelectedItem = dy;
-                        El.ScrollIntoView(El.SelectedItem);
-                        HidePane();
-                        break;
-                    }
-                }
+                if (dy.GetType().Name != "Day") continue;
+                if (((Day)dy).dt != dt) continue;
+                (dy as Day).AddEvent(tp);
+                El.SelectedItem = dy;
+                El.ScrollIntoView(El.SelectedItem);
+                HidePane();
+                break;
             }
         }
 
@@ -76,7 +72,7 @@ namespace Lifes_log
         private void ResetFilter()
         {
             ds.etps = "0";
-            foreach (object d in El.Items) if (d.GetType().Name == "Day") (d as Day).ResetFilter();
+            foreach (var d in El.Items) if (d.GetType().Name == "Day") (d as Day)?.ResetFilter();
         }
 
         private void HidePane()

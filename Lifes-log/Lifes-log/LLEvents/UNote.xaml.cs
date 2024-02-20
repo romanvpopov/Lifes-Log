@@ -2,28 +2,27 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Npgsql;
 using System;
-using Lifes_log;
 
 namespace Lifes_log.LLEvents
 {
-    public partial class UNote : UserControl
+    public partial class UNote 
     {
-        protected string lang = (App.Current as App).lang;
-        protected Int16 ntp;
-        protected Int32 cd;
+        private readonly string lang = (App.Current as App).lang;
+        private readonly short ntp;
+        private int cd;
         protected string cname;
         protected EventBody Bd;
-        protected Event et;
-        protected DateTime dt;
+        private readonly Event et;
+        private readonly DateTime dt;
 
-        public UNote(Int32 Cd, Event Et)
+        public UNote(int cd, Event et)
         {
-            this.InitializeComponent();
-            cd = Cd; et = Et;
+            InitializeComponent();
+            this.cd = cd; this.et = et;
             var cmd = (App.Current as App).NpDs.CreateCommand(
                 $@"Select l.comment,lt.{lang}_name as nm,lt.class_name,l.event_type_id
                 From ll_event l join ll_event_type lt on l.event_type_id = lt.id
-                Where l.id = {cd}");
+                Where l.id = {this.cd}");
             var rd = cmd.ExecuteReader();
             rd.Read();
             GNote.Text = rd["comment"].ToString();
@@ -31,14 +30,14 @@ namespace Lifes_log.LLEvents
             cname = rd["class_name"].ToString();
             ntp = (short)rd["event_type_id"];
             rd.Close();
-            UBody(cmd, cd, ntp);
+            UBody(cmd, this.cd, ntp);
         }
 
-        public UNote(Int16 tp, Event Et)
+        public UNote(short tp, Event et)
         {
-            ntp = tp; et = Et;
-            this.InitializeComponent();
-            cd = 0; dt = et.Dt;
+            ntp = tp; this.et = et;
+            InitializeComponent();
+            cd = 0; dt = this.et.Dt;
             DelBt.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
             var cmd = (App.Current as App).NpDs.CreateCommand(
             $@"Select {lang}_name as nm,class_name From ll_event_type Where id = {ntp}");
@@ -52,7 +51,7 @@ namespace Lifes_log.LLEvents
 
         private void UBody(NpgsqlCommand cmd, Int32 cd, Int16 ntp)
         {
-        /*    switch (cname)
+            /*    switch (cname)
             {
                 case "Num": Bd = new UNum(cd, ntp); break;
                 case "Tono": Bd = new UTono(cmd, cd, ntp); break;
@@ -62,10 +61,12 @@ namespace Lifes_log.LLEvents
                 case "List": Bd = new UList(cmd, cd, ntp); break;
             }
         */
-            if (Bd != null) { Bd.Sf = SetGNoteFocus; MainGrid.Children.Add(Bd); }
+            if (Bd == null) return;
+            Bd.Sf = SetGNoteFocus;
+            MainGrid.Children.Add(Bd);
         }
 
-        public void SetGNoteFocus() { GNote.Focus(FocusState.Programmatic); }
+        private void SetGNoteFocus() { GNote.Focus(FocusState.Programmatic); }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -80,14 +81,14 @@ namespace Lifes_log.LLEvents
             if (cd == 0)
             {
                 var cmd = (App.Current as App).NpDs.CreateCommand(
-                 "Select Max(Code)+1 as Code From LLEvent");
+                 "Select Max(id)+1 as Code From ll_event");
                 var rd = cmd.ExecuteReader(); rd.Read();
                 cd = rd.GetInt32(0);
                 et.Code = cd;
                 rd.Close();
                 cmd.CommandText =
-                    "Insert into LLEvent (Code,    DateT,                  DateEvent,Comment,        Descr, EventTypeCode,UserCode) " +
-                                $"Values ({cd},GETDATE(),'{dt.ToString("yyyyMMdd")}','{cmt}','{GNote.Text}',        {ntp},1)";
+                    $@"@INSERT INTO ll_event (  id,server_time,    event_time,comment, description, event_type_id)
+                                    values   ({cd}, localtime,'{dt:yyyyMMdd}','{cmt}','{GNote.Text}',      {ntp})";
                 cmd.ExecuteNonQuery();
             }
             else
@@ -136,8 +137,8 @@ namespace Lifes_log.LLEvents
     }
     public class EventBody : UserControl
     {
-        public virtual void SelectBody(NpgsqlCommand cmd, Int32 Code, Int16 ntp) { }
-        public virtual void InsertBody(NpgsqlCommand cmd, Int32 Code) { }
+        public virtual void SelectBody(NpgsqlCommand cmd, Int32 code, Int16 ntp) { }
+        public virtual void InsertBody(NpgsqlCommand cmd, Int32 code) { }
         public virtual void GetFocus() { }
         public Action Sf;
     }

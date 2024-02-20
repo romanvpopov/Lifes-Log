@@ -1,13 +1,12 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
-using Lifes_log;
 
 namespace Lifes_log.LLEvents
 {
-    public sealed partial class MoveTo : UserControl
+    public sealed partial class MoveTo
     {
-        public Action<String> Move;
+        public Action<string> Move;
         private readonly Button bt;
         public MoveTo()
         {
@@ -30,7 +29,7 @@ namespace Lifes_log.LLEvents
 
         private void Year_Click(object sender, RoutedEventArgs e)
         {
-            Move?.Invoke((sender as Button).Name);
+            Move?.Invoke((sender as Button)?.Name);
         }
     }
 }

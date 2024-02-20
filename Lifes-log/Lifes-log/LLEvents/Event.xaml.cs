@@ -14,11 +14,11 @@ namespace Lifes_log.LLEvents
         public Int16 tp;
         private readonly string lang = (App.Current as App).lang;
 
-        public Event(String st, Int32 EventCode, Int16 EventType)
+        public Event(String st, Int32 eventCode, Int16 eventType)
         {
             InitializeComponent();
-            Code = EventCode;
-            tp = EventType;
+            Code = eventCode;
+            tp = eventType;
             if (st != "")
             {
                 Body.Content = new TextBlock { Text = st, TextWrapping = TextWrapping.Wrap };
@@ -31,11 +31,11 @@ namespace Lifes_log.LLEvents
             }
         }
 
-        public Event(Int16 EventType, DateTime dt)
+        public Event(Int16 eventType, DateTime dt)
         {
             InitializeComponent();
             Code = 0;
-            tp = EventType;
+            tp = eventType;
             Dt = dt;
             Body.Content = new UNote(tp, this);
             exp = true;

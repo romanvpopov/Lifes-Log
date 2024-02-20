@@ -1,6 +1,5 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using WinUI3;
 
 namespace Lifes_log
 {
@@ -13,7 +12,7 @@ namespace Lifes_log
 
         private void NV_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            if (args.IsSettingsInvoked) MainFrame.Navigate(typeof(Settings.SetDB), this);
+            if (args.IsSettingsInvoked) MainFrame.Navigate(typeof(Settings.SetDb), this);
             else
             {
                 //switch (args.InvokedItemContainer.Tag)

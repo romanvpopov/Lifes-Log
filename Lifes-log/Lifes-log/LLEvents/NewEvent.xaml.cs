@@ -1,30 +1,25 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using System;
-using Lifes_log;
 
 namespace Lifes_log.LLEvents
 {
-    public sealed partial class NewEvent : UserControl
+    public sealed partial class NewEvent
     {
-        private Boolean exp;
-        private readonly string lang = (App.Current as App).lang;
-        private Day pd;
+        private bool exp;
+        private readonly Day pd;
 
-        public NewEvent(Day Pd)
+        public NewEvent(Day pds)
         {
-            this.InitializeComponent();
-            pd = Pd;
+            InitializeComponent();
+            pd = pds;
             Body.Content = new TextBlock { Text = "..." };
         }
 
         private void UserControl_Tapped(object sender, Microsoft.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            if (!exp)
-            {
-                Body.Content = new NewEventBody(this, pd);
-                exp = true;
-            }
+            if (exp) return;
+            Body.Content = new NewEventBody(this, pd);
+            exp = true;
         }
 
         public void Collapse()
@@ -35,12 +30,12 @@ namespace Lifes_log.LLEvents
 
         private void Border_PointerEntered(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
-            if (!exp) (sender as Border).BorderBrush = (SolidColorBrush)Resources["ContentDialogBorderThemeBrush"];
+            if (!exp) ((Border)sender).BorderBrush = (SolidColorBrush)Resources["ContentDialogBorderThemeBrush"];
         }
 
         private void Border_PointerExited(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
-            (sender as Border).BorderBrush = (SolidColorBrush)Resources["ButtonBorderThemeBrush"];
+            ((Border)sender).BorderBrush = (SolidColorBrush)Resources["ButtonBorderThemeBrush"];
         }
     }
 }
