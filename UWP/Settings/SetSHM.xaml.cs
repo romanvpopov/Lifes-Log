@@ -1,6 +1,5 @@
 ﻿using System;
-using Microsoft.Data.SqlClient;
-using Windows.UI.Xaml;
+using System.Data.SqlClient;
 using Windows.UI.Xaml.Controls;
 
 namespace LL.Settings

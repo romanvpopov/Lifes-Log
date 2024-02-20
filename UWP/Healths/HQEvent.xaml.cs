@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Microsoft.Data.SqlClient;
-using System.Threading.Tasks;
-using Windows.UI;
+using System.Data.SqlClient;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
 namespace LL.Healths
 {
@@ -35,11 +30,12 @@ namespace LL.Healths
             using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr)) {
                 sq.Open();
                 var cmd = sq.CreateCommand();
-                cmd.CommandText = $"Select Distinct le.Code,le.{lang}_FieldName " +
-                    "From LLFieldEvent le join LLUnit lu on le.UnitCode = lu.Code " +
-                    "join LLEvent l on l.EventTypeCode = le.EventTypeCode "+
-                    "join LLEventValue lv on lv.EventCode = l.Code and lv.FieldEventCode = le.Code "+
-                   $"Where le.EventTypeCode = {tp} Order by le.Code";
+                cmd.CommandText = $@"
+                    Select Distinct le.Code,le.{lang}_FieldName
+                    From LLFieldEvent le join LLUnit lu on le.UnitCode = lu.Code
+                    join LLEvent l on l.EventTypeCode = le.EventTypeCode
+                    join LLEventValue lv on lv.EventCode = l.Code and lv.FieldEventCode = le.Code
+                    Where le.EventTypeCode = {tp} Order by le.Code";
                 var rd = cmd.ExecuteReader();
                 while (rd.Read()) {
                     etp = etp + "," + rd.GetInt32(0).ToString();

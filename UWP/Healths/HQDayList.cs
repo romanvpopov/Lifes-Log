@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -38,12 +38,13 @@ namespace LL.Healths
                             using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr)) {
                                 sq.Open();
                                 var cmd = sq.CreateCommand();
-                                cmd.CommandText = $"Select Distinct Top {count} l.Code,l.DateEvent,l.Descr " +
-                                    "From LLFieldEvent le join LLUnit lu on le.UnitCode = lu.Code " +
-                                    "join LLEvent l on l.EventTypeCode = le.EventTypeCode " +
-                                    "join LLEventValue lv on lv.EventCode = l.Code and lv.FieldEventCode = le.Code " +
-                                    $"Where l.EventTypeCode = {tp} and  l.DateEvent<='{dt:yyyyMMdd}' " +
-                                    $"Order by l.DateEvent Desc";
+                                cmd.CommandText = $@"
+                                    Select Distinct Top {count} l.Code,l.DateEvent,l.Descr
+                                    From LLFieldEvent le join LLUnit lu on le.UnitCode = lu.Code
+                                    join LLEvent l on l.EventTypeCode = le.EventTypeCode
+                                    join LLEventValue lv on lv.EventCode = l.Code and lv.FieldEventCode = le.Code
+                                    Where l.EventTypeCode = {tp} and  l.DateEvent<='{dt:yyyyMMdd}'
+                                    Order by l.DateEvent Desc";
                                 var rd = cmd.ExecuteReader();
                                 if (rd.HasRows) {
                                     while (rd.Read()) {
