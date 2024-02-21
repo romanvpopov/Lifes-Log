@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace LL.Settings
 {
-    public sealed partial class SetSHM : UserControl
+    public sealed partial class SetSHM
     {
         private readonly string lang = (App.Current as App).lang;
 
@@ -20,9 +20,10 @@ namespace LL.Settings
             {
                 sq.Open();
                 var cmd = sq.CreateCommand();
-                cmd.CommandText = $"Select lt.Code,lt.{lang}_Name,lt.ClassName,lt.HSM " +
-                $"From LLEventType lt Where lt.ClassName<>'' and lt.HSM='{et}' " +
-                $"Order by lt.Turn,lt.{lang}_Name";
+                cmd.CommandText = $@"
+                  Select lt.Code,lt.{lang}_Name,lt.ClassName,lt.HSM
+                  From LLEventType lt Where lt.ClassName<>'' and lt.HSM='{et}'
+                  Order by lt.Turn,lt.{lang}_Name";
                 var rd = cmd.ExecuteReader();
                 while (rd.Read())
                 {

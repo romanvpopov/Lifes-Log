@@ -7,22 +7,22 @@ using Windows.UI.Xaml.Controls;
 
 namespace LL.LLEvents
 {
-    public sealed partial class UList : EventBody
+    public sealed partial class UList
     {
-        private string lang = (App.Current as App).lang;
-        private readonly ObservableCollection<ListBodyField> lsts = new ObservableCollection<ListBodyField>();
+        private readonly string lang = (App.Current as App).lang;
+        private readonly ObservableCollection<ListBodyField> lists = new ObservableCollection<ListBodyField>();
 
-        public UList(SqlCommand cmd, Int32 Code, Int16 ntp)
+        public UList(SqlCommand cmd, int code, short ntp)
         {
             this.InitializeComponent();
             cmd.CommandText = $"Select lf.Code,isNull(lf.{lang}_FieldName,''),isNull(lf.{lang}_FieldSmallName,''),isNull(lv.FieldValue,'')" +
-                $"From LLFieldEvent lf left join LLEventValue lv on lf.Code = lv.FieldEventCode and lv.EventCode={Code} " +
+                $"From LLFieldEvent lf left join LLEventValue lv on lf.Code = lv.FieldEventCode and lv.EventCode={code} " +
                 $"Where lf.EventTypeCode ={ntp} Order by lf.{lang}_FieldName";
             var rd = cmd.ExecuteReader();
             while (rd.Read()) {
-                lsts.Add(new ListBodyField { Code = rd.GetInt32(0), Name = rd.GetString(1), ShortName = rd.GetString(2), Value = rd.GetString(3) });
+                lists.Add(new ListBodyField { Code = rd.GetInt32(0), Name = rd.GetString(1), ShortName = rd.GetString(2), Value = rd.GetString(3) });
             }
-            FieldList.ItemsSource = lsts;
+            FieldList.ItemsSource = lists;
         }
 
         public override void InsertBody(SqlCommand cmd, Int32 cd)

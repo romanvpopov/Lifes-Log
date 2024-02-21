@@ -1,15 +1,14 @@
 ﻿using LL.LLEvents;
 using System.Data.SqlClient;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace LL
 {
-    public sealed partial class Search : Page
+    public sealed partial class Search
     {
         public Search()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -30,7 +29,10 @@ namespace LL
                         while (rd.Read()) EL.Items.Add(new Day(rd.GetDateTime(0), "0"));
                     }
                 }
-                catch { }
+                catch
+                {
+                    // ignored
+                }
             }
         }
     }

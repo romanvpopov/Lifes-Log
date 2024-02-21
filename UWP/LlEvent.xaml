@@ -1,4 +1,4 @@
-﻿<Page x:Class="LL.LLEvent" 
+﻿<Page x:Class="LL.LlEvent" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SplitView x:Name="RightPane"

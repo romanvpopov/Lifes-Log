@@ -1,10 +1,9 @@
 ﻿using System.Data.SqlClient;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace LL
 {
-    public sealed partial class Health : Page
+    public sealed partial class Health
     {
         private readonly string lang = (App.Current as App).lang;
 
@@ -13,10 +12,9 @@ namespace LL
             this.InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            var dsp = Window.Current.Dispatcher;
-            using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr)) {
+            using (var sq = new SqlConnection((App.Current as App).ConStr)) {
                 sq.Open();
                 var cmd = sq.CreateCommand();
                 cmd.CommandText =$@"
@@ -26,7 +24,7 @@ namespace LL
                     Where lt.Turn > 0 and lt.HSM = 'H' Order by Turn";
                 var rd = cmd.ExecuteReader();
                 while (rd.Read()) {
-                    EL.Items.Add(new LL.Healths.HQEvent(rd.GetInt16(0), rd.GetString(2)));
+                    EL.Items.Add(new Healths.HQEvent(rd.GetInt16(0), rd.GetString(2)));
                 }
                 rd.Close();
 

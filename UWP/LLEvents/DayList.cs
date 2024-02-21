@@ -12,10 +12,10 @@ namespace LL.LLEvents
     {
         public DateTime dt;
         public String etps;
-        public DayList(DateTime Dt)
+        public DayList(DateTime dts)
         {
             HasMoreItems = true;
-            dt = Dt;
+            dt = dts;
             etps = "0";
         }
 

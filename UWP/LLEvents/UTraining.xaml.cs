@@ -4,18 +4,18 @@ using Windows.UI.Xaml;
 
 namespace LL.LLEvents
 {
-    public sealed partial class UTraining : EventBody
+    public sealed partial class UTraining
     {
-        private string lang = (App.Current as App).lang;
+        private readonly string lang = (App.Current as App).lang;
 
-        public UTraining(SqlCommand cmd, Int32 Code, Int16 ntp)
+        public UTraining(SqlCommand cmd, int code, short ntp)
         {
             InitializeComponent();
-            cmd.CommandText =
-                $"Select lu.Code, lf.Code, isNull(lf.{lang}_FieldName,''), isNull(lf.{lang}_FieldSmallName,''), " +
-                $"isNull(lv.FieldValue,''), isNull(lu.{lang}_UnitName,''), isNull(lu.{lang}_UnitSmallName,'') " +
-                $"From LLFieldEvent lf left join LLEventValue lv on lf.Code = lv.FieldEventCode and lv.EventCode={Code} " +
-                $"left join LLUnit lu on lf.UnitCode=lu.Code Where lf.EventTypeCode ={ntp}";
+            cmd.CommandText = $@"
+                Select lu.Code, lf.Code, isNull(lf.{lang}_FieldName,''), isNull(lf.{lang}_FieldSmallName,''),
+                isNull(lv.FieldValue,''), isNull(lu.{lang}_UnitName,''), isNull(lu.{lang}_UnitSmallName,'')
+                From LLFieldEvent lf left join LLEventValue lv on lf.Code = lv.FieldEventCode and lv.EventCode={code}
+                left join LLUnit lu on lf.UnitCode=lu.Code Where lf.EventTypeCode ={ntp}";
             var rd = cmd.ExecuteReader();
             while (rd.Read()) {
                 switch (rd.GetInt16(0)) {

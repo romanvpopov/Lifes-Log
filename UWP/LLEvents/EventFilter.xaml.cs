@@ -5,18 +5,17 @@ using Windows.UI.Xaml.Controls;
 
 namespace LL.LLEvents
 {
-    public sealed partial class EventFilter : UserControl
+    public sealed partial class EventFilter
     {
-        public Action<String> Apply;
+        public Action<string> Apply;
         public Action Reset;
         private readonly string lang = (App.Current as App).lang;
-        private String tps;
-        private readonly CheckBox bt;
+        private string tps;
 
         public EventFilter()
         {
             this.InitializeComponent();
-            BTRS.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            BTRS.Visibility = Visibility.Collapsed;
             using (SqlConnection sq = new SqlConnection((App.Current as App).ConStr)) {
                 sq.Open();
                 var cmd = sq.CreateCommand();
@@ -24,8 +23,9 @@ namespace LL.LLEvents
                 "From LLEventType lt Where lt.ClassName<>'' and lt.Turn>0" +
                 $"Order by lt.Turn,lt.{lang}_Name";
                 var reader = cmd.ExecuteReader();
-                while (reader.Read()) {
-                    bt = new CheckBox {
+                while (reader.Read())
+                {
+                    var bt = new CheckBox {
                         Content = reader.GetString(1),
                         Tag = reader.GetInt16(0)
                     };
@@ -47,7 +47,7 @@ namespace LL.LLEvents
             foreach (CheckBox s in PS.Children) if (s.IsChecked == true) tps = tps + "," + s.Tag;
             foreach (CheckBox s in PH.Children) if (s.IsChecked == true) tps = tps + "," + s.Tag;
             foreach (CheckBox s in PM.Children) if (s.IsChecked == true) tps = tps + "," + s.Tag;
-            BTRS.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            BTRS.Visibility = Visibility.Visible;
             Apply?.Invoke(tps);
         }
 
@@ -57,7 +57,7 @@ namespace LL.LLEvents
             foreach (CheckBox s in PS.Children) s.IsChecked = false;
             foreach (CheckBox s in PH.Children) s.IsChecked = false;
             foreach (CheckBox s in PM.Children) s.IsChecked = false;
-            BTRS.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            BTRS.Visibility = Visibility.Collapsed;
             Reset?.Invoke();
         }
     }

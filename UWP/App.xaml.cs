@@ -12,11 +12,12 @@ using System.Linq;
 namespace LL
 {
     
-    sealed partial class App : Application {
+    sealed partial class App
+    {
 
         public string ConStr;
         public string lang;
-        public Int16 lenpage;
+        //public Int16 lenpage;
         private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
 
         public App()
@@ -77,9 +78,9 @@ namespace LL
     }
     public class Msg : Flyout
     {
-        public Msg(string Uid)
+        public Msg(string uid)
         {
-            Content = new TextBlock() { Text = ResourceLoader.GetForCurrentView().GetString(Uid) };
+            Content = new TextBlock() { Text = ResourceLoader.GetForCurrentView().GetString(uid) };
         }
     }
 }

@@ -150,8 +150,8 @@
     <Compile Include="Healths\HQValue.xaml.cs">
       <DependentUpon>HQValue.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LLEvent.xaml.cs">
-      <DependentUpon>LLEvent.xaml</DependentUpon>
+    <Compile Include="LlEvent.xaml.cs">
+      <DependentUpon>LlEvent.xaml</DependentUpon>
     </Compile>
     <Compile Include="LLEvents\Day.xaml.cs">
       <DependentUpon>Day.xaml</DependentUpon>
@@ -212,8 +212,8 @@
     <Compile Include="Settings\SetAccount.xaml.cs">
       <DependentUpon>SetAccount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Settings\SetDB.xaml.cs">
-      <DependentUpon>SetDB.xaml</DependentUpon>
+    <Compile Include="Settings\SetDb.xaml.cs">
+      <DependentUpon>SetDb.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\SetEventType.xaml.cs">
       <DependentUpon>SetEventType.xaml</DependentUpon>
@@ -318,7 +318,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LLEvent.xaml">
+    <Page Include="LlEvent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -398,7 +398,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Settings\SetDB.xaml">
+    <Page Include="Settings\SetDb.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

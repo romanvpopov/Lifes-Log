@@ -1,26 +1,24 @@
-﻿using LL.LLEvents;
+﻿using System;
 using System.Data.SqlClient;
-using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-
-namespace LL
+namespace LL.LLEvents
 {
-    public sealed partial class Event : UserControl
+    public sealed partial class Event
     {
-        private Boolean exp;
-        public Int32 Code;
+        private bool exp;
+        public int Code;
         public DateTime Dt;
-        public Int16 tp;
+        public readonly short tp;
         private readonly string lang = (App.Current as App).lang;
 
-        public Event(String st, Int32 EventCode, Int16 EventType)
+        public Event(string st, int eventCode, short eventType)
         {
             InitializeComponent();
-            Code = EventCode;
-            tp = EventType;
+            Code = eventCode;
+            tp = eventType;
             if (st != "") {
                 Body.Content = new TextBlock { Text = st, TextWrapping=TextWrapping.Wrap };
                 exp = false;
@@ -31,11 +29,11 @@ namespace LL
             }
         }
 
-        public Event(Int16 EventType, DateTime dt)
+        public Event(short eventType, DateTime dt)
         {
             InitializeComponent();
             Code = 0;
-            tp = EventType;
+            tp = eventType;
             Dt = dt;
             Body.Content = new UNote(tp, this);
             exp = true;
@@ -60,15 +58,16 @@ namespace LL
                 {
                     sq.Open();
                     var cmd = sq.CreateCommand();
-                    cmd.CommandText = $"Select lt.{lang}_ShortName,l.Comment,l.Descr " +
-                        $"From llEvent l join LLEventType lt on l.EventTypeCode = lt.Code Where l.Code={Code}";
+                    cmd.CommandText = $@"
+                        Select lt.{lang}_ShortName,l.Comment,l.Descr
+                        From llEvent l join LLEventType lt on l.EventTypeCode = lt.Code Where l.Code={Code}";
                     var rd = cmd.ExecuteReader();
                     rd.Read();
                     Body.Content = new TextBlock {
                         Text = (rd.GetString(0) != "" ? rd.GetString(0) + ": " : "") + rd.GetString(1) + " " + rd.GetString(2),
                         TextWrapping=TextWrapping.Wrap};
                 }
-            else Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            else Visibility = Visibility.Collapsed;
             exp = false;
             //BD.Background = null;
             BD.BorderBrush = (SolidColorBrush)Resources["ContentDialogBorderThemeBrush"];

@@ -1,12 +1,11 @@
-﻿using Windows.Storage;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.ApplicationModel.Resources;
-using System;
 
 namespace LL
 {
-    public sealed partial class MainPage : Page {
+    public sealed partial class MainPage 
+    {
 
         public MainPage()
         {
@@ -15,10 +14,10 @@ namespace LL
 
         private void NV_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            if (args.IsSettingsInvoked) MainFrame.Navigate(typeof(Settings.SetDB),this);
+            if (args.IsSettingsInvoked) MainFrame.Navigate(typeof(Settings.SetDb),this);
             else {
                 switch (args.InvokedItemContainer.Tag) {
-                    case "Events": MainFrame.Navigate(typeof(LLEvent), this); break;
+                    case "Events": MainFrame.Navigate(typeof(LlEvent), this); break;
                     case "Sport" : MainFrame.Navigate(typeof(Sport), this); break;
                     case "Health": MainFrame.Navigate(typeof(Health), this); break;
                     case "Money" : MainFrame.Navigate(typeof(Money), this); break;
@@ -30,7 +29,7 @@ namespace LL
         {
             NV.MenuItems.Clear();
             NV.AutoSuggestBox.Visibility = Visibility.Collapsed;
-            int cacheSize = MainFrame.CacheSize;
+            var cacheSize = MainFrame.CacheSize;
             MainFrame.CacheSize = 0;
             MainFrame.CacheSize = cacheSize;
             MainFrame.Navigate(typeof(Login), this); 
@@ -58,17 +57,17 @@ namespace LL
                 Tag = "Calendar", Icon = new FontIcon { Glyph = "\xE787" },
                 Content = ResourceLoader.GetForCurrentView().GetString("Calendar")
             });
-            MainFrame.Navigate(typeof(LLEvent), this);
+            MainFrame.Navigate(typeof(LlEvent), this);
             NV.AutoSuggestBox.Visibility = Visibility.Visible;
         }
 
         private void NV_BackRequested(NavigationView _1, NavigationViewBackRequestedEventArgs _2)
         {
             if (MainFrame.CanGoBack)
-            MainFrame.GoBack();
+                MainFrame.GoBack();
         }
 
-        private void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Login();
         }

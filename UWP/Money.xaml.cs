@@ -1,12 +1,11 @@
-﻿using Windows.UI.Xaml.Controls;
-
+﻿
 namespace LL
 {
-    public sealed partial class Money : Page
+    public sealed partial class Money
     {
         public Money()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

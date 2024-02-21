@@ -4,25 +4,23 @@ using Windows.UI.Xaml;
 
 namespace LL.LLEvents
 {
-    public sealed partial class UTono : EventBody
+    public sealed partial class UTono 
     {
-        public UTono(SqlCommand cmd, Int32 Code, Int16 ntp)
+        public UTono(SqlCommand cmd, int code, short ntp)
         {
             InitializeComponent();
-            if (Code > 0) {
-                cmd.CommandText = $"Select FieldEventCode,FieldValue From LLEventValue Where EventCode={Code}";
-                var rd = cmd.ExecuteReader();
-                while (rd.Read()) {
-                    switch (rd.GetInt32(0)) {
-                        case 2: MS.Text = rd.GetString(1); break;
-                        case 3: MD.Text = rd.GetString(1); break;
-                        case 4: MP.Text = rd.GetString(1); break;
-                        case 5: ES.Text = rd.GetString(1); break;
-                        case 6: ED.Text = rd.GetString(1); break;
-                        case 7: EP.Text = rd.GetString(1); break;
-                    }
+            if (code <= 0) return;
+            cmd.CommandText = $"Select FieldEventCode,FieldValue From LLEventValue Where EventCode={code}";
+            var rd = cmd.ExecuteReader();
+            while (rd.Read()) {
+                switch (rd.GetInt32(0)) {
+                    case 2: MS.Text = rd.GetString(1); break;
+                    case 3: MD.Text = rd.GetString(1); break;
+                    case 4: MP.Text = rd.GetString(1); break;
+                    case 5: ES.Text = rd.GetString(1); break;
+                    case 6: ED.Text = rd.GetString(1); break;
+                    case 7: EP.Text = rd.GetString(1); break;
                 }
-
             }
         }    
 

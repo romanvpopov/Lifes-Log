@@ -4,9 +4,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace LL.LLEvents
 {
-    public sealed partial class NewEventList : UserControl
+    public sealed partial class NewEventList
     {
-        public Action<DateTime, Int16> Add;
+        public Action<DateTime, short> Add;
         public Action Manage;
         public DateTime DatePic { set => DateEvent.Date = value; }
         private readonly string lang = (App.Current as App).lang;
@@ -20,9 +20,10 @@ namespace LL.LLEvents
             {
                 sq.Open();
                 var cmd = sq.CreateCommand();
-                cmd.CommandText = $"Select lt.Code,lt.{lang}_Name,lt.ClassName,lt.HSM " +
-                "From LLEventType lt Where lt.ClassName<>'' and lt.Turn>0" +
-                $"Order by lt.Turn,lt.{lang}_Name";
+                cmd.CommandText = $@"
+                  Select lt.Code,lt.{lang}_Name,lt.ClassName,lt.HSM
+                  From LLEventType lt Where lt.ClassName<>'' and lt.Turn>0
+                  Order by lt.Turn,lt.{lang}_Name";
                 var reader = cmd.ExecuteReader();
                 while (reader.Read()) {
                     bt = new Button {

@@ -1,28 +1,25 @@
-﻿using System;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
 namespace LL.LLEvents
 {
-    public sealed partial class NewEvent : UserControl
+    public sealed partial class NewEvent
     {
-        private Boolean exp;
-        private readonly string lang = (App.Current as App).lang;
-        private Day pd;
+        private bool exp;
+        private readonly Day pd;
 
-        public NewEvent(Day Pd)
+        public NewEvent(Day pds)
         {
-            this.InitializeComponent();
-            pd = Pd;
+            InitializeComponent();
+            pd = pds;
             Body.Content = new TextBlock { Text = "..." };
         }
 
         private void UserControl_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            if (!exp) {
-                Body.Content = new NewEventBody(this, pd);
-                exp = true;
-            }
+            if (exp) return;
+            Body.Content = new NewEventBody(this, pd);
+            exp = true;
         }
 
         public void Collapse() {

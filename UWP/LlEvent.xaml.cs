@@ -1,5 +1,4 @@
 ﻿using System;
-using Windows.UI.Xaml.Controls;
 using LL.LLEvents;
 using Windows.Storage;
 
@@ -7,16 +6,16 @@ namespace LL {
     /// 
     /// Страница событий
     /// 
-    public sealed partial class LLEvent : Page {
+    public sealed partial class LlEvent 
+    {
 
-        private readonly string lang = (App.Current as App).lang;
         private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
         private readonly DayList ds;
         private readonly EventFilter ef;
         private readonly NewEventList ne;
         private readonly MoveTo mt;
 
-        public LLEvent() {
+        public LlEvent() {
             InitializeComponent();
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             ds = new DayList(DateTime.Today);
@@ -25,7 +24,7 @@ namespace LL {
             ne = new NewEventList { Add = Add,
                 Manage = () => { Frame.Navigate(typeof(Settings.SetEventType)); }
             };
-            if (ls.Values.ContainsKey("FixPane")) FixPane.IsOn = (bool)ls.Values["FixPane"];
+            if (ls.Values.TryGetValue("FixPane", out var value)) FixPane.IsOn = (bool)value;
             RPane.Content = ne;
         }
 
@@ -34,22 +33,21 @@ namespace LL {
             EL.ItemsSource=ds;
         }
 
-        private void Add(DateTime dt, Int16 tp)
+        private void Add(DateTime dt, short tp)
         { 
-            foreach (object dy in EL.Items) {
-                if (dy.GetType().Name == "Day") {
-                    if ((dy as Day).dt == dt) {
-                        (dy as Day).AddEvent(tp);
-                        EL.SelectedItem = dy;
-                        EL.ScrollIntoView(EL.SelectedItem);
-                        HidePane();
-                        break;
-                    }
-}
+            foreach (var dy in EL.Items)
+            {
+                if (dy.GetType().Name != "Day") continue;
+                if (((Day)dy).dt != dt) continue;
+                (dy as Day).AddEvent(tp);
+                EL.SelectedItem = dy;
+                EL.ScrollIntoView(EL.SelectedItem);
+                HidePane();
+                break;
             }
         }
 
-        private void Move(String ss)
+        private void Move(string ss)
         {
             ds.Clear();
             ds.HasMoreItems = true;
@@ -58,24 +56,24 @@ namespace LL {
                 ne.DatePic = DateTime.Today;
             }
             else
-                ds.dt = new DateTime(Int32.Parse(ss), 12, 31);
+                ds.dt = new DateTime(int.Parse(ss), 12, 31);
             HidePane();
         }
 
-        private void ApplyFilter(String tpd)
+        private void ApplyFilter(string tpd)
         {
             ds.etps = tpd;
-            foreach (object d in EL.Items) 
-            if (d.GetType().Name == "Day") (d as Day).ApllyFilter(tpd);
+            foreach (var d in EL.Items) 
+                if (d.GetType().Name == "Day") (d as Day)?.ApllyFilter(tpd);
         }
 
         private void ResetFilter()
         {
             ds.etps = "0";
-            foreach (object d in EL.Items) if (d.GetType().Name == "Day") (d as Day).ResetFilter();
+            foreach (var d in EL.Items) if (d.GetType().Name == "Day") (d as Day)?.ResetFilter();
         }
 
-        public void HidePane()
+        private void HidePane()
         {
             if (!FixPane.IsOn) RightPane.IsPaneOpen = false;
         }
