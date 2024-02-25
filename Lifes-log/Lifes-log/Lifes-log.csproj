@@ -16,6 +16,7 @@
     <PackageReference Include="Npgsql" Version="8.0.2" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
+
   <ItemGroup>
     <None Remove="LLEvent.xaml" />
     <None Remove="LLEvents\Day.xaml" />
@@ -35,6 +36,42 @@
 
   <ItemGroup>
     <Page Update="LLEvents\UNote.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\UExercise.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\UList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\UNum.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\UShaving.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\UTraining.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="LLEvents\UTono.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

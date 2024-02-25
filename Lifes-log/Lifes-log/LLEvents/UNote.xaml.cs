@@ -9,8 +9,8 @@ namespace Lifes_log.LLEvents
     {
         private readonly string lang = (App.Current as App).lang;
         private int cd;
-        protected string cname;
-        protected EventBody Bd;
+        private readonly string cname;
+        private EventBody bd;
         private readonly Event et;
         private DateTime dt;
 
@@ -49,35 +49,33 @@ namespace Lifes_log.LLEvents
             UBody(cmd, cd, ntp);
         }
 
-        private void UBody(NpgsqlCommand cmd, int cd, short ntp)
+        private void UBody(NpgsqlCommand cmd, int cds, short ntp)
         {
-            /*    switch (cname)
+            bd = cname switch
             {
-                case "Num": Bd = new UNum(cd, ntp); break;
-                case "Tono": Bd = new UTono(cmd, cd, ntp); break;
-                case "Shaving": Bd = new UShaving(cmd, cd, ntp); break;
-                case "Training": Bd = new UTraining(cmd, cd, ntp); break;
-                case "Exercise": Bd = new UExercise(cmd, cd, ntp); break;
-                case "List": Bd = new UList(cmd, cd, ntp); break;
-            }
-        */
-            if (Bd == null) return;
-            Bd.Sf = SetGNoteFocus;
-            MainGrid.Children.Add(Bd);
+                "Num" => new UNum(cds, ntp),
+                "Tono" => new UTono(cmd, cds),
+                "Shaving" => new UShaving(cmd, cds),
+                "Training" => new UTraining(cmd, cds, ntp),
+                "Exercise" => new UExercise(cmd, cds, ntp),
+                "List" => new UList(cmd, cds, ntp),
+                _ => bd
+            };
+            if (bd == null) return;
+            bd.Sf = SetGNoteFocus;
+            MainGrid.Children.Add(bd);
         }
 
         private void SetGNoteFocus() { GNote.Focus(FocusState.Programmatic); }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Bd == null) SetGNoteFocus(); else Bd.GetFocus();
+            if (bd == null) SetGNoteFocus(); else bd.GetFocus();
         }
 
         private void Log_Click(object  _1, RoutedEventArgs _2)
         {
-            var cmt = Bd == null ? "" : Bd.ToString();
-            //var tr = sq.BeginTransaction(IsolationLevel.ReadCommitted);
-            //cmd.Transaction = tr;
+            var cmt = bd == null ? "" : bd.ToString();
             if (cd == 0)
             {
                 var cmd = (App.Current as App).NpDs.CreateCommand(
@@ -99,26 +97,21 @@ namespace Lifes_log.LLEvents
                 cmd.CommandText = $"Delete From ll_value Where event_id={cd}";
                 cmd.ExecuteNonQuery();
             }
-            if (Bd != null)
+            if (bd != null)
             {
                 var cmd = (App.Current as App).NpDs.CreateCommand("");
-                Bd.InsertBody(cmd, cd);
+                bd.InsertBody(cmd, cd);
             }
-            //tr.Commit();
             et.Collapse();
         }
 
         private void Delete_Click(object _1, RoutedEventArgs _2)
         {
-            /*using (var sq = new SqlConnection((App.Current as App).ConStr))
-            {
-                sq.Open();
-                var cmd = sq.CreateCommand();
-                cmd.CommandText = $"Delete From LLEventValue Where EventCode={cd}";
-                cmd.ExecuteNonQuery();
-                cmd.CommandText = $"Delete From LLEvent Where Code={cd}";
-                cmd.ExecuteNonQuery();
-            }*/
+            var cmd = (App.Current as App).NpDs.CreateCommand(
+            $"Delete From LLEventValue Where EventCode={cd}");
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = $"Delete From LLEvent Where Code={cd}";
+            cmd.ExecuteNonQuery();
             cd = 0;
             et.Code = 0;
             et.Collapse();
@@ -137,8 +130,8 @@ namespace Lifes_log.LLEvents
     }
     public class EventBody : UserControl
     {
-        public virtual void SelectBody(NpgsqlCommand cmd, Int32 code, Int16 ntp) { }
-        public virtual void InsertBody(NpgsqlCommand cmd, Int32 code) { }
+        public virtual void SelectBody(NpgsqlCommand cmd, int code, short ntp) { }
+        public virtual void InsertBody(NpgsqlCommand cmd, int code) { }
         public virtual void GetFocus() { }
         public Action Sf;
     }

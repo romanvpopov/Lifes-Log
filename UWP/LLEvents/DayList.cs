@@ -11,7 +11,7 @@ namespace LL.LLEvents
     public class DayList : ObservableCollection<Day>, ISupportIncrementalLoading
     {
         public DateTime dt;
-        public String etps;
+        public string etps;
         public DayList(DateTime Dt)
         {
             HasMoreItems = true;

@@ -2,19 +2,18 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
-using Lifes_log;
 
 namespace Lifes_log.LLEvents
 {
-    public sealed partial class Event : UserControl
+    public sealed partial class Event 
     {
-        private Boolean exp;
-        public Int32 Code;
+        private bool exp;
+        public int Code;
         public DateTime Dt;
-        public Int16 tp;
-        private readonly string lang = (App.Current as App).lang;
+        public readonly short tp;
+        private readonly string lang = (App.Current as App)?.lang;
 
-        public Event(String st, Int32 eventCode, Int16 eventType)
+        public Event(string st, int eventCode, short eventType)
         {
             InitializeComponent();
             Code = eventCode;
@@ -31,7 +30,7 @@ namespace Lifes_log.LLEvents
             }
         }
 
-        public Event(Int16 eventType, DateTime dt)
+        public Event(short eventType, DateTime dt)
         {
             InitializeComponent();
             Code = 0;
@@ -39,7 +38,7 @@ namespace Lifes_log.LLEvents
             Dt = dt;
             Body.Content = new UNote(tp, this);
             exp = true;
-            //BD.Background = (SolidColorBrush)Resources["TextBoxBackgroundThemeBrush"];
+            BD.Background = (SolidColorBrush)Resources["TextBoxBackgroundThemeBrush"];
         }
 
 
@@ -69,7 +68,7 @@ namespace Lifes_log.LLEvents
                     TextWrapping = TextWrapping.Wrap
                 };
             }
-            else Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+            else Visibility = Visibility.Collapsed;
             exp = false;
             //BD.Background = null;
             BD.BorderBrush = (SolidColorBrush)Resources["ContentDialogBorderThemeBrush"];
