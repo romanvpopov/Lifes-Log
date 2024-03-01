@@ -443,6 +443,10 @@
   <ItemGroup>
     <Folder Include="Sports\" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Strings\en-US\Resources.ru-ru.resx" />
+    <EmbeddedResource Include="Strings\ru-RU\Resources.ru-ru.resx" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

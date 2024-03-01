@@ -54,7 +54,7 @@ namespace Lifes_log.LLEvents
             bd = cname switch
             {
                 "Num" => new UNum(cds, ntp),
-                "Tono" => new UTono(cmd, cds),
+                "BPM" => new UBPM(cmd, cds),
                 "Shaving" => new UShaving(cmd, cds),
                 "Training" => new UTraining(cmd, cds, ntp),
                 "Exercise" => new UExercise(cmd, cds, ntp),
@@ -108,9 +108,9 @@ namespace Lifes_log.LLEvents
         private void Delete_Click(object _1, RoutedEventArgs _2)
         {
             var cmd = (App.Current as App).NpDs.CreateCommand(
-            $"Delete From LLEventValue Where EventCode={cd}");
+            $"Delete From ll_value Where event_id={cd}");
             cmd.ExecuteNonQuery();
-            cmd.CommandText = $"Delete From LLEvent Where Code={cd}";
+            cmd.CommandText = $"Delete From ll_event Where id={cd}";
             cmd.ExecuteNonQuery();
             cd = 0;
             et.Code = 0;
@@ -130,7 +130,6 @@ namespace Lifes_log.LLEvents
     }
     public class EventBody : UserControl
     {
-        public virtual void SelectBody(NpgsqlCommand cmd, int code, short ntp) { }
         public virtual void InsertBody(NpgsqlCommand cmd, int code) { }
         public virtual void GetFocus() { }
         public Action Sf;

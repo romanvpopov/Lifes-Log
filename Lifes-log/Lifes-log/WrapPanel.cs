@@ -57,10 +57,10 @@ namespace Lifes_log
         protected override Size MeasureOverride(Size availableSize)
         {
             // Take the full available width
-            Size finalSize = new Size { Width = double.IsInfinity(availableSize.Width) ? int.MaxValue : availableSize.Width };
-            double x = 0d;
-            double rowHeight = 0d;
-            foreach (FrameworkElement child in GetChildrenOrdered())
+            var finalSize = new Size { Width = double.IsInfinity(availableSize.Width) ? int.MaxValue : availableSize.Width };
+            var x = 0d;
+            var rowHeight = 0d;
+            foreach (var child in GetChildrenOrdered())
             {
                 // Determine which size the child needs
                 child.Measure(availableSize);
@@ -96,7 +96,7 @@ namespace Lifes_log
         /// <returns>The computed final size of the panel.</returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            Rect finalRect = new Rect(0, 0, finalSize.Width, finalSize.Height);
+            var finalRect = new Rect(0, 0, finalSize.Width, finalSize.Height);
             double rowHeight = 0;
 
             foreach (var child in GetChildrenOrdered())
@@ -125,7 +125,7 @@ namespace Lifes_log
         /// <param name="eventArgs">Data describing the changes.</param>
         private static void ItemsSource_Changed(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs eventArgs)
         {
-            WrapPanel instance = dependencyObject as WrapPanel;
+            var instance = dependencyObject as WrapPanel;
 
             if (eventArgs.OldValue != eventArgs.NewValue)
             {
