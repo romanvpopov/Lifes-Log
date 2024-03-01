@@ -31,6 +31,13 @@
     <None Remove="Settings\SetDB.xaml" />
     <None Remove="Settings\SetEventType.xaml" />
     <None Remove="Settings\SetSHM.xaml" />
+    <None Remove="styles.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
 

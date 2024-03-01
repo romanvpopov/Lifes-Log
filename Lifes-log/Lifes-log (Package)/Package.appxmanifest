@@ -9,13 +9,13 @@
 
   <Identity
     Name="120c4b92-265f-4570-b43a-5e3425f8079b"
-    Publisher="CN=rem"
-    Version="1.0.0.0" />
+    Publisher="CN=Popov Roman"
+    Version="1.1.2.0" />
 
   <mp:PhoneIdentity PhoneProductId="120c4b92-265f-4570-b43a-5e3425f8079b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Lifes-log (Package)</DisplayName>
+    <DisplayName>Lifes-log 2</DisplayName>
     <PublisherDisplayName>rem</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
@@ -34,8 +34,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="Lifes-log (Package)"
-        Description="Lifes-log (Package)"
+        DisplayName="Lifes-log 2"
+        Description="Lifes-log 2"
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
         Square44x44Logo="Images\Square44x44Logo.png">
