@@ -5,9 +5,9 @@ using Npgsql;
 
 namespace Lifes_log.LLEvents
 {
-    public sealed partial class UTono 
+    public sealed partial class UBPM 
     {
-        public UTono(NpgsqlCommand cmd, int code)
+        public UBPM(NpgsqlCommand cmd, int code)
         {
             InitializeComponent();
             if (code <= 0) return;
