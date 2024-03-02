@@ -15,13 +15,13 @@ namespace Lifes_log
             if (args.IsSettingsInvoked) MainFrame.Navigate(typeof(Settings.SetDb), this);
             else
             {
-                //switch (args.InvokedItemContainer.Tag)
-                //{
-                    //case "Events": MainFrame.Navigate(typeof(LLEvent), this); break;
+                switch (args.InvokedItemContainer.Tag)
+                {
+                    case "Events": MainFrame.Navigate(typeof(LlEvent), this); break;
                     //case "Sport": MainFrame.Navigate(typeof(Sport), this); break;
                     //case "Health": MainFrame.Navigate(typeof(Health), this); break;
                     //case "Money": MainFrame.Navigate(typeof(Money), this); break;
-                //}
+                }
             }
         }
 
