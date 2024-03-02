@@ -35,24 +35,28 @@ namespace Lifes_log
                 }
                 else
                 {
-                    constr = $"Host={(string)ls.Values["DataSource"] ?? ""};" +
-                        $" Database={(string)ls.Values["InitialCatalog"] ?? ""};" +
-                        $" Username={(string)ls.Values["Login"] ?? ""};" +
+                    constr = $"Host={(string)ls.Values["DataSource"] ?? "localhost"};" +
+                        $" Database={(string)ls.Values["InitialCatalog"] ?? "ll"};" +
+                        $" Username={(string)ls.Values["Login"] ?? "postgres"};" +
                         $" Password = {(string)ls.Values["Password"] ?? ""}";
                 }
-            }
 
-            var dataSourceBuilder = new NpgsqlDataSourceBuilder(constr);
-            (App.Current as App).NpDs = dataSourceBuilder.Build();
-            try
-            {
-                (App.Current as App).NpDs.OpenConnection();
-                mp.CreateNav();
+                var dataSourceBuilder = new NpgsqlDataSourceBuilder(constr);
+                (App.Current as App).NpDs = dataSourceBuilder.Build();
+                try
+                {
+                    (App.Current as App).NpDs.OpenConnection();
+                    mp.CreateNav();
+                }
+                catch (Exception ex)
+                {
+                    PB.IsActive = false;
+                    Msg.Text = ex.Message;
+                }
             }
-            catch (Exception ex)
-            {
+            else {
                 PB.IsActive = false;
-                Msg.Text = ex.Message;
+                Msg.Text = "Не настроена база данных";
             }
         }
 
