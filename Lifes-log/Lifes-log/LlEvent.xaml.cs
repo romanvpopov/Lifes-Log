@@ -7,7 +7,7 @@ namespace Lifes_log
     public sealed partial class LlEvent
     {
 
-        private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
+        //private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
         private readonly DayList ds;
         private readonly EventFilter ef;
         private readonly NewEventList ne;
@@ -25,7 +25,8 @@ namespace Lifes_log
                 Add = Add,
                 Manage = () => { Frame.Navigate(typeof(Settings.SetEventType)); }
             };
-            if (ls.Values.TryGetValue("FixPane", out var value)) FixPane.IsOn = (bool)value;
+            //if (ls.Values.TryGetValue("FixPane", out var value))
+            FixPane.IsOn = true; // (bool)value;
             RPane.Content = ne;
         }
 
@@ -82,7 +83,7 @@ namespace Lifes_log
 
         private void FixPane_Toggled(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            ls.Values["FixPane"] = FixPane.IsOn;
+            //ls.Values["FixPane"] = FixPane.IsOn;
         }
 
         private void BTMove_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

@@ -1,21 +1,24 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using System;
+//using System;
+//using Windows.ApplicationModel;
 using Windows.Globalization;
-using Windows.Storage;
+//using Windows.Management.Core;
+//using Windows.Storage;
 
 namespace Lifes_log.Settings
 {
     public sealed partial class SetDb
     {
-        readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
+        //readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
+        //readonly ApplicationDataContainer ls = ApplicationDataManager.CreateForPackageFamily(Package.Current.Id.FamilyName).LocalSettings;
         private MainWindow mp;
 
         public SetDb()
         {
-            this.InitializeComponent();
-            if (ls.Values.TryGetValue("LocalDB", out var value))
+            InitializeComponent();
+            /*if (ls.Values.TryGetValue("LocalDB", out var value))
                 LocalDB.IsOn = (bool)value;
             else LocalDB.IsOn = true;
             DataSource.Text = (string)ls.Values["DataSource"] ?? "";
@@ -26,7 +29,7 @@ namespace Lifes_log.Settings
             {
                 LLang.SelectedIndex = (Int32)lsValue;
             }
-            else LLang.SelectedIndex = 0;
+            else LLang.SelectedIndex = 0;*/
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -36,11 +39,11 @@ namespace Lifes_log.Settings
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ls.Values["LocalDB"] = LocalDB.IsOn;
+            /*ls.Values["LocalDB"] = LocalDB.IsOn;
             ls.Values["DataSource"] = DataSource.Text;
             ls.Values["InitialCatalog"] = InitialCatalog.Text;
             ls.Values["Login"] = Login.Text;
-            ls.Values["Password"] = Password.Password;
+            ls.Values["Password"] = Password.Password;*/
             mp.Login();
         }
 
@@ -48,7 +51,7 @@ namespace Lifes_log.Settings
         {
             var ss = (e.AddedItems[0] as ComboBoxItem)?.Tag.ToString();
             if (ss == null) return;
-            ls.Values["LLang"] = int.Parse(ss);
+            //ls.Values["LLang"] = int.Parse(ss);
             switch (ss)
             {
                 case "1":
@@ -64,7 +67,7 @@ namespace Lifes_log.Settings
 
         private void LocalDB_Toggled(object _1, RoutedEventArgs _2)
         {
-            ls.Values["LocalDB"] = LocalDB.IsOn;
+            //ls.Values["LocalDB"] = LocalDB.IsOn;
         }
     }
 }
