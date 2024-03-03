@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="LL.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Loaded="Page_Loaded">
+    <NavigationView x:Name="NV" 
+        ItemInvoked="NV_ItemInvoked"
+        OpenPaneLength="140"
+        BackRequested="NV_BackRequested"
+        IsBackEnabled="True"
+        PaneDisplayMode="Auto">
+        <NavigationView.AutoSuggestBox>
+            <AutoSuggestBox PlaceholderText=""
+                            QueryIcon="Find"
+                            QuerySubmitted="AutoSuggestBox_QuerySubmitted" />
+        </NavigationView.AutoSuggestBox>
+        <NavigationView.PaneFooter>
+            <Image Source="/Assets/LargeTile.png" />
+        </NavigationView.PaneFooter>
+        <Frame x:Name="MainFrame"/>
+    </NavigationView>
+</Page>
