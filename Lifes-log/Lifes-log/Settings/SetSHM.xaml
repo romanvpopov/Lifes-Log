@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Lifes_log.Settings.SetShm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <RelativePanel Width="200">
+        <StackPanel x:Name="Th"
+                    Orientation="Horizontal"
+                    Margin="4" CornerRadius="2"
+                    Background="{ThemeResource AppBarBackgroundThemeBrush}"
+                    RelativePanel.AlignTopWithPanel="True"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True">
+            <FontIcon x:Name="Fi" Glyph="&#xE70F;" FontSize="16"/>
+            <TextBlock x:Name="Tx" x:Uid="Notes"
+                       Margin="10,0,0,0" FontSize="16"/>
+        </StackPanel>
+        <ListView x:Name="Lv" AllowDrop="True"
+                  RelativePanel.Below="Th"
+                  RelativePanel.Above="Bt"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignRightWithPanel="True"/>
+        <Button x:Name="Bt"
+                x:Uid="NewET"
+                RelativePanel.AlignBottomWithPanel="True"/>
+    </RelativePanel>
+</UserControl>

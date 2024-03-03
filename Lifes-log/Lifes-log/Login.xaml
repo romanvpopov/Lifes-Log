@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Lifes_log.Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lifes_log"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <RelativePanel>
+        <StackPanel Orientation="Vertical" 
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    RelativePanel.AlignVerticalCenterWithPanel="True">
+            <ProgressRing x:Name="PB" IsActive="True"/>
+            <TextBlock x:Uid="Connect"
+                       Margin="10"
+                       FontSize="16"
+                       HorizontalAlignment="Center"/>
+            <TextBlock x:Name="Msg"
+                       Width="400"
+                       TextWrapping="Wrap"/>
+        </StackPanel>
+    </RelativePanel>
+</Page>
