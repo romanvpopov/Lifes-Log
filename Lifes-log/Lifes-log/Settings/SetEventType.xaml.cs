@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml.Controls;
 
-namespace Lifes_log.Settings
+namespace Lifes_log.DBSettings
 {
     public sealed partial class SetEventType : Page
     {

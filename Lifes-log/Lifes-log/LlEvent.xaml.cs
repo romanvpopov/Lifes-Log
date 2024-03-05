@@ -1,5 +1,4 @@
 using System;
-using Windows.Storage;
 using Lifes_log.LLEvents;
 
 namespace Lifes_log
@@ -7,7 +6,6 @@ namespace Lifes_log
     public sealed partial class LlEvent
     {
 
-        //private readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
         private readonly DayList ds;
         private readonly EventFilter ef;
         private readonly NewEventList ne;
@@ -23,7 +21,7 @@ namespace Lifes_log
             ne = new NewEventList
             {
                 Add = Add,
-                Manage = () => { Frame.Navigate(typeof(Settings.SetEventType)); }
+                Manage = () => { Frame.Navigate(typeof(DBSettings.SetEventType)); }
             };
             //if (ls.Values.TryGetValue("FixPane", out var value))
             FixPane.IsOn = true; // (bool)value;

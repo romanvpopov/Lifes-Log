@@ -3,7 +3,6 @@
     x:Class="Lifes_log.Settings.SetDb"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Lifes_log.Settings"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -35,12 +34,10 @@
             <ComboBoxItem Content="English" Tag="1"/>
             <ComboBoxItem Content="Русский" Tag="2"/>
         </ComboBox>
+        <TextBlock x:Name="CurLang" FontSize="20"/>
         <TextBlock x:Uid="DBManage" FontSize="20"/>
-        <TextBlock x:Uid="StartDB" FontSize="16"/>
-        <ToggleSwitch x:Uid="LocalDB" x:Name="LocalDB" Toggled="LocalDB_Toggled"/>
-        <TextBlock x:Uid="RDBSets" FontSize="16"/>
         <TextBlock x:Uid="DBServer"/>
-        <TextBox x:Name="DataSource"/>
+        <TextBox x:Name="DataSource" />
         <TextBlock x:Uid="DBName"/>
         <TextBox x:Name="InitialCatalog" />
         <TextBlock x:Uid="Login"/>

@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.ApplicationModel.Resources;
 
 namespace Lifes_log
 {
@@ -37,36 +38,37 @@ namespace Lifes_log
 
         public void CreateNav()
         {
+            var rl = new ResourceLoader();
             Nv.MenuItems.Clear();
             Nv.MenuItems.Add(new NavigationViewItem
             {
                 Tag = "Events",
                 Icon = new FontIcon { Glyph = "\xEADF" },
-                Content = "Events"
+                Content = rl.GetString("Events")
             });
             Nv.MenuItems.Add(new NavigationViewItem
             {
                 Tag = "Sport",
                 Icon = new FontIcon { Glyph = "\xE805" },
-                Content = "Sport"
+                Content = rl.GetString("Sport")
             });
             Nv.MenuItems.Add(new NavigationViewItem
             {
                 Tag = "Health",
                 Icon = new FontIcon { Glyph = "\xE95E" },
-                Content = "Health"
+                Content = rl.GetString("Health")
             });
             Nv.MenuItems.Add(new NavigationViewItem
             {
                 Tag = "Money",
                 Icon = new FontIcon { Glyph = "\xEF40" },
-                Content = "Money"
+                Content = rl.GetString("Money")
             });
             Nv.MenuItems.Add(new NavigationViewItem
             {
                 Tag = "Calendar",
                 Icon = new FontIcon { Glyph = "\xE787" },
-                Content = "Calendar"
+                Content = rl.GetString("Calendar")
             });
             MainFrame.Navigate(typeof(LlEvent), this);
             Nv.AutoSuggestBox.Visibility = Visibility.Visible;

@@ -1,35 +1,29 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-//using System;
-//using Windows.ApplicationModel;
-using Windows.Globalization;
-//using Windows.Management.Core;
-//using Windows.Storage;
+using System.Globalization;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace Lifes_log.Settings
 {
     public sealed partial class SetDb
     {
-        //readonly ApplicationDataContainer ls = ApplicationData.Current.LocalSettings;
-        //readonly ApplicationDataContainer ls = ApplicationDataManager.CreateForPackageFamily(Package.Current.Id.FamilyName).LocalSettings;
         private MainWindow mp;
+        private readonly Settings sets = new();
+        private readonly ConfigurationBuilder bld = new();
 
         public SetDb()
         {
             InitializeComponent();
-            /*if (ls.Values.TryGetValue("LocalDB", out var value))
-                LocalDB.IsOn = (bool)value;
-            else LocalDB.IsOn = true;
-            DataSource.Text = (string)ls.Values["DataSource"] ?? "";
-            InitialCatalog.Text = (string)ls.Values["InitialCatalog"] ?? "";
-            Login.Text = (string)ls.Values["Login"] ?? "";
-            Password.Password = (string)ls.Values["Password"] ?? "";
-            if (ls.Values.TryGetValue("LLang", out var lsValue))
-            {
-                LLang.SelectedIndex = (Int32)lsValue;
-            }
-            else LLang.SelectedIndex = 0;*/
+            bld.AddJsonFile("appsettings.json").Build()
+                .GetSection("Settings").Bind(sets);
+            DataSource.Text = sets?.Server;
+            InitialCatalog.Text = sets?.Database;
+            Login.Text = sets?.User;
+            Password.Password = sets?.Password;
+            LLang.SelectedIndex = (int)(sets?.Lang);
+            CurLang.Text = CultureInfo.CurrentCulture.Name+" - "+CultureInfo.CurrentCulture.DisplayName;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -39,11 +33,10 @@ namespace Lifes_log.Settings
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            /*ls.Values["LocalDB"] = LocalDB.IsOn;
-            ls.Values["DataSource"] = DataSource.Text;
-            ls.Values["InitialCatalog"] = InitialCatalog.Text;
-            ls.Values["Login"] = Login.Text;
-            ls.Values["Password"] = Password.Password;*/
+            using StreamWriter writer = new("appsettings.json", false);
+            writer.WriteLine(
+              $"{{\"Settings\": {{ \"Lang\": \"{(LLang.SelectedItem as ComboBoxItem).Tag}\",\"Server\": \"{DataSource.Text}\","+
+              $"\"Database\": \"{InitialCatalog.Text}\",\"User\": \"{Login.Text}\",\"Password\": \"{Password.Password}\"}}}}");
             mp.Login();
         }
 
@@ -51,23 +44,28 @@ namespace Lifes_log.Settings
         {
             var ss = (e.AddedItems[0] as ComboBoxItem)?.Tag.ToString();
             if (ss == null) return;
-            //ls.Values["LLang"] = int.Parse(ss);
             switch (ss)
             {
                 case "1":
-                    ApplicationLanguages.PrimaryLanguageOverride = "en-US";
+                    CultureInfo.CurrentCulture = new CultureInfo("en-US", false);
                     ((App)App.Current).lang = "en";
                     break;
                 case "2":
-                    ApplicationLanguages.PrimaryLanguageOverride = "ru";
+                    CultureInfo.CurrentCulture = new CultureInfo("ru-ru", false);
                     ((App)App.Current).lang = "ru";
                     break;
             }
         }
 
-        private void LocalDB_Toggled(object _1, RoutedEventArgs _2)
+        private class Settings
         {
-            //ls.Values["LocalDB"] = LocalDB.IsOn;
+            public int Lang { get; set; }
+            public string Server { get; set; }
+            public string Database { get; set; }
+            public string User { get; set; }
+            public string Password { get; set; }
         }
+
     }
+
 }
