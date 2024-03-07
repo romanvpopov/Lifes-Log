@@ -44,13 +44,11 @@ namespace Lifes_log.LLEvents
 
         private void UserControl_Tapped(object sender, Microsoft.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            if (!exp & Code > 0)
-            {
-                Body.Content = new UNote(Code, this);
-                BD.BorderBrush = (SolidColorBrush)Resources["ButtonBorderThemeBrush"];
-                //BD.Background = (SolidColorBrush)Resources["TextBoxBackgroundThemeBrush"];
-                exp = true;
-            }
+            if (!(!exp & Code > 0)) return;
+            Body.Content = new UNote(Code, this);
+            BD.BorderBrush = (SolidColorBrush)Resources["ButtonBorderThemeBrush"];
+            //BD.Background = (SolidColorBrush)Resources["TextBoxBackgroundThemeBrush"];
+            exp = true;
         }
 
         public void Collapse()
@@ -58,8 +56,8 @@ namespace Lifes_log.LLEvents
             if (Code > 0)
             {
                 var cmd = (App.Current as App).NpDs.CreateCommand(
-                  $@"Select lt.{lang}_ShortName,l.Comment,l.Descr
-                   From llEvent l join LLEventType lt on l.EventTypeCode = lt.Code Where l.Code={Code}");
+                  $@"Select lt.{lang}_short_name,l.Comment,l.description
+                   From ll_event l join ll_event_type lt on l.event_type_id = lt.id Where l.id={Code}");
                 var rd = cmd.ExecuteReader();
                 rd.Read();
                 Body.Content = new TextBlock

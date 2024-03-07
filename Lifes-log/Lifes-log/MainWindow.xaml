@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Activated="Window_Activated"
+    Title="Lifes-log"
     mc:Ignorable="d">
     <NavigationView x:Name="Nv" 
         ItemInvoked="NV_ItemInvoked"

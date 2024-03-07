@@ -35,15 +35,20 @@
             <ComboBoxItem Content="Русский" Tag="2"/>
         </ComboBox>
         <TextBlock x:Name="CurLang" FontSize="20"/>
-        <TextBlock x:Uid="DBManage" FontSize="20"/>
-        <TextBlock x:Uid="DBServer"/>
-        <TextBox x:Name="DataSource" />
-        <TextBlock x:Uid="DBName"/>
-        <TextBox x:Name="InitialCatalog" />
-        <TextBlock x:Uid="Login"/>
-        <TextBox x:Name="Login"/>
-        <TextBlock x:Uid="Password"/>
-        <PasswordBox x:Name="Password"/>
+        <Expander x:Uid="DBManage" IsExpanded="True">
+            <Expander.Content>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock x:Uid="DBServer"/>
+                    <TextBox x:Name="DataSource" />
+                    <TextBlock x:Uid="DBName"/>
+                    <TextBox x:Name="InitialCatalog" />
+                    <TextBlock x:Uid="Login"/>
+                    <TextBox x:Name="Login"/>
+                    <TextBlock x:Uid="Password"/>
+                    <PasswordBox x:Name="Password"/>
+                </StackPanel>
+            </Expander.Content>
+        </Expander>
         <Button x:Name="BTApply"
                 x:Uid="BTApply"
                 Click="Button_Click"

@@ -7,9 +7,8 @@
     <StackPanel Orientation="Horizontal">
         <TextBlock x:Name="Value"
                    VerticalAlignment="Center"/>
-        <TextBox x:Name="Qty"
-                 InputScope="Number"
-                 KeyUp="Qty_KeyUp"
-                 TextAlignment="Right" BeforeTextChanging="Qty_BeforeTextChanging"/>
+        <NumberBox x:Name="Qty" 
+                 KeyDown="Qty_KeyDown" 
+                 SpinButtonPlacementMode="Hidden" />
     </StackPanel>
 </local:EventBody>

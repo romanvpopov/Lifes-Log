@@ -6,6 +6,7 @@
     <Style TargetType="Button">
         <Setter Property="CornerRadius" Value="2"/>
         <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,0"/>
     </Style>
     <Style TargetType="Border">
         <Setter Property="CornerRadius" Value="2"/>

@@ -31,13 +31,13 @@
                 <CommandBar.Content>
                     <StackPanel Margin="6"
                         Orientation="Horizontal">
-                        <FontIcon Glyph="&#xADF;" FontSize="16"/>
+                        <FontIcon Glyph="&#xEADF;" FontSize="16"/>
                         <TextBlock x:Uid="AllEvents" FontSize="16"/>
                     </StackPanel>
                 </CommandBar.Content>
-                <AppBarButton x:Uid="NewEventC" Icon="Add" Click="BTNewEvent_Click"/>
-                <AppBarButton x:Uid="MoveToC" Icon="Go" Click="BTMove_Click"/>
-                <AppBarButton x:Uid="FilterC" Icon="Filter" Click="BTFilter_Click"/>
+                <AppBarButton x:Uid="NewEventL" Icon="Add" Click="BTNewEvent_Click"/>
+                <AppBarButton x:Uid="MoveToL" Icon="Go" Click="BTMove_Click"/>
+                <AppBarButton x:Uid="FilterL" Icon="Filter" Click="BTFilter_Click"/>
             </CommandBar>
             <ListView x:Name="El" 
                       Loaded="EL_Loaded"

@@ -171,7 +171,7 @@
   <data name="Connect.Text" xml:space="preserve">
     <value>Connecting</value>
   </data>
-  <data name="DBManage.Text" xml:space="preserve">
+  <data name="DBManage.Header" xml:space="preserve">
     <value>Database manage</value>
   </data>
   <data name="DBName.Text" xml:space="preserve">

@@ -118,249 +118,249 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Accounts.Content" xml:space="preserve">
-    <value>Accounts</value>
+    <value>Счета</value>
   </data>
   <data name="Alldays" xml:space="preserve">
-    <value>All days</value>
+    <value>Все дни</value>
   </data>
   <data name="AllEvents.Text" xml:space="preserve">
-    <value>Events</value>
+    <value>События</value>
   </data>
   <data name="Assets.Content" xml:space="preserve">
-    <value>Assets</value>
+    <value>Активы</value>
   </data>
   <data name="BTApply.Content" xml:space="preserve">
-    <value>Apply</value>
+    <value>Применить</value>
   </data>
   <data name="BTCancel.Content" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Отменить</value>
   </data>
   <data name="BTClose.Content" xml:space="preserve">
-    <value>Close</value>
+    <value>Закрыть</value>
   </data>
   <data name="BTDay.Content" xml:space="preserve">
-    <value>Midday</value>
+    <value>День</value>
   </data>
   <data name="BTDel.Content" xml:space="preserve">
-    <value>Delete</value>
+    <value>Удалить</value>
   </data>
   <data name="BTEvening.Content" xml:space="preserve">
-    <value>Evening</value>
+    <value>вечер</value>
   </data>
   <data name="BTLog.Content" xml:space="preserve">
-    <value>Log</value>
+    <value>Записать</value>
   </data>
   <data name="BTMorning.Content" xml:space="preserve">
-    <value>Morning</value>
+    <value>утро</value>
   </data>
   <data name="BTNewBlade.Content" xml:space="preserve">
-    <value>New blade</value>
+    <value>новое лезвие</value>
   </data>
   <data name="BTReset.Content" xml:space="preserve">
-    <value>Reset</value>
+    <value>Сбросить</value>
   </data>
   <data name="Calendar" xml:space="preserve">
-    <value>Calendar</value>
+    <value>Календарь</value>
   </data>
   <data name="CashFlowItems.Content" xml:space="preserve">
-    <value>Cash flow items</value>
+    <value>Статьи расхода/прихода</value>
   </data>
   <data name="Comment.Text" xml:space="preserve">
-    <value>Comment</value>
+    <value>Примечание</value>
   </data>
   <data name="Connect.Text" xml:space="preserve">
-    <value>Connecting</value>
+    <value>Подключаюсь</value>
   </data>
-  <data name="DBManage.Text" xml:space="preserve">
-    <value>Database manage</value>
+  <data name="DBManage.Header" xml:space="preserve">
+    <value>Управление базой данных</value>
   </data>
   <data name="DBName.Text" xml:space="preserve">
-    <value>Database name</value>
+    <value>Имя базы данных</value>
   </data>
   <data name="DBServer.Text" xml:space="preserve">
-    <value>Server</value>
+    <value>Сервер</value>
   </data>
   <data name="DelConfirm.Text" xml:space="preserve">
-    <value>The event will be deleted. Confirm</value>
+    <value>Событие будет удалено. Подтвердите</value>
   </data>
   <data name="DispLang.Text" xml:space="preserve">
-    <value>Display language</value>
+    <value>Язык интерфейса</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Done</value>
+    <value>Готово</value>
   </data>
   <data name="EManage.Text" xml:space="preserve">
-    <value>Events manage</value>
+    <value>Управление событиями</value>
   </data>
   <data name="Evening.Text" xml:space="preserve">
-    <value>Evening</value>
+    <value>Вечер</value>
   </data>
   <data name="Events" xml:space="preserve">
-    <value>Events</value>
+    <value>События</value>
   </data>
   <data name="EventsNote.Text" xml:space="preserve">
-    <value>Note</value>
+    <value>Заметка</value>
   </data>
   <data name="EventsTono.Text" xml:space="preserve">
-    <value>Tonometr</value>
+    <value>Тонометр</value>
   </data>
   <data name="EventTypes.Content" xml:space="preserve">
-    <value>Event types</value>
+    <value>Типы событий</value>
   </data>
   <data name="Evnts.Text" xml:space="preserve">
-    <value>Events count</value>
+    <value>Событий</value>
   </data>
   <data name="Expense.Label" xml:space="preserve">
-    <value>Expens</value>
+    <value>Расход</value>
   </data>
   <data name="FilterC.Content" xml:space="preserve">
-    <value>Filter</value>
+    <value>Фильтр</value>
   </data>
   <data name="FilterL.Label" xml:space="preserve">
-    <value>Filter</value>
+    <value>Фильтр</value>
   </data>
   <data name="FilterT.Text" xml:space="preserve">
-    <value>Filter</value>
+    <value>Фильтр</value>
   </data>
   <data name="Fix.OffContent" xml:space="preserve">
-    <value>Float</value>
+    <value>Освободить</value>
   </data>
   <data name="Fix.OnContent" xml:space="preserve">
-    <value>Fix</value>
+    <value>Закрепить</value>
   </data>
   <data name="Health" xml:space="preserve">
-    <value>Health</value>
+    <value>Здоровье</value>
   </data>
   <data name="Hlth.Text" xml:space="preserve">
-    <value>Health</value>
+    <value>Здоровье</value>
   </data>
   <data name="Income.Label" xml:space="preserve">
-    <value>Income</value>
+    <value>Доход</value>
   </data>
   <data name="Last365" xml:space="preserve">
-    <value>Last 365 days</value>
+    <value>Последние 365 дней</value>
   </data>
   <data name="Loans.Content" xml:space="preserve">
-    <value>Loans</value>
+    <value>Долги</value>
   </data>
   <data name="LocalDB.OffContent" xml:space="preserve">
-    <value>Remote dabase</value>
+    <value>Удаленная база данных</value>
   </data>
   <data name="LocalDB.OnContent" xml:space="preserve">
-    <value>Local database</value>
+    <value>Локальная база данных</value>
   </data>
   <data name="Log in" xml:space="preserve">
-    <value>Log in</value>
+    <value>Вход</value>
   </data>
   <data name="Log out" xml:space="preserve">
-    <value>Log out</value>
+    <value>Выход</value>
   </data>
   <data name="Login.Text" xml:space="preserve">
-    <value>Login</value>
+    <value>Имя учетной записи</value>
   </data>
   <data name="Manage.Content" xml:space="preserve">
-    <value>Manage</value>
+    <value>Управлять</value>
   </data>
   <data name="Mny.Text" xml:space="preserve">
-    <value>Money</value>
+    <value>Деньги</value>
   </data>
   <data name="Money" xml:space="preserve">
-    <value>Money</value>
+    <value>Деньги</value>
   </data>
   <data name="More.Text" xml:space="preserve">
-    <value>More</value>
+    <value>Еще</value>
   </data>
   <data name="Morning.Text" xml:space="preserve">
-    <value>Morning</value>
+    <value>Утро</value>
   </data>
   <data name="MoveToC.Content" xml:space="preserve">
-    <value>Move to</value>
+    <value>Перейти</value>
   </data>
   <data name="MoveToL.Label" xml:space="preserve">
-    <value>Move to</value>
+    <value>Перейти</value>
   </data>
   <data name="MoveToT.Text" xml:space="preserve">
-    <value>Move to</value>
+    <value>Перейти</value>
   </data>
   <data name="NewET.Content" xml:space="preserve">
-    <value>New event type</value>
+    <value>Новый тип события</value>
   </data>
   <data name="NewEventC.Content" xml:space="preserve">
-    <value>New event</value>
+    <value>Новое событие</value>
   </data>
   <data name="NewEventL.Label" xml:space="preserve">
-    <value>New event</value>
+    <value>Новое событие</value>
   </data>
   <data name="NewEventT.Text" xml:space="preserve">
-    <value>New event</value>
+    <value>Новое событие</value>
   </data>
   <data name="NF" xml:space="preserve">
-    <value>Nothing found</value>
+    <value>Ничего не найдено</value>
   </data>
   <data name="Notes.Text" xml:space="preserve">
-    <value>Notes</value>
+    <value>Заметки</value>
   </data>
   <data name="Password.Text" xml:space="preserve">
-    <value>Password</value>
+    <value>Пароль</value>
   </data>
   <data name="Period" xml:space="preserve">
-    <value>Period</value>
+    <value>Период</value>
   </data>
   <data name="Pulse.Text" xml:space="preserve">
-    <value>Pulse</value>
+    <value>Пульс</value>
   </data>
   <data name="RDBSets.Text" xml:space="preserve">
-    <value>Remote database settings</value>
+    <value>Настройки удаленной базы данных</value>
   </data>
   <data name="Reports.Content" xml:space="preserve">
-    <value>Reports</value>
+    <value>Отчеты</value>
   </data>
   <data name="Search.Text" xml:space="preserve">
-    <value>Search</value>
+    <value>Поиск</value>
   </data>
   <data name="Settings.Content" xml:space="preserve">
-    <value>Settings</value>
+    <value>Настройки</value>
   </data>
   <data name="Sport" xml:space="preserve">
-    <value>Sport</value>
+    <value>Спорт</value>
   </data>
   <data name="SportT.Text" xml:space="preserve">
-    <value>Sport</value>
+    <value>Спорт</value>
   </data>
   <data name="StartDB.Text" xml:space="preserve">
-    <value>Start database</value>
+    <value>База данных при открытии</value>
   </data>
   <data name="Time.Text" xml:space="preserve">
-    <value>Time</value>
+    <value>Время</value>
   </data>
   <data name="Today.Content" xml:space="preserve">
-    <value>Today</value>
+    <value>Сегодня</value>
   </data>
   <data name="TonoDiastole.Text" xml:space="preserve">
-    <value>Lower</value>
+    <value>Нижнее</value>
   </data>
   <data name="TonoSystole.Text" xml:space="preserve">
-    <value>Upper</value>
+    <value>Верхнее</value>
   </data>
   <data name="Transfer.Label" xml:space="preserve">
-    <value>Transfer</value>
+    <value>Перемещение</value>
   </data>
   <data name="Value.Text" xml:space="preserve">
-    <value>Value</value>
+    <value>Значение</value>
   </data>
   <data name="WCalendar" xml:space="preserve">
-    <value>Over calendar</value>
+    <value>Наложить календарь</value>
   </data>
   <data name="WrongEvent" xml:space="preserve">
-    <value>Can not create event</value>
+    <value>Не могу создать событие</value>
   </data>
   <data name="WrongEventCon" xml:space="preserve">
-    <value>Wrong event constructor</value>
+    <value>Конструктор события не найден</value>
   </data>
   <data name="WrongEventType" xml:space="preserve">
-    <value>Wrong event type</value>
+    <value>Тип события не найден</value>
   </data>
   <data name="Year.Text" xml:space="preserve">
-    <value>Year</value>
+    <value>Год</value>
   </data>
 </root>

@@ -4,7 +4,6 @@
 		<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
 		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
 		<RootNamespace>Lifes_log</RootNamespace>
-		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<Platforms>x86;x64;ARM64</Platforms>
 		<RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
 		<UseWinUI>true</UseWinUI>
@@ -14,6 +13,12 @@
 		<WindowsPackageType>None</WindowsPackageType>
 		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 	  <UserSecretsId>2ab7cca3-50b4-4732-ae5e-22c6a3563df7</UserSecretsId>
+	  <AssemblyName>Lifes-log</AssemblyName>
+	  <Title>Lifes-log</Title>
+	  <Authors>Roman Popov</Authors>
+	  <Company>mt-soft.ru</Company>
+	  <PackageProjectUrl>mt-soft.ru/lifes-log</PackageProjectUrl>
+	  <NeutralLanguage>ru</NeutralLanguage>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -33,6 +38,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="Health.xaml" />
 		<None Remove="LLEvent.xaml" />
 		<None Remove="LLEvents\Day.xaml" />
 		<None Remove="LLEvents\Event.xaml" />
@@ -43,11 +49,38 @@
 		<None Remove="LLEvents\NewEventList.xaml" />
 		<None Remove="LLEvents\UNote.xaml" />
 		<None Remove="Login.xaml" />
+		<None Remove="Money.xaml" />
+		<None Remove="Search.xaml" />
 		<None Remove="Settings\SetDB.xaml" />
 		<None Remove="Settings\SetEventType.xaml" />
 		<None Remove="Settings\SetSHM.xaml" />
+		<None Remove="Sport.xaml" />
 		<None Remove="styles.xaml" />
 		<None Remove="Properties\appsettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Search.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Health.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Money.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Sport.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 
 	<ItemGroup>

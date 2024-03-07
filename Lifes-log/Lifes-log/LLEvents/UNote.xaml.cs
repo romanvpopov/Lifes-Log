@@ -12,7 +12,8 @@ namespace Lifes_log.LLEvents
         private readonly string cname;
         private EventBody bd;
         private readonly Event et;
-        private DateTime dt;
+        private readonly DateTime dt;
+        private readonly short ntp;
 
         public UNote(int cds, Event ets)
         {
@@ -20,22 +21,22 @@ namespace Lifes_log.LLEvents
             cd = cds;
             et = ets;
             var cmd = ((App)App.Current).NpDs.CreateCommand(
-                $"Select l.comment,lt.{lang}_name as nm,lt.class_name,l.event_type_id "+
-                "From ll_event l join ll_event_type lt on l.event_type_id = lt.id "+
-                "Where l.id = {cd}");
+                $@"Select l.description,lt.{lang}_name as nm,lt.class_name,l.event_type_id
+                From ll_event l join ll_event_type lt on l.event_type_id = lt.id
+                Where l.id = {cd}");
             var rd = cmd.ExecuteReader();
             rd.Read();
-            GNote.Text = rd["comment"].ToString();
+            GNote.Text = rd["description"].ToString();
             TypeNote.Text = rd["nm"].ToString();
             cname = rd["class_name"].ToString();
-            var ntp = (short)rd["event_type_id"];
+            ntp = (short)rd["event_type_id"];
             rd.Close();
-            UBody(cmd, this.cd, ntp);
+            UBody(cmd, cd, ntp);
         }
 
         public UNote(short tp, Event ets)
         {
-            var ntp = tp; et = ets;
+            ntp = tp; et = ets;
             InitializeComponent();
             cd = 0; dt = et.Dt;
             DelBt.Visibility = Visibility.Collapsed;
@@ -49,16 +50,16 @@ namespace Lifes_log.LLEvents
             UBody(cmd, cd, ntp);
         }
 
-        private void UBody(NpgsqlCommand cmd, int cds, short ntp)
+        private void UBody(NpgsqlCommand cmd, int cds, short tp)
         {
             bd = cname switch
             {
-                "Num" => new UNum(cds, ntp),
+                "Num" => new UNum(cds, tp),
                 "BPM" => new UBPM(cmd, cds),
                 "Shaving" => new UShaving(cmd, cds),
-                "Training" => new UTraining(cmd, cds, ntp),
-                "Exercise" => new UExercise(cmd, cds, ntp),
-                "List" => new UList(cmd, cds, ntp),
+                "Training" => new UTraining(cmd, cds, tp),
+                "Exercise" => new UExercise(cmd, cds, tp),
+                "List" => new UList(cmd, cds, tp),
                 _ => bd
             };
             if (bd == null) return;
@@ -85,8 +86,8 @@ namespace Lifes_log.LLEvents
                 et.Code = cd;
                 rd.Close();
                 cmd.CommandText =
-                    $"INSERT INTO ll_event (  id,server_time,    event_time,comment, description, event_type_id)"+
-                                 "values   ({cd}, localtime,'{dt:yyyyMMdd}','{cmt}','{GNote.Text}',      {ntp})";
+                    $"INSERT INTO ll_event (  id,    server_time,    event_time,comment, description, event_type_id)"+
+                                $"values   ({cd}, localtimestamp,'{dt:yyyyMMdd}','{cmt}','{GNote.Text}',      {ntp})";
                 cmd.ExecuteNonQuery();
             }
             else

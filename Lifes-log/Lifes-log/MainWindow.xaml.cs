@@ -19,9 +19,9 @@ namespace Lifes_log
                 switch (args.InvokedItemContainer.Tag)
                 {
                     case "Events": MainFrame.Navigate(typeof(LlEvent), this); break;
-                    //case "Sport": MainFrame.Navigate(typeof(Sport), this); break;
-                    //case "Health": MainFrame.Navigate(typeof(Health), this); break;
-                    //case "Money": MainFrame.Navigate(typeof(Money), this); break;
+                    case "Sport": MainFrame.Navigate(typeof(Sport), this); break;
+                    case "Health": MainFrame.Navigate(typeof(Health), this); break;
+                    case "Money": MainFrame.Navigate(typeof(Money), this); break;
                 }
             }
         }
@@ -83,7 +83,7 @@ namespace Lifes_log
         
         private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            //MainFrame.Navigate(typeof(Search), args.QueryText);
+            MainFrame.Navigate(typeof(Search), args.QueryText);
         }
 
         private void Window_Activated(object sender, WindowActivatedEventArgs args)

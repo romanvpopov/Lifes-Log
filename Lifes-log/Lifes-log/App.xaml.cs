@@ -11,6 +11,7 @@ namespace Lifes_log
     {
         public string lang;
         public NpgsqlDataSource NpDs;
+        private HostApplicationBuilder builder = Host.CreateApplicationBuilder();
 
         public App()
         {
@@ -18,7 +19,6 @@ namespace Lifes_log
         }
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            var builder = Host.CreateApplicationBuilder();
             builder.Services.AddLocalization(options =>
             {
                 options.ResourcesPath = "Resources";
