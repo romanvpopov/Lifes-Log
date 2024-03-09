@@ -40,7 +40,7 @@ namespace Lifes_log.LLEvents
             while (rd.Read())
             {
                 var ss = (rd.GetString(2) != "" ? rd.GetString(2) + ": " : "") + 
-                         rd.GetString(3) + " " + rd.GetString(4);
+                         rd.GetString(4) + " " + rd.GetString(3);
                 var ev = new Event(ss, rd.GetInt32(0), rd.GetInt16(5));
                 if (etps != "0")
                 {

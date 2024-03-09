@@ -25,7 +25,7 @@ namespace Lifes_log.LLEvents
             if (!rd.Read()) return;
             vkey = rd.GetString(0);
             Value.Text = rd.GetString(2);
-            Qty.Text = rd.GetDecimal(1).ToString();
+            Qty.Value = (double)rd.GetDecimal(1);
             Qty.NumberFormatter = new DecimalFormatter
             {
                 IntegerDigits = 3,

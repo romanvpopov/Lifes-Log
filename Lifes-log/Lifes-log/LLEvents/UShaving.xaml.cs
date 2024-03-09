@@ -1,4 +1,6 @@
-﻿using Npgsql;
+﻿using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.Windows.ApplicationModel.Resources;
+using Npgsql;
 
 namespace Lifes_log.LLEvents
 {
@@ -9,18 +11,19 @@ namespace Lifes_log.LLEvents
             InitializeComponent();
             BTM.IsChecked = true;
             if (code <= 0) return;
-            cmd.CommandText = $"Select Comment From LLEvent Where Code = {code}";
+            cmd.CommandText = $"Select description From ll_event Where id = {code}";
             var rd = cmd.ExecuteReader();
             if (!rd.Read()) return;
             var ss = rd.GetString(0);
-            BTM.IsChecked = ss.Contains("Morning");
-            BTD.IsChecked = ss.Contains("Midday");
-            BTE.IsChecked = ss.Contains("Evening");
-            BNB.IsChecked = ss.Contains("New blade");
+            var rl = new ResourceLoader();
+            BTM.IsChecked = ss.Contains(rl.GetString("BTMorning/Content"));
+            BTD.IsChecked = ss.Contains(rl.GetString("BTDay/Content"));
+            BTE.IsChecked = ss.Contains(rl.GetString("BTEvening/Content"));
+            BNB.IsChecked = ss.Contains(rl.GetString("BTNewBlade/Content"));
         }
         public override void InsertBody(NpgsqlCommand cmd, int code)
         {
-            cmd.CommandText = $"Update LLEvent Set Comment='{ToString()}' Where Code={code}";
+            cmd.CommandText = $"Update ll_event Set description='{ToString()}' Where id={code}";
             cmd.ExecuteNonQuery();
         }
         public override string ToString()

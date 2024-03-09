@@ -234,6 +234,9 @@
   <data name="Hlth.Text" xml:space="preserve">
     <value>Здоровье</value>
   </data>
+  <data name="Hour.Text" xml:space="preserve">
+    <value>Ч</value>
+  </data>
   <data name="Income.Label" xml:space="preserve">
     <value>Доход</value>
   </data>
@@ -260,6 +263,9 @@
   </data>
   <data name="Manage.Content" xml:space="preserve">
     <value>Управлять</value>
+  </data>
+  <data name="Minute.Text" xml:space="preserve">
+    <value>М</value>
   </data>
   <data name="Mny.Text" xml:space="preserve">
     <value>Деньги</value>
@@ -317,6 +323,9 @@
   </data>
   <data name="Search.Text" xml:space="preserve">
     <value>Поиск</value>
+  </data>
+  <data name="Second.Text" xml:space="preserve">
+    <value>С</value>
   </data>
   <data name="Settings.Content" xml:space="preserve">
     <value>Настройки</value>

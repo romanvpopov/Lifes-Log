@@ -21,12 +21,12 @@ namespace Lifes_log.LLEvents
             cd = cds;
             et = ets;
             var cmd = ((App)App.Current).NpDs.CreateCommand(
-                $@"Select l.description,lt.{lang}_name as nm,lt.class_name,l.event_type_id
+                $@"Select l.comment,lt.{lang}_name as nm,lt.class_name,l.event_type_id
                 From ll_event l join ll_event_type lt on l.event_type_id = lt.id
                 Where l.id = {cd}");
             var rd = cmd.ExecuteReader();
             rd.Read();
-            GNote.Text = rd["description"].ToString();
+            GNote.Text = rd["comment"].ToString();
             TypeNote.Text = rd["nm"].ToString();
             cname = rd["class_name"].ToString();
             ntp = (short)rd["event_type_id"];
@@ -93,7 +93,7 @@ namespace Lifes_log.LLEvents
             else
             {
                 var cmd = (App.Current as App).NpDs.CreateCommand(
-                $"Update ll_event Set comment='{cmt}',description='{GNote.Text}' Where id={cd}");
+                $"Update ll_event Set description='{cmt}',comment='{GNote.Text}' Where id={cd}");
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = $"Delete From ll_value Where event_id={cd}";
                 cmd.ExecuteNonQuery();

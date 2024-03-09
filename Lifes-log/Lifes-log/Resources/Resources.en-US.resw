@@ -234,6 +234,9 @@
   <data name="Hlth.Text" xml:space="preserve">
     <value>Health</value>
   </data>
+  <data name="Hour.Text" xml:space="preserve">
+    <value>H</value>
+  </data>
   <data name="Income.Label" xml:space="preserve">
     <value>Income</value>
   </data>
@@ -260,6 +263,9 @@
   </data>
   <data name="Manage.Content" xml:space="preserve">
     <value>Manage</value>
+  </data>
+  <data name="Minute.Text" xml:space="preserve">
+    <value>M</value>
   </data>
   <data name="Mny.Text" xml:space="preserve">
     <value>Money</value>
@@ -317,6 +323,9 @@
   </data>
   <data name="Search.Text" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="Second.Text" xml:space="preserve">
+    <value>S</value>
   </data>
   <data name="Settings.Content" xml:space="preserve">
     <value>Settings</value>

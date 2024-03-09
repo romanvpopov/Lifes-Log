@@ -10,7 +10,7 @@
   <Identity
     Name="120c4b92-265f-4570-b43a-5e3425f8079b"
     Publisher="CN=Popov Roman"
-    Version="1.1.2.0" />
+    Version="1.1.3.0" />
 
   <mp:PhoneIdentity PhoneProductId="120c4b92-265f-4570-b43a-5e3425f8079b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

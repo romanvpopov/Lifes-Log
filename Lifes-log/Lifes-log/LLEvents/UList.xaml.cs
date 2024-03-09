@@ -10,7 +10,7 @@ namespace Lifes_log.LLEvents
     public sealed partial class UList
     {
         private readonly string lang = (App.Current as App).lang;
-        private readonly ObservableCollection<ListBodyField> lists = new ObservableCollection<ListBodyField>();
+        private readonly ObservableCollection<ListBodyField> lists = new();
 
         public UList(NpgsqlCommand cmd, int code, short ntp)
         {
@@ -28,7 +28,7 @@ namespace Lifes_log.LLEvents
 
         public override void InsertBody(NpgsqlCommand cmd, int cd)
         {
-            foreach (ListBodyField s in FieldList.Items)
+            foreach (ListBodyField s in FieldList.Items.Cast<ListBodyField>())
             {
                 if (s.Value == "") continue;
                 cmd.CommandText = $"Insert into LLEventValue (EventCode,FieldEventCode,FieldValue) Values({cd},{s.Code},'{s.Value}')";

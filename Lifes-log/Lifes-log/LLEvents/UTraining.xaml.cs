@@ -1,6 +1,7 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Npgsql;
+using Windows.Globalization.NumberFormatting;
 
 namespace Lifes_log.LLEvents
 {
@@ -11,29 +12,33 @@ namespace Lifes_log.LLEvents
         public UTraining(NpgsqlCommand cmd, int code, short ntp)
         {
             InitializeComponent();
-            cmd.CommandText =
-                $"Select lu.Code, lf.Code, isNull(lf.{lang}_FieldName,''), isNull(lf.{lang}_FieldSmallName,''), " +
-                $"isNull(lv.FieldValue,''), isNull(lu.{lang}_UnitName,''), isNull(lu.{lang}_UnitSmallName,'') " +
-                $"From LLFieldEvent lf left join LLEventValue lv on lf.Code = lv.FieldEventCode and lv.EventCode={code} " +
-                $"left join LLUnit lu on lf.UnitCode=lu.Code Where lf.EventTypeCode ={ntp}";
+            cmd.CommandText = (code>0)?$@"
+                Select lt.key, lt.{lang}_name,lv.dec_value,lv.interval_value
+                From ll_value lv join ll_value_type lt on lv.value_type_key = lt.key
+                Where lv.event_id={code}":$@"
+                Select lt.key, lt.ru_name,0 as dec_value,0 as interval_value
+                From ll_value_type lt
+                Where lt.key in ('cal','dist','time')";
             var rd = cmd.ExecuteReader();
             while (rd.Read()) {
-                switch (rd.GetInt16(0)) {
-                    case 9:
-                        Calories.Text = rd.GetString(5);
-                        Calories.Tag = rd.GetString(6);
-                        VCalories.Tag = rd.GetInt32(1);
-                        VCalories.Text = rd.GetString(4); break;
-                    case 10:
-                        Distanсe.Text = rd.GetString(5);
-                        Distanсe.Tag = rd.GetString(6);
-                        VDistance.Tag = rd.GetInt32(1);
-                        VDistance.Text = rd.GetString(4); break;
-                    case 11:
-                        Time.Text = rd.GetString(5);
-                        Time.Tag = rd.GetString(6);
-                        VTime.Tag = rd.GetInt32(1);
-                        VTime.Text = rd.GetString(4); break;
+                switch (rd.GetString(0)) {
+                    case "cal":
+                        Calories.Text = rd.GetString(1);
+                        VCalories.Value = (double)rd.GetDecimal(2);
+                        VCalories.NumberFormatter = new DecimalFormatter {
+                            IntegerDigits = 4,
+                            FractionDigits = 0,
+                        }; break;
+                    case "dist":
+                        Distanсe.Text = rd.GetString(1);
+                        VDistance.Value = (double)rd.GetDecimal(2);
+                        VDistance.NumberFormatter = new DecimalFormatter {
+                            IntegerDigits = 5,
+                            FractionDigits = 0,
+                        }; break;
+                    case "time":
+                        Time.Text = rd.GetString(1);
+                        VTime.Time = rd.GetTimeSpan(3); break;
                 }
             }
         }
@@ -46,25 +51,28 @@ namespace Lifes_log.LLEvents
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = $"Insert into LLEventValue (EventCode,FieldEventCode,FieldValue) Values({cd},{VDistance.Tag},'{VDistance.Text}')";
                 cmd.ExecuteNonQuery();
-                cmd.CommandText = $"Insert into LLEventValue (EventCode,FieldEventCode,FieldValue) Values({cd},{VTime.Tag},'{VTime.Text}')";
+                cmd.CommandText = $"Insert into LLEventValue (EventCode,FieldEventCode,FieldValue) Values({cd},{VTime.Tag},'{VTime.Time}')";
                 cmd.ExecuteNonQuery();
         }
         public override string ToString()
         {
-            return (VCalories.Text+" "+Calories.Tag+", " +VDistance.Text + " " + Distanсe.Tag+", "+VTime.Text + " " + Time.Tag);
+            return (VCalories.Text+" "+Calories.Tag+", " +VDistance.Text + " " + Distanсe.Tag+", "+VTime.Time + " " + Time.Tag);
 
         }
-        private void C_KeyUp(object _, KeyRoutedEventArgs e) {
-            if (e.Key == Windows.System.VirtualKey.Enter) { VDistance.Focus(FocusState.Programmatic); }
-        }
 
-        private void D_KeyUp(object _, KeyRoutedEventArgs e) {
-            if (e.Key == Windows.System.VirtualKey.Enter) { VTime.Focus(FocusState.Programmatic); }
-        }
-
-        private void T_KeyUp(object _, KeyRoutedEventArgs e) {
+        private void VTime_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
             if (e.Key == Windows.System.VirtualKey.Enter) { Sf(); }
         }
 
+        private void VDistance_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter) { VTime.Focus(FocusState.Programmatic); }
+        }
+
+        private void VCalories_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter) { VDistance.Focus(FocusState.Programmatic); }
+        }
     }
 }
