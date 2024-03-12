@@ -1,105 +1,111 @@
 ﻿using System;
+using Windows.Globalization.NumberFormatting;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Npgsql;
 
 namespace Lifes_log.LLEvents
 {
-    public sealed partial class UBPM 
+    public sealed partial class UBPM
     {
+        private readonly string lang = (App.Current as App)?.lang;
+
         public UBPM(NpgsqlCommand cmd, int code)
         {
             InitializeComponent();
-            if (code <= 0) return;
-            cmd.CommandText = $"Select FieldEventCode,FieldValue From LLEventValue Where EventCode={code}";
+            cmd.CommandText = (code > 0)
+                ? $@"
+                Select lt.key, lt.{lang}_name,lv.dec_value
+                From ll_value lv join ll_value_type lt on lv.value_type_key = lt.key
+                Where lv.event_id={code}"
+                : $@"
+                Select lt.key, lt.{lang}_name,0 as dec_value
+                From ll_value_type lt
+                Where lt.key in ('sys','dia','pulse')";
             var rd = cmd.ExecuteReader();
-            while (rd.Read()) {
-                switch (rd.GetInt32(0)) {
-                    case 2: MS.Text = rd.GetString(1); break;
-                    case 3: MD.Text = rd.GetString(1); break;
-                    case 4: MP.Text = rd.GetString(1); break;
-                    case 5: ES.Text = rd.GetString(1); break;
-                    case 6: ED.Text = rd.GetString(1); break;
-                    case 7: EP.Text = rd.GetString(1); break;
+            while (rd.Read())
+            {
+                switch (rd.GetString(0))
+                {
+                    case "sys":
+                        MST.Text = rd.GetString(1);
+                        MS.Value = (double)rd.GetDecimal(2);
+                        MS.NumberFormatter = new DecimalFormatter
+                        {
+                            IntegerDigits = 1, FractionDigits = 0
+                        };
+                        MS.Maximum = 300;
+                        break;
+                    case "dia":
+                        MDT.Text = rd.GetString(1);
+                        MD.Value = (double)rd.GetDecimal(2);
+                        MD.NumberFormatter = new DecimalFormatter
+                        {
+                            IntegerDigits = 1, FractionDigits = 0,
+                        };
+                        MD.Maximum = 300;
+                        break;
+                    case "pulse":
+                        MPT.Text = rd.GetString(1);
+                        MP.Value = (double)rd.GetDecimal(2);
+                        MP.NumberFormatter = new DecimalFormatter
+                        {
+                            IntegerDigits = 1, FractionDigits = 0,
+                        };
+                        MP.Maximum = 300;
+                        break;
                 }
             }
-        }    
+        }
 
-        public override void GetFocus() {
-            if (MS.Text == "") {
-                MS.Focus(FocusState.Programmatic);
-            } else {
-                ES.Focus(FocusState.Programmatic);
-            }
+        public override void GetFocus()
+        {
+            MS.Focus(FocusState.Programmatic);
         }
 
         public override void InsertBody(NpgsqlCommand cmd, Int32 cd)
         {
-            if (MS.Text != "")
-            {
-                cmd.CommandText = $"Insert into LLEventValue (EventCode,FieldEventCode,FieldValue) Values({cd},2,'{MS.Text}')";
-                cmd.ExecuteNonQuery();
-            }
-            if (MD.Text != "")
-            {
-                cmd.CommandText = $"Insert into LLEventValue (EventCode,FieldEventCode,FieldValue) Values({cd},3,'{MD.Text}')";
-                cmd.ExecuteNonQuery();
-            }
-            if (MP.Text != "")
-            {
-                cmd.CommandText = $"Insert into LLEventValue (EventCode,FieldEventCode,FieldValue) Values({cd},4,'{MP.Text}')";
-                cmd.ExecuteNonQuery();
-            }
-            if (ES.Text != "")
-            {
-                cmd.CommandText = $"Insert into LLEventValue (EventCode,FieldEventCode,FieldValue) Values({cd},5,'{ES.Text}')";
-                cmd.ExecuteNonQuery();
-            }
-            if (ED.Text != "")
-            {
-                cmd.CommandText = $"Insert into LLEventValue (EventCode,FieldEventCode,FieldValue) Values({cd},6,'{ED.Text}')";
-                cmd.ExecuteNonQuery();
-            }
-            if (EP.Text != "")
-            {
-                cmd.CommandText = $"Insert into LLEventValue (EventCode,FieldEventCode,FieldValue) Values({cd},7,'{EP.Text}')";
-                cmd.ExecuteNonQuery();
-            }
+            cmd.CommandText = $@"
+                Insert into ll_value (event_id,value_type_key,dec_value)
+                                   Values({cd},         'sys',{MS.Text})";
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = $@"
+                Insert into ll_value (event_id,value_type_key,dec_value)
+                                   Values({cd},        'dia',{MD.Text})";
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = $@"
+                Insert into ll_value (event_id,value_type_key,dec_value)
+                                   Values({cd},       'pulse','{MP.Text}')";
+            cmd.ExecuteNonQuery();
         }
+
         public override string ToString()
         {
-            return (MS.Text != "" | MP.Text != "" ? "утро " + MS.Text + "/" + MD.Text : "") + (MP.Text != "" ? "П" + MP.Text : "") +
-               (ES.Text != "" | EP.Text != "" ? " вечер " + ES.Text + "/" + ED.Text : "") + (EP.Text != "" ? "П" + EP.Text : "");
-
-        }
-        private void MS_KeyUp(object _, KeyRoutedEventArgs e)
-        {
-            if (e.Key == Windows.System.VirtualKey.Enter) { MD.Focus(FocusState.Programmatic); }
+            return MS.Text + "/" + MD.Text + " " + MPT.Text + ":" + MP.Text;
         }
 
-        private void MD_KeyUp(object _, KeyRoutedEventArgs e)
+        private void MS_OnKeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Enter) { MP.Focus(FocusState.Programmatic); }
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                MD.Focus(FocusState.Programmatic);
+            }
         }
 
-        private void ES_KeyUp(object _, KeyRoutedEventArgs e)
+        private void MD_OnKeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Enter) { ED.Focus(FocusState.Programmatic); }
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                MP.Focus(FocusState.Programmatic);
+            }
         }
 
-        private void ED_KeyUp(object _, KeyRoutedEventArgs e)
+        private void MP_OnKeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Enter) { EP.Focus(FocusState.Programmatic); }
-        }
-
-        private void MP_KeyUp(object _, KeyRoutedEventArgs e)
-        {
-            if (e.Key == Windows.System.VirtualKey.Enter) { Sf(); }
-        }
-
-        private void EP_KeyUp(object _, KeyRoutedEventArgs e)
-        {
-            if (e.Key == Windows.System.VirtualKey.Enter) { Sf(); }
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                Sf();
+            }
         }
     }
 }

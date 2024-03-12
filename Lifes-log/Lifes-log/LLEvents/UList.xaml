@@ -14,14 +14,13 @@
                   Width="400" MaxHeight="500">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:ListBodyField">
-                    <ListViewItem KeyUp="ListViewItem_KeyUp">
+                    <ListViewItem KeyDown="ListViewItem_KeyDown">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{x:Bind Path=Name}" Width="300" VerticalAlignment="Center"/>
-                            <TextBox x:Name="Val"
-                                     Text="{x:Bind Path=Value, Mode=TwoWay}"
-                                     HorizontalAlignment="Right"
-                                     TextAlignment="Right"
-                                     KeyUp="TextBox_KeyUp"/>
+                            <NumberBox Value="{x:Bind Path=Value, Mode=TwoWay}"
+                                       NumberFormatter="{x:Bind Path=dcF, Mode=OneWay}"
+                                       SmallChange="0" LargeChange="0"
+                                       KeyDown="Val_OnKeyDown" />
                         </StackPanel>
                     </ListViewItem>
                 </DataTemplate>

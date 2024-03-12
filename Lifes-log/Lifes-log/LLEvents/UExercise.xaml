@@ -1,4 +1,4 @@
-﻿ <local:EventBody
+﻿<local:EventBody
     x:Class="Lifes_log.LLEvents.UExercise"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,40 +9,14 @@
     d:DesignHeight="300"
     d:DesignWidth="400"
     Grid.Row="1" Grid.ColumnSpan="4" Width="400">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock x:Name="Calories"
-                Grid.Column="0"
-                VerticalAlignment="Center"/>
-        <TextBox x:Name="VCalories"
-                Grid.Column="1"
-                InputScope="Digits"
-                KeyUp="C_KeyUp"/>
-        <TextBlock x:Name="Repeats"
-                Grid.Column="2"
-                VerticalAlignment="Center"/>
-        <TextBox x:Name="VRepeats"
-                Grid.Column="3" Grid.Row="0"
-                InputScope="Digits"
-                KeyUp="D_KeyUp">
-        </TextBox>
+    <StackPanel Orientation="Horizontal">
         <TextBlock x:Name="Time"
-                Grid.Column="4" Grid.Row="0"
-                VerticalAlignment="Center"/>
-        <TextBox x:Name="VTime"
-                Grid.Column="5" Grid.Row="0"
-                InputScope="Digits"
-                KeyUp="T_KeyUp">
-        </TextBox>
-    </Grid>
+                   VerticalAlignment="Center" />
+        <local:IntervalPicker x:Name="VTime"/>
+        <TextBlock x:Name="Calories"
+                   VerticalAlignment="Center" />
+        <NumberBox x:Name="VCalories"
+                 Width="50"
+                 KeyDown="VCalories_OnKeyDown"/>
+    </StackPanel>
 </local:EventBody>

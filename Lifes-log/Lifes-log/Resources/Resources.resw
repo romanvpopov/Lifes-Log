@@ -235,7 +235,7 @@
     <value>Здоровье</value>
   </data>
   <data name="Hour.Text" xml:space="preserve">
-    <value>Ч</value>
+    <value>ч</value>
   </data>
   <data name="Income.Label" xml:space="preserve">
     <value>Доход</value>
@@ -265,7 +265,7 @@
     <value>Управлять</value>
   </data>
   <data name="Minute.Text" xml:space="preserve">
-    <value>М</value>
+    <value>мин</value>
   </data>
   <data name="Mny.Text" xml:space="preserve">
     <value>Деньги</value>
@@ -325,7 +325,7 @@
     <value>Поиск</value>
   </data>
   <data name="Second.Text" xml:space="preserve">
-    <value>С</value>
+    <value>сек</value>
   </data>
   <data name="Settings.Content" xml:space="preserve">
     <value>Настройки</value>

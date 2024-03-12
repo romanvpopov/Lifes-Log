@@ -59,7 +59,7 @@ namespace Lifes_log.LLEvents
                 "Shaving" => new UShaving(cmd, cds),
                 "Training" => new UTraining(cmd, cds, tp),
                 "Exercise" => new UExercise(cmd, cds, tp),
-                "List" => new UList(cmd, cds, tp),
+                "List" => new UList(cmd, cds),
                 _ => bd
             };
             if (bd == null) return;
@@ -85,9 +85,9 @@ namespace Lifes_log.LLEvents
                 cd = rd.GetInt32(0);
                 et.Code = cd;
                 rd.Close();
-                cmd.CommandText =
-                    $"INSERT INTO ll_event (  id,    server_time,    event_time,comment, description, event_type_id)"+
-                                $"values   ({cd}, localtimestamp,'{dt:yyyyMMdd}','{cmt}','{GNote.Text}',      {ntp})";
+                cmd.CommandText =$@"
+                   INSERT INTO ll_event (  id,    server_time,    event_time,        comment,description, event_type_id)
+                                Values   ({cd}, localtimestamp,'{dt:yyyyMMdd}','{GNote.Text}',    '{cmt}',  {ntp})";
                 cmd.ExecuteNonQuery();
             }
             else

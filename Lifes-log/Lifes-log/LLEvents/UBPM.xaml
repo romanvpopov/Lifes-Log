@@ -9,54 +9,18 @@
     d:DesignHeight="300"
     d:DesignWidth="400"
     Grid.Row="1" Grid.ColumnSpan="4" Width="400">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock x:Uid="Morning"
-                   Grid.Column="0" Grid.Row="0"
+    <StackPanel Orientation="Horizontal">
+        <TextBlock x:Name="MST"
                    VerticalAlignment="Center"/>
-        <TextBox   x:Name="MS"
-                   Grid.Column="1" Grid.Row="0"
-                   InputScope="Digits" KeyUp="MS_KeyUp"/>
-        <TextBlock Text="/"
-                   Grid.Column="2" Grid.Row="0"
+        <NumberBox x:Name="MS"
+                   KeyDown="MS_OnKeyDown"/>
+        <TextBlock x:Name="MDT"
                    VerticalAlignment="Center"/>
-        <TextBox   x:Name="MD"
-                   Grid.Column="3" Grid.Row="0"
-                   InputScope="Number" KeyUp="MD_KeyUp"/>
-        <TextBlock x:Uid="Pulse"
-                   Grid.Column="4" Grid.Row="0" 
+        <NumberBox x:Name="MD"
+                   KeyDown="MD_OnKeyDown"/>
+        <TextBlock x:Name="MPT"
                    VerticalAlignment="Center" />
-        <TextBox   x:Name="MP"
-                   Grid.Column="5" Grid.Row="0"
-                   InputScope="Number" KeyUp="MP_KeyUp"/>
-        <TextBlock x:Uid="Evening"
-                   Grid.Column="0" Grid.Row="1"
-                   VerticalAlignment="Center"/>
-        <TextBox   x:Name="ES"
-                   Grid.Column="1" Grid.Row="1"
-                   InputScope="Digits" KeyUp="ES_KeyUp"/>
-        <TextBlock Text="/"
-                   Grid.Column="2" Grid.Row="1"
-                   VerticalAlignment="Center"/>
-        <TextBox   x:Name="ED"
-                   Grid.Column="3" Grid.Row="1"
-                   InputScope="Number" KeyUp="ED_KeyUp"/>
-        <TextBlock x:Uid="Pulse"
-                   Grid.Column="4" Grid.Row="1"
-                   VerticalAlignment="Center" />
-        <TextBox   x:Name="EP"
-                   Grid.Column="5" Grid.Row="1"
-                   InputScope="Number" KeyUp="EP_KeyUp"/>
-    </Grid>
+        <NumberBox x:Name="MP"
+                   KeyDown="MP_OnKeyDown"/>
+    </StackPanel>
 </local:EventBody>

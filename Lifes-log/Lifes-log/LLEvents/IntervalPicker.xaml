@@ -5,40 +5,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock x:Uid="Hour"
-                   Grid.Column="0"
-                   VerticalAlignment="Center"/>
-        <NumberBox x:Name="VHour"
-                   Grid.Column="1"
+    mc:Ignorable="d"
+    Grid.Row="0" Grid.Column="5">
+    <StackPanel Orientation="Horizontal">
+        <NumberBox x:Name="VHour" Width="30"
                    KeyDown="VHour_KeyDown"/>
-        <TextBlock x:Uid="Minute"
-                   Grid.Column="2"
+        <TextBlock x:Name="THour" x:Uid="Hour"
                    VerticalAlignment="Center"/>
-        <NumberBox x:Name="VMinute"
-                   KeyDown="VMinute_KeyDown"
-                   Grid.Column="3"
-                   Grid.Row="0"/>
-        <TextBlock x:Uid="Second"
-                   Grid.Column="4"
-                   Grid.Row="0"
+        <NumberBox x:Name="VMinute" Width="30"
+                   KeyDown="VMinute_KeyDown"/>
+        <TextBlock x:Name="TMinute" x:Uid="Minute"
                    VerticalAlignment="Center"/>
-        <NumberBox x:Name="VSecond" 
-                    KeyDown="VSecond_KeyDown"
-                    Grid.Column="5"
-                    Grid.Row="0"/>
+        <NumberBox x:Name="VSecond"  Width="30"
+                    KeyDown="VSecond_KeyDown"/>
+        <TextBlock x:Name="TSecond" x:Uid="Second"
+                   VerticalAlignment="Center"/>
 
-    </Grid>
+    </StackPanel>
 </UserControl>

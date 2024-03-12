@@ -9,38 +9,18 @@
     d:DesignHeight="300"
     d:DesignWidth="400"
     Grid.Row="1" Grid.ColumnSpan="4" Width="400">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+    <StackPanel Orientation="Horizontal">
+        <TextBlock x:Name="Distanсe"
+                   VerticalAlignment="Center"/>
+        <NumberBox x:Name="VDistance"  Width="50"
+                   KeyDown="VDistance_KeyDown"/>
+        <TextBlock x:Name="Time"
+                   VerticalAlignment="Center"/>
+        <local:IntervalPicker x:Name="VTime"/>
         <TextBlock x:Name="Calories"
-                   Grid.Column="0"
                    VerticalAlignment="Center"/>
         <NumberBox x:Name="VCalories"
-                   Grid.Column="1"
+                   Width="50"
                    KeyDown="VCalories_KeyDown"/>
-        <TextBlock x:Name="Distanсe"
-                   Grid.Column="2"
-                   VerticalAlignment="Center"/>
-        <NumberBox x:Name="VDistance"
-                   KeyDown="VDistance_KeyDown"
-                   Grid.Column="3"
-                   Grid.Row="0"/>
-        <TextBlock x:Name="Time"
-                   Grid.Column="4"
-                   Grid.Row="0"
-                   VerticalAlignment="Center"/>
-        <TimePicker x:Name="VTime" 
-                    KeyDown="VTime_KeyDown"
-                    Grid.Column="5"
-                    Grid.Row="0"/>
-    </Grid>
+    </StackPanel>
 </local:EventBody>
