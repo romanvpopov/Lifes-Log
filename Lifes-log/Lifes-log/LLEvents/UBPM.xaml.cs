@@ -3,6 +3,7 @@ using Windows.Globalization.NumberFormatting;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Npgsql;
+using Microsoft.UI.Xaml.Controls;
 
 namespace Lifes_log.LLEvents
 {
@@ -22,36 +23,31 @@ namespace Lifes_log.LLEvents
                 Select lt.key, lt.{lang}_name,0 as dec_value
                 From ll_value_type lt
                 Where lt.key in ('sys','dia','pulse')";
+            var decF = new DecimalFormatter {
+                IntegerDigits = 1, FractionDigits = 0,
+                NumberRounder = new IncrementNumberRounder { Increment = 1 }
+            };
             var rd = cmd.ExecuteReader();
             while (rd.Read())
             {
                 switch (rd.GetString(0))
                 {
                     case "sys":
-                        MST.Text = rd.GetString(1);
+                        MS.Header = rd.GetString(1);
                         MS.Value = (double)rd.GetDecimal(2);
-                        MS.NumberFormatter = new DecimalFormatter
-                        {
-                            IntegerDigits = 1, FractionDigits = 0
-                        };
+                        MS.NumberFormatter = decF;
                         MS.Maximum = 300;
                         break;
                     case "dia":
-                        MDT.Text = rd.GetString(1);
+                        MD.Header = rd.GetString(1);
                         MD.Value = (double)rd.GetDecimal(2);
-                        MD.NumberFormatter = new DecimalFormatter
-                        {
-                            IntegerDigits = 1, FractionDigits = 0,
-                        };
+                        MD.NumberFormatter = decF;
                         MD.Maximum = 300;
                         break;
                     case "pulse":
-                        MPT.Text = rd.GetString(1);
+                        MP.Header = rd.GetString(1);
                         MP.Value = (double)rd.GetDecimal(2);
-                        MP.NumberFormatter = new DecimalFormatter
-                        {
-                            IntegerDigits = 1, FractionDigits = 0,
-                        };
+                        MP.NumberFormatter = decF;
                         MP.Maximum = 300;
                         break;
                 }
@@ -81,7 +77,7 @@ namespace Lifes_log.LLEvents
 
         public override string ToString()
         {
-            return MS.Text + "/" + MD.Text + " " + MPT.Text + ":" + MP.Text;
+            return MS.Text + "/" + MD.Text + " " + MP.Header + ":" + MP.Text;
         }
 
         private void MS_OnKeyDown(object sender, KeyRoutedEventArgs e)
@@ -106,6 +102,11 @@ namespace Lifes_log.LLEvents
             {
                 Sf();
             }
+        }
+
+        private void V_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
+        {
+            if (double.IsNaN(args.NewValue)) { sender.Value = 0; }
         }
     }
 }

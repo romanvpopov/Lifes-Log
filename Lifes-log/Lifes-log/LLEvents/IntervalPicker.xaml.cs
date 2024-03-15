@@ -19,26 +19,21 @@ namespace Lifes_log.LLEvents
                 VMinute.Value = value.Minutes;
                 VSecond.Value = value.Seconds;
             }
-            get => TimeSpan.Parse(VHour.Text + ":" + VMinute.Text + ":" + VSecond.Text);
+            get => TimeSpan.Parse(VHour.Value + ":" + VMinute.Value + ":" + VSecond.Value);
         }
 
         public IntervalPicker()
         {
-            this.InitializeComponent();
-            VHour.NumberFormatter = new DecimalFormatter
-            {
-                IntegerDigits = 1, FractionDigits = 0
+            InitializeComponent();
+            var decF = new DecimalFormatter { 
+                IntegerDigits = 1, FractionDigits = 0,
+                NumberRounder = new IncrementNumberRounder { Increment = 1 }
             };
+            VHour.NumberFormatter = decF;
             VHour.Maximum = 99;
-            VMinute.NumberFormatter = new DecimalFormatter
-            {
-                IntegerDigits = 1, FractionDigits = 0
-            };
+            VMinute.NumberFormatter = decF;
             VMinute.Maximum = 60;
-            VSecond.NumberFormatter = new DecimalFormatter
-            {
-                IntegerDigits = 1, FractionDigits = 0
-            };
+            VSecond.NumberFormatter = decF;
             VSecond.Maximum = 60;
         }
 
@@ -76,6 +71,11 @@ namespace Lifes_log.LLEvents
             {
                 Sf?.Invoke();
             }
+        }
+
+        private void V_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
+        {
+            if (double.IsNaN(args.NewValue)) { sender.Value = 0; }
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Lifes_log
     public sealed partial class LlEvent
     {
 
-        private readonly DayList ds;
+        private readonly DayL ds;
         private readonly EventFilter ef;
         private readonly NewEventList ne;
         private readonly MoveTo mt;
@@ -15,7 +15,7 @@ namespace Lifes_log
         {
             InitializeComponent();
             NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
-            ds = new DayList(DateTime.Today);
+            ds = new (new DayList(DateTime.Today));
             ef = new EventFilter { Apply = ApplyFilter, Reset = ResetFilter };
             mt = new MoveTo { Move = Move };
             ne = new NewEventList
@@ -49,28 +49,27 @@ namespace Lifes_log
 
         private void Move(string ss)
         {
-            ds.Clear();
-            ds.HasMoreItems = true;
+            ds.RefreshAsync();
             if (ss == "Today")
             {
-                ds.dt = DateTime.Today;
+                ds.Dt = DateTime.Today;
                 ne.DatePic = DateTime.Today;
             }
             else
-                ds.dt = new DateTime(Int32.Parse(ss), 12, 31);
+                ds.Dt = new DateTime(Int32.Parse(ss), 12, 31);
             HidePane();
         }
 
         private void ApplyFilter(String tpd)
         {
-            ds.etps = tpd;
+            ds.Etps = tpd;
             foreach (object d in El.Items)
                 if (d.GetType().Name == "Day") (d as Day).ApllyFilter(tpd);
         }
 
         private void ResetFilter()
         {
-            ds.etps = "0";
+            ds.Etps = "0";
             foreach (var d in El.Items) if (d.GetType().Name == "Day") (d as Day)?.ResetFilter();
         }
 

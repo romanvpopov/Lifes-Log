@@ -9,15 +9,18 @@
     Grid.Row="0" Grid.Column="5">
     <StackPanel Orientation="Horizontal">
         <NumberBox x:Name="VHour" Width="30"
+                   ValueChanged="V_ValueChanged"
                    KeyDown="VHour_KeyDown"/>
         <TextBlock x:Name="THour" x:Uid="Hour"
                    VerticalAlignment="Center"/>
         <NumberBox x:Name="VMinute" Width="30"
+                   ValueChanged="V_ValueChanged"
                    KeyDown="VMinute_KeyDown"/>
         <TextBlock x:Name="TMinute" x:Uid="Minute"
                    VerticalAlignment="Center"/>
         <NumberBox x:Name="VSecond"  Width="30"
-                    KeyDown="VSecond_KeyDown"/>
+                   ValueChanged="V_ValueChanged"
+                   KeyDown="VSecond_KeyDown"/>
         <TextBlock x:Name="TSecond" x:Uid="Second"
                    VerticalAlignment="Center"/>
 

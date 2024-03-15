@@ -18,7 +18,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{x:Bind Path=Name}" Width="300" VerticalAlignment="Center"/>
                             <NumberBox Value="{x:Bind Path=Value, Mode=TwoWay}"
-                                       NumberFormatter="{x:Bind Path=dcF, Mode=OneWay}"
+                                       NumberFormatter="{x:Bind Path=dcF}"
                                        SmallChange="0" LargeChange="0"
                                        KeyDown="Val_OnKeyDown" />
                         </StackPanel>

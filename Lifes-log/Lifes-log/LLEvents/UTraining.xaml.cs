@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Npgsql;
 using Windows.Globalization.NumberFormatting;
@@ -24,6 +25,12 @@ namespace Lifes_log.LLEvents
                 From ll_value_type lt
                 Where lt.key in ('cal','dist','time')";
             var rd = cmd.ExecuteReader();
+            var decF = new DecimalFormatter {
+                IntegerDigits = 2,
+                FractionDigits = 0,
+                IsGrouped = true,
+                NumberRounder = new IncrementNumberRounder { Increment = 1 }
+            };
             while (rd.Read())
             {
                 switch (rd.GetString(0))
@@ -31,17 +38,13 @@ namespace Lifes_log.LLEvents
                     case "cal":
                         Calories.Text = rd.GetString(1);
                         VCalories.Value = (double)rd.GetDecimal(2);
-                        VCalories.NumberFormatter = new DecimalFormatter {
-                            IntegerDigits = 1, FractionDigits = 0
-                        };
+                        VCalories.NumberFormatter = decF;
                         calUnit = rd.GetString(4);
                         break;
                     case "dist":
                         Distanсe.Text = rd.GetString(1);
                         VDistance.Value = (double)rd.GetDecimal(2);
-                        VDistance.NumberFormatter = new DecimalFormatter {
-                            IntegerDigits = 1, FractionDigits = 0,
-                        };
+                        VDistance.NumberFormatter = decF;
                         distUnit = rd.GetString(4);
                         break;
                     case "time":
@@ -62,11 +65,11 @@ namespace Lifes_log.LLEvents
         {
             cmd.CommandText =$@"
                 Insert into ll_value (event_id,value_type_key,dec_value)
-                                   Values({cd},         'cal',{VCalories.Text})";
+                                   Values({cd},         'cal',{(double.IsNaN(VCalories.Value) ? 0:VCalories.Value)})";
             cmd.ExecuteNonQuery();
             cmd.CommandText = $@"
                 Insert into ll_value (event_id,value_type_key,dec_value)
-                                   Values({cd},        'dist',{VDistance.Text})";
+                                   Values({cd},        'dist',{(double.IsNaN(VDistance.Value) ? 0 : VDistance.Value)})";
             cmd.ExecuteNonQuery();
             cmd.CommandText = $@"
                 Insert into ll_value (event_id,value_type_key,interval_value)
@@ -76,7 +79,7 @@ namespace Lifes_log.LLEvents
 
         public override string ToString()
         {
-            return (VDistance.Text + " " + distUnit + ", " + VTime + "," + VCalories.Text + " " + calUnit);
+            return VDistance.Text + " " + distUnit + ", " + VTime + "," + VCalories.Value + " " + calUnit;
         }
 
         private void VDistance_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -85,6 +88,11 @@ namespace Lifes_log.LLEvents
             {
                 VTime.Focus(FocusState.Programmatic);
             }
+        }
+
+        private void V_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
+        {
+            if (double.IsNaN(args.NewValue)) { sender.Value = 0; }
         }
 
         private void VCalories_KeyDown(object sender, KeyRoutedEventArgs e)

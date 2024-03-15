@@ -14,7 +14,7 @@ namespace Lifes_log.LLEvents
         {
             InitializeComponent();
             dt = dts;
-            TX.Text = dts.ToString("dddd") + " " + dts.ToString("D");
+            TX.Text = dts.ToString("D");
             if ((dts.DayOfWeek == DayOfWeek.Sunday | dts.DayOfWeek == DayOfWeek.Saturday))
             {
                 BL.Background = new SolidColorBrush(Colors.Red);
@@ -35,7 +35,7 @@ namespace Lifes_log.LLEvents
             var cmd = (App.Current as App).NpDs.CreateCommand(
                    $@"Select l.id,lt.class_name,lt.{lang}_short_name,l.comment,l.description,l.event_type_id
                       From ll_event l join ll_event_type lt on l.event_type_id = lt.id
-                      Where l.event_time='{dts:yyyyMMdd}' Order by l.id");
+                      Where l.event_time='{dts:yyyyMMdd}' Order by l.event_time,l.id");
             var rd = cmd.ExecuteReader();
             while (rd.Read())
             {

@@ -9,6 +9,7 @@ namespace Lifes_log
         public MainWindow()
         {
             this.InitializeComponent();
+       
         }
 
         private void NV_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)

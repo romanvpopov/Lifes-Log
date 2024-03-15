@@ -10,17 +10,11 @@
     d:DesignWidth="400"
     Grid.Row="1" Grid.ColumnSpan="4" Width="400">
     <StackPanel Orientation="Horizontal">
-        <TextBlock x:Name="MST"
-                   VerticalAlignment="Center"/>
-        <NumberBox x:Name="MS"
+        <NumberBox x:Name="MS" ValueChanged="V_ValueChanged"
                    KeyDown="MS_OnKeyDown"/>
-        <TextBlock x:Name="MDT"
-                   VerticalAlignment="Center"/>
-        <NumberBox x:Name="MD"
+        <NumberBox x:Name="MD" ValueChanged="V_ValueChanged"
                    KeyDown="MD_OnKeyDown"/>
-        <TextBlock x:Name="MPT"
-                   VerticalAlignment="Center" />
-        <NumberBox x:Name="MP"
+        <NumberBox x:Name="MP"  ValueChanged="V_ValueChanged"
                    KeyDown="MP_OnKeyDown"/>
     </StackPanel>
 </local:EventBody>

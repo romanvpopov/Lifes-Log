@@ -13,14 +13,15 @@
         <TextBlock x:Name="Distanсe"
                    VerticalAlignment="Center"/>
         <NumberBox x:Name="VDistance"  Width="50"
+                   ValueChanged="V_ValueChanged"
                    KeyDown="VDistance_KeyDown"/>
         <TextBlock x:Name="Time"
                    VerticalAlignment="Center"/>
-        <local:IntervalPicker x:Name="VTime"/>
+        <local:IntervalPicker x:Name="VTime" />
         <TextBlock x:Name="Calories"
                    VerticalAlignment="Center"/>
-        <NumberBox x:Name="VCalories"
-                   Width="50"
+        <NumberBox x:Name="VCalories" Width="50"
+                   ValueChanged="V_ValueChanged"
                    KeyDown="VCalories_KeyDown"/>
     </StackPanel>
 </local:EventBody>

@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Npgsql;
+using Microsoft.UI.Xaml.Controls;
 
 namespace Lifes_log.LLEvents
 {
@@ -32,7 +33,8 @@ namespace Lifes_log.LLEvents
                         Calories.Text = rd.GetString(1);
                         VCalories.Value = (double)rd.GetDecimal(2);
                         VCalories.NumberFormatter = new DecimalFormatter {
-                            IntegerDigits = 2, FractionDigits = 0, SignificantDigits=0
+                            IntegerDigits = 1, FractionDigits = 0,
+                            NumberRounder = new IncrementNumberRounder { Increment = 1 }
                         };
                         calUnit = rd.GetString(4);
                         break;
@@ -73,5 +75,9 @@ namespace Lifes_log.LLEvents
             }
         }
 
+        private void VCalories_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
+        {
+            if (double.IsNaN(args.NewValue)) { sender.Value = 0; }
+        }
     }
 }
