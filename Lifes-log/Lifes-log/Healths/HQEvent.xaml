@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Lifes_log.Healths.HQEvent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lifes_log.Healths"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <RelativePanel
+        Margin="0,4,0,4"
+        CornerRadius="2"
+        Background="{ThemeResource AppBarBackgroundThemeBrush}">
+        <Border x:Name="BL"
+                Width="2" Margin="0,0,4,0" 
+                Background="Blue"
+                BorderBrush="{x:Null}"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignTopWithPanel="True"
+            RelativePanel.AlignBottomWithPanel="True"/>
+        <Border x:Name="SP"
+            RelativePanel.RightOf="BL"
+            RelativePanel.AlignTopWithPanel="True">
+            <TextBlock x:Name="TX"/>
+        </Border>
+        <StackPanel x:Name="HD"
+            Margin="2" Width="200" 
+            Orientation="Vertical"
+            RelativePanel.Below="SP">
+        </StackPanel>
+        <ListView x:Name="DS"
+                  RelativePanel.RightOf="HD"
+                  RelativePanel.AlignTopWithPanel="True"
+                  RelativePanel.AlignBottomWithPanel="True"
+                  ScrollViewer.HorizontalScrollMode="Enabled" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                  ScrollViewer.VerticalScrollMode="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+    </RelativePanel>
+</UserControl>
