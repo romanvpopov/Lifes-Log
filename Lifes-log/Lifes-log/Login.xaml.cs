@@ -25,10 +25,10 @@ namespace Lifes_log
             constr = $"Host={sets.Server}; Database={sets.Database};" +
                         $" Username={sets.User}; Password = {sets.Password}";
             var dataSourceBuilder = new NpgsqlDataSourceBuilder(constr);
-            (App.Current as App).NpDs = dataSourceBuilder.Build();
+            App.NpDs = dataSourceBuilder.Build();
             try
             {
-                (App.Current as App).NpDs.OpenConnection();
+                App.NpDs.OpenConnection();
                 mp.CreateNav();
             }
             catch (Exception ex)

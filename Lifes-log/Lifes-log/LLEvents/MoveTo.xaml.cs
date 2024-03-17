@@ -11,12 +11,15 @@ namespace Lifes_log.LLEvents
         public MoveTo()
         {
             this.InitializeComponent();
-            var cmd = (App.Current as App).NpDs.CreateCommand(
-             $@"Select Distinct date_part('year', event_time)::varchar as dy From ll_event order by dy");
+            var cmd = App.NpDs.CreateCommand($@"
+                Select date_part('year', event_time)::varchar as dy,count(id) as ids
+                From ll_event
+                Group by date_part('year', event_time)
+                Order by dy");
             var rd = cmd.ExecuteReader();
             while (rd.Read())
             {
-                bt = new Button() { Content = rd.GetString(0), Name = rd.GetString(0) };
+                bt = new Button() { Content = rd.GetString(0)+" ("+rd.GetInt32(1).ToString()+")", Name = rd.GetString(0) };
                 bt.Click += Year_Click;
                 YS.Children.Add(bt);
             }

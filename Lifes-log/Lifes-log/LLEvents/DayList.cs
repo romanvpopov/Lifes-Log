@@ -8,8 +8,8 @@ namespace Lifes_log.LLEvents
 {
     public class DayL : IncrementalLoadingCollection<DayList, Day>
     {
-        public DateTime Dt { set { dls.dt = value.AddDays(1); } }
-        public string Etps { set { dls.etps = value; } }
+        public DateTime Dt { set => dls.dt = value.AddDays(1); }
+        public string Etps { set => dls.etps = value; }
         private readonly DayList dls;
 
         public DayL(DayList source) : base(source)

@@ -8,10 +8,10 @@ namespace Lifes_log.Healths
 {
     public sealed partial class HQDay : UserControl
     {
-        private String cmt;
-        public HQDay(Int32 cd, DateTime dt, String etp, Int32 cdf, String Cmt)
+        private readonly string cmt;
+        public HQDay(int cd, DateTime dt, string etp, int cdf, string Cmt)
         {
-            this.InitializeComponent();
+            InitializeComponent();
             DT.Text = dt.ToString("d");
             cmt = Cmt;
             if (cmt != "")
@@ -19,7 +19,7 @@ namespace Lifes_log.Healths
                 DT.Foreground = new SolidColorBrush { Color = Colors.Blue };
                 ToolTipService.SetToolTip(DT, new ToolTip { Content = cmt });
             }
-            var cmd = (App.Current as App).NpDs.CreateCommand($@"
+            var cmd = App.NpDs.CreateCommand($@"
                     Select Distinct le.Code,isNull(lv.FieldValue,'')
                     From LLFieldEvent le join LLUnit lu on le.UnitCode = lu.Code 
                     join LLEvent l on l.EventTypeCode = le.EventTypeCode
@@ -42,4 +42,5 @@ namespace Lifes_log.Healths
             (sender as Border).BorderBrush = (SolidColorBrush)Resources["ButtonBorderThemeBrush"];
         }
     }
+
 }

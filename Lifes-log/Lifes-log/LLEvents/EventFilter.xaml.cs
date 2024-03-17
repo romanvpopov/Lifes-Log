@@ -8,24 +8,23 @@ namespace Lifes_log.LLEvents
     {
         public Action<string> Apply;
         public Action Reset;
-        private readonly string lang = ((App)App.Current).lang;
         private string tps;
 
         public EventFilter()
         {
             InitializeComponent();
             BTRS.Visibility = Visibility.Visible;
-            var cmd = ((App)App.Current).NpDs.CreateCommand(
-            $@"Select lt.id,lt.{lang}_name as nm,lt.class_name,lt.hsm
+            var cmd = App.NpDs.CreateCommand(
+            $@"Select lt.id,lt.{App.lang}_name as nm,lt.class_name,lt.hsm
                From ll_event_type lt Where lt.priority>0
-               Order by lt.priority,lt.{lang}_name");
+               Order by lt.priority,lt.{App.lang}_name");
             var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 var bt = new CheckBox
                 {
-                    Content = reader["id"],
-                    Tag = reader["nm"]
+                    Content = reader["nm"],
+                    Tag = reader["id"]
                 };
                 switch (reader["hsm"])
                 {

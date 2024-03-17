@@ -5,7 +5,6 @@ namespace Lifes_log.LLEvents
 {
     public sealed partial class NewEventBody
     {
-        private readonly string lang = (App.Current as App).lang;
         private readonly NewEvent ne;
         private readonly Day pd;
         private readonly Button bt;
@@ -14,10 +13,10 @@ namespace Lifes_log.LLEvents
         {
             this.InitializeComponent();
             this.ne = ne; this.pd = pd;
-            var cmd = (App.Current as App).NpDs.CreateCommand(
-            $@"Select lt.id,lt.{lang}_short_name,lt.class_name,lt.hsm,lt.{lang}_Name
+            var cmd = App.NpDs.CreateCommand(
+            $@"Select lt.id,lt.{App.lang}_short_name,lt.class_name,lt.hsm,lt.{App.lang}_Name
                From ll_event_type lt Where lt.class_name<>'' and lt.priority>0
-               Order by lt.priority,lt.{lang}_short_name");
+               Order by lt.priority,lt.{App.lang}_short_name");
             var reader = cmd.ExecuteReader();
             while (reader.Read())
             {

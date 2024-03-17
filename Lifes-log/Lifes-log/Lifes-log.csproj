@@ -40,6 +40,10 @@
 
 	<ItemGroup>
 		<None Remove="Health.xaml" />
+		<None Remove="Healths\HQDay.xaml" />
+		<None Remove="Healths\HQEvent.xaml" />
+		<None Remove="Healths\HQHead.xaml" />
+		<None Remove="Healths\HQValue.xaml" />
 		<None Remove="LLEvent.xaml" />
 		<None Remove="LLEvents\Day.xaml" />
 		<None Remove="LLEvents\Event.xaml" />
@@ -59,6 +63,24 @@
 		<None Remove="Sport.xaml" />
 		<None Remove="styles.xaml" />
 		<None Remove="Properties\appsettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Healths\HQEvent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Healths\HQHead.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Healths\HQValue.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -210,5 +232,11 @@
 		<Page Update="LLEvents\Day.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</Page>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Healths\HQDay.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 </Project>

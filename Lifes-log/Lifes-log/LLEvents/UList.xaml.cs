@@ -10,7 +10,6 @@ namespace Lifes_log.LLEvents
 {
     public sealed partial class UList
     {
-        private readonly string lang = (App.Current as App).lang;
         private readonly ObservableCollection<ListBodyField> lists = new();
         private readonly DecimalFormatter decF = new() {
             IntegerDigits = 1, FractionDigits = 2,
@@ -21,7 +20,7 @@ namespace Lifes_log.LLEvents
         {
             InitializeComponent();
             cmd.CommandText = $@"
-                Select lt.key,lt.{lang}_name,lt.{lang}_short_name,lv.dec_value
+                Select lt.key,lt.{App.lang}_name,lt.{App.lang}_short_name,lv.dec_value
                 From ll_value_type lt left join ll_value lv on lt.key = lv.value_type_key and lv.event_id={code}
                 Where lt.key like 'bcb%'";
             var rd = cmd.ExecuteReader();

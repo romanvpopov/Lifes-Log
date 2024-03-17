@@ -8,7 +8,6 @@ namespace Lifes_log.LLEvents
 {
     public sealed partial class UTraining
     {
-        private readonly string lang = (App.Current as App)?.lang;
         private readonly string distUnit, calUnit;
 
         public UTraining(NpgsqlCommand cmd, int code, short ntp)
@@ -16,12 +15,12 @@ namespace Lifes_log.LLEvents
             InitializeComponent();
             cmd.CommandText = (code > 0)
                 ? $@"
-                Select lt.key, lt.{lang}_short_name,lv.dec_value,lv.interval_value,lt.{lang}_unit_name
+                Select lt.key, lt.{App.lang}_short_name,lv.dec_value,lv.interval_value,lt.{App.lang}_unit_name
                 From ll_value lv join ll_value_type lt on lv.value_type_key = lt.key
                 Where lv.event_id={code}"
                 : $@"
-                Select lt.key, lt.{lang}_short_name,0 as dec_value,
-                       cast('00:00:00' as interval) as interval_value,lt.{lang}_unit_name
+                Select lt.key, lt.{App.lang}_short_name,0 as dec_value,
+                       cast('00:00:00' as interval) as interval_value,lt.{App.lang}_unit_name
                 From ll_value_type lt
                 Where lt.key in ('cal','dist','time')";
             var rd = cmd.ExecuteReader();

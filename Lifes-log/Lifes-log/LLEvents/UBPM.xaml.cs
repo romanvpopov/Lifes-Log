@@ -9,18 +9,17 @@ namespace Lifes_log.LLEvents
 {
     public sealed partial class UBPM
     {
-        private readonly string lang = (App.Current as App)?.lang;
 
         public UBPM(NpgsqlCommand cmd, int code)
         {
             InitializeComponent();
             cmd.CommandText = (code > 0)
                 ? $@"
-                Select lt.key, lt.{lang}_name,lv.dec_value
+                Select lt.key, lt.{App.lang}_name,lv.dec_value
                 From ll_value lv join ll_value_type lt on lv.value_type_key = lt.key
                 Where lv.event_id={code}"
                 : $@"
-                Select lt.key, lt.{lang}_name,0 as dec_value
+                Select lt.key, lt.{App.lang}_name,0 as dec_value
                 From ll_value_type lt
                 Where lt.key in ('sys','dia','pulse')";
             var decF = new DecimalFormatter {

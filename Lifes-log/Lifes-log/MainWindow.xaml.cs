@@ -8,8 +8,8 @@ namespace Lifes_log
     {
         public MainWindow()
         {
-            this.InitializeComponent();
-       
+            InitializeComponent();
+            Login();
         }
 
         private void NV_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -87,9 +87,5 @@ namespace Lifes_log
             MainFrame.Navigate(typeof(Search), args.QueryText);
         }
 
-        private void Window_Activated(object sender, WindowActivatedEventArgs args)
-        {
-            Login();
-        }
     }
 }

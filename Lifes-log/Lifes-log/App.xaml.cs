@@ -2,16 +2,15 @@
 using Npgsql;
 using System.Globalization;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+//using Microsoft.Extensions.Hosting;
 
 namespace Lifes_log
 {
     public partial class App
     {
-        public string lang;
-        public NpgsqlDataSource NpDs;
-        private HostApplicationBuilder builder = Host.CreateApplicationBuilder();
+        public static string lang;
+        public static NpgsqlDataSource NpDs;
+        //private readonly HostApplicationBuilder builder = Host.CreateApplicationBuilder();
 
         public App()
         {
@@ -19,10 +18,10 @@ namespace Lifes_log
         }
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            builder.Services.AddLocalization(options =>
+            /*builder.Services.AddLocalization(options =>
             {
                 options.ResourcesPath = "Resources";
-            });
+            });*/
             var bld = new ConfigurationBuilder();
             var sets = new Settings();
             bld.AddJsonFile("appsettings.json").Build()
@@ -33,6 +32,7 @@ namespace Lifes_log
                 case 2: CultureInfo.CurrentCulture = new CultureInfo("ru-ru", false); lang = "ru"; break;
                 default: lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName[..2]; break;
             }
+            if (lang != "ru" & lang != "en") lang = "en";
             mWindow = new MainWindow();
             mWindow.Activate();
         }
@@ -40,7 +40,7 @@ namespace Lifes_log
         private Window mWindow;
         private class Settings
         {
-            public int Lang { get; set; }
+            public int Lang { get; }
         }
     }
 }

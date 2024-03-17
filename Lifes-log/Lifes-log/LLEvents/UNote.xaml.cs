@@ -7,7 +7,6 @@ namespace Lifes_log.LLEvents
 {
     public partial class UNote 
     {
-        private readonly string lang = (App.Current as App).lang;
         private int cd;
         private readonly string cname;
         private EventBody bd;
@@ -20,8 +19,8 @@ namespace Lifes_log.LLEvents
             InitializeComponent();
             cd = cds;
             et = ets;
-            var cmd = ((App)App.Current).NpDs.CreateCommand(
-                $@"Select l.comment,lt.{lang}_name as nm,lt.class_name,l.event_type_id
+            var cmd = App.NpDs.CreateCommand(
+                $@"Select l.comment,lt.{App.lang}_name as nm,lt.class_name,l.event_type_id
                 From ll_event l join ll_event_type lt on l.event_type_id = lt.id
                 Where l.id = {cd}");
             var rd = cmd.ExecuteReader();
@@ -40,8 +39,8 @@ namespace Lifes_log.LLEvents
             InitializeComponent();
             cd = 0; dt = et.Dt;
             DelBt.Visibility = Visibility.Collapsed;
-            var cmd = (App.Current as App).NpDs.CreateCommand(
-            $"Select {lang}_name as nm,class_name From ll_event_type Where id = {ntp}");
+            var cmd = App.NpDs.CreateCommand(
+            $"Select {App.lang}_name as nm,class_name From ll_event_type Where id = {ntp}");
             var rd = cmd.ExecuteReader();
             rd.Read();
             TypeNote.Text = rd["nm"].ToString();
@@ -58,7 +57,7 @@ namespace Lifes_log.LLEvents
                 "BPM" => new UBPM(cmd, cds),
                 "Shaving" => new UShaving(cmd, cds),
                 "Training" => new UTraining(cmd, cds, tp),
-                "Exercise" => new UExercise(cmd, cds, tp),
+                "Exercise" => new UExercise(cmd, cds),
                 "List" => new UList(cmd, cds),
                 _ => bd
             };
@@ -79,7 +78,7 @@ namespace Lifes_log.LLEvents
             var cmt = bd == null ? "" : bd.ToString();
             if (cd == 0)
             {
-                var cmd = (App.Current as App).NpDs.CreateCommand(
+                var cmd = App.NpDs.CreateCommand(
                  "Select Max(id)+1 as Code From ll_event");
                 var rd = cmd.ExecuteReader(); rd.Read();
                 cd = rd.GetInt32(0);
@@ -92,7 +91,7 @@ namespace Lifes_log.LLEvents
             }
             else
             {
-                var cmd = (App.Current as App).NpDs.CreateCommand(
+                var cmd = App.NpDs.CreateCommand(
                 $"Update ll_event Set description='{cmt}',comment='{GNote.Text}' Where id={cd}");
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = $"Delete From ll_value Where event_id={cd}";
@@ -100,7 +99,7 @@ namespace Lifes_log.LLEvents
             }
             if (bd != null)
             {
-                var cmd = (App.Current as App).NpDs.CreateCommand("");
+                var cmd = App.NpDs.CreateCommand("");
                 bd.InsertBody(cmd, cd);
             }
             et.Collapse();
@@ -108,7 +107,7 @@ namespace Lifes_log.LLEvents
 
         private void Delete_Click(object _1, RoutedEventArgs _2)
         {
-            var cmd = (App.Current as App).NpDs.CreateCommand(
+            var cmd = App.NpDs.CreateCommand(
             $"Delete From ll_value Where event_id={cd}");
             cmd.ExecuteNonQuery();
             cmd.CommandText = $"Delete From ll_event Where id={cd}";

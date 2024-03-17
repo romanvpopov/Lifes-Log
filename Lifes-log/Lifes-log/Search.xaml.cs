@@ -13,7 +13,7 @@ namespace Lifes_log
         {
             var ss = e.Parameter as string;
             if (ss == "") return;
-            var cmd = (App.Current as App).NpDs.CreateCommand($@"
+            var cmd = App.NpDs.CreateCommand($@"
                    Select event_time From ll_event Where comment like '%{ss}%' or ll_event.description like '%{ss}%' Order by event_time");
                 try
                 {

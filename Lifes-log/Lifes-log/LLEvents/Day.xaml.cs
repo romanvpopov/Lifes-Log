@@ -7,7 +7,6 @@ namespace Lifes_log.LLEvents
 {
     public sealed partial class Day
     {
-        private readonly string lang = (App.Current as App).lang;
         public DateTime dt;
 
         public Day(DateTime dts, string etps)
@@ -32,8 +31,8 @@ namespace Lifes_log.LLEvents
             }
             EDL.Children.Add(new NewEvent(this));
             //var tps = (etps == "0") ? "" : $" and l.EventTypeCode in ({etps})";
-            var cmd = (App.Current as App).NpDs.CreateCommand(
-                   $@"Select l.id,lt.class_name,lt.{lang}_short_name,l.comment,l.description,l.event_type_id
+            var cmd = App.NpDs.CreateCommand(
+                   $@"Select l.id,lt.class_name,lt.{App.lang}_short_name,l.comment,l.description,l.event_type_id
                       From ll_event l join ll_event_type lt on l.event_type_id = lt.id
                       Where l.event_time='{dts:yyyyMMdd}' Order by l.event_time,l.id");
             var rd = cmd.ExecuteReader();

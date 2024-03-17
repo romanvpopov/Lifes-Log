@@ -48,11 +48,11 @@ namespace Lifes_log.Settings
             {
                 case "1":
                     CultureInfo.CurrentCulture = new CultureInfo("en-US", false);
-                    ((App)App.Current).lang = "en";
+                    App.lang = "en";
                     break;
                 case "2":
                     CultureInfo.CurrentCulture = new CultureInfo("ru-ru", false);
-                    ((App)App.Current).lang = "ru";
+                    App.lang = "ru";
                     break;
             }
         }

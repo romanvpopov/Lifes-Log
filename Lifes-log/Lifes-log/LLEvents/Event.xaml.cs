@@ -11,7 +11,6 @@ namespace Lifes_log.LLEvents
         public int Code;
         public DateTime Dt;
         public readonly short tp;
-        private readonly string lang = (App.Current as App)?.lang;
 
         public Event(string st, int eventCode, short eventType)
         {
@@ -55,8 +54,8 @@ namespace Lifes_log.LLEvents
         {
             if (Code > 0)
             {
-                var cmd = (App.Current as App).NpDs.CreateCommand(
-                  $@"Select lt.{lang}_short_name,l.Comment,l.description
+                var cmd = App.NpDs.CreateCommand(
+                  $@"Select lt.{App.lang}_short_name,l.Comment,l.description
                    From ll_event l join ll_event_type lt on l.event_type_id = lt.id Where l.id={Code}");
                 var rd = cmd.ExecuteReader();
                 rd.Read();
