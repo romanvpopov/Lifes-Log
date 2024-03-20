@@ -10,7 +10,7 @@ namespace Lifes_log.LLEvents
 {
     public sealed partial class UList
     {
-        private readonly ObservableCollection<ListBodyField> lists = new();
+        private readonly ObservableCollection<ListBodyField> lists = [];
         private readonly DecimalFormatter decF = new() {
             IntegerDigits = 1, FractionDigits = 2,
             NumberRounder = new IncrementNumberRounder { Increment = 0.01 }
@@ -35,6 +35,7 @@ namespace Lifes_log.LLEvents
                     dcF = decF
                 });
             }
+            rd.Close();
             FieldList.ItemsSource = lists;
         }
 

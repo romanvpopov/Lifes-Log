@@ -64,6 +64,7 @@ namespace Lifes_log.LLEvents
                     Text = (rd.GetString(0) != "" ? rd.GetString(0) + ": " : "") + rd.GetString(1) + " " + rd.GetString(2),
                     TextWrapping = TextWrapping.Wrap
                 };
+                rd.Close();
             }
             else Visibility = Visibility.Collapsed;
             exp = false;

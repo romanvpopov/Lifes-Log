@@ -12,15 +12,16 @@ namespace Lifes_log.DBSettings
                 case "S": Fi.Glyph = "\xE805"; Tx.Text = "Sport"; break;
                 case "H": Fi.Glyph = "\xE95E"; Tx.Text = "Health"; break;
             }
-            var cmd = App.NpDs.CreateCommand(
-              $@"Select lt.Code,lt.{App.lang}_Name,lt.ClassName,lt.HSM
-                 From LLEventType lt Where lt.ClassName<>'' and lt.HSM='{et}'
-                Order by lt.Turn,lt.{App.lang}_Name");
+            var cmd = App.NpDs.CreateCommand($@"
+                Select lt.id,lt.{App.lang}_Name,lt.class_name,lt.HSM
+                From ll_event_type lt Where lt.class_name<>'' and lt.HSM='{et}'
+                Order by lt.priority,lt.{App.lang}_name");
             var rd = cmd.ExecuteReader();
             while (rd.Read())
             {
                 Lv.Items.Add(new ListViewItem { Content = rd.GetString(1), CanDrag = true, AllowDrop = true });
             }
+            rd.Close();
         }
     }
 }

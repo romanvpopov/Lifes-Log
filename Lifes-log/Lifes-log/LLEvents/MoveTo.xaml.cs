@@ -23,6 +23,7 @@ namespace Lifes_log.LLEvents
                 bt.Click += Year_Click;
                 YS.Children.Add(bt);
             }
+            rd.Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

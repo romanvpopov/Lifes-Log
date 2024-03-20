@@ -1,63 +1,35 @@
-﻿using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.UI.Core;
+using System.Threading;
+using CommunityToolkit.WinUI.Collections;
 
 namespace Lifes_log.Healths
 {
-    public class HQDayList : ObservableCollection<HQDay>//, ISupportIncrementalLoading
+    public class HqDayList(short tps, DateTime dts, string values, string keys)
+        : IIncrementalSource<HqDay>
     {
-        public DateTime dt;
-        private readonly short tp;
-        private readonly int cd;
-        private readonly string etp;
-
-        public HQDayList(Int16 Tp, DateTime Dt, String Etp, Int32 Cd)
+        public async Task<IEnumerable<HqDay>> 
+            GetPagedItemsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken = default)
         {
-            HasMoreItems = true;
-            tp = Tp;
-            etp = Etp;
-            cd = Cd;
-            dt = Dt;
+            List<HqDay> items = [];
+            var cmd = App.NpDs.CreateCommand($@"
+                    Select l.id,l.event_time,l.comment
+                    From ll_event l
+                    Where l.event_type_id = {tps} and l.event_time<='{dts:yyyyMMdd}'
+                    Order by l.event_time Desc
+                    LIMIT {pageSize}");
+            var rd = cmd.ExecuteReader();
+                //while (await rd.ReadAsync(cancellationToken))
+                while (rd.Read())
+                {
+                    items.Add(new HqDay(rd.GetInt16(0), rd.GetDateTime(1),
+                        keys, rd.GetString(2),values));
+                    dts = rd.GetDateTime(1).AddDays(-1);
+                }
+            rd.Close();
+            await Task.Delay(1, cancellationToken);
+            return items;
         }
-
-        public bool HasMoreItems { get; set; }
-
-        /*public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
-        {
-            var dsp = Window.Current.Dispatcher;
-            return Task.Run(
-                async () => {
-                    await dsp.RunAsync(
-                        CoreDispatcherPriority.Normal,
-                        () => {
-                            var cmd = App.NpDs.CreateCommand($@"
-                                    Select Distinct Top {count} l.Code,l.DateEvent,l.Descr
-                                    From LLFieldEvent le join LLUnit lu on le.UnitCode = lu.Code
-                                    join LLEvent l on l.EventTypeCode = le.EventTypeCode
-                                    join LLEventValue lv on lv.EventCode = l.Code and lv.FieldEventCode = le.Code
-                                    Where l.EventTypeCode = {tp} and  l.DateEvent<='{dt:yyyyMMdd}'
-                                    Order by l.DateEvent Desc");
-                                var rd = cmd.ExecuteReader();
-                                if (rd.HasRows)
-                                {
-                                    while (rd.Read())
-                                    {
-                                        Add(new HQDay(rd.GetInt32(0), rd.GetDateTime(1), etp, cd, rd.GetString(2)));
-                                        dt = rd.GetDateTime(1).AddDays(-1);
-                                    }
-                                }
-                                else { HasMoreItems = false; }
-                            }
-                        });
-                    return new LoadMoreItemsResult() { Count = count };
-                }).AsAsyncOperation<LoadMoreItemsResult>();
-        }*/
     }
 }

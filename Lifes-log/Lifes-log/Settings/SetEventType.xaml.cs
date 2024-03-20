@@ -6,7 +6,7 @@ namespace Lifes_log.DBSettings
     {
         public SetEventType()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             U1.Content = new SetShm("");
             U2.Content = new SetShm("S");
             U3.Content = new SetShm("H");

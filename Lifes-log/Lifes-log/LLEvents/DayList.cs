@@ -6,33 +6,15 @@ using CommunityToolkit.WinUI.Collections;
 
 namespace Lifes_log.LLEvents
 {
-    public class DayL : IncrementalLoadingCollection<DayList, Day>
+    public class DayList(DateTime dts) : IIncrementalSource<Day>
     {
-        public DateTime Dt { set => dls.dt = value.AddDays(1); }
-        public string Etps { set => dls.etps = value; }
-        private readonly DayList dls;
+        public DateTime dt = dts.AddDays(1);
+        public string etps = "0";
 
-        public DayL(DayList source) : base(source)
+        public async Task<IEnumerable<Day>> 
+            GetPagedItemsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken = default)
         {
-            dls = source;
-        }
-
-    }
-
-    public class DayList : IIncrementalSource<Day>
-    {
-        public DateTime dt;
-        public string etps;
-
-        public DayList(DateTime dts)
-        {
-            dt = dts.AddDays(1);
-            etps = "0";
-        }
-
-        public async Task<IEnumerable<Day>> GetPagedItemsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken = default)
-        {
-            List<Day> items = new();
+            List<Day> items = [];
 
             for (var i = 1; i <= pageSize; i++)
             {

@@ -1,4 +1,5 @@
 using System;
+using CommunityToolkit.WinUI.Collections;
 using Lifes_log.LLEvents;
 
 namespace Lifes_log
@@ -6,7 +7,8 @@ namespace Lifes_log
     public sealed partial class LlEvent
     {
 
-        private readonly DayL ds;
+        private DayList ds;
+        private IncrementalLoadingCollection<DayList, Day> dls;
         private readonly EventFilter ef;
         private readonly NewEventList ne;
         private readonly MoveTo mt;
@@ -15,7 +17,6 @@ namespace Lifes_log
         {
             InitializeComponent();
             NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
-            ds = new (new DayList(DateTime.Today));
             ef = new EventFilter { Apply = ApplyFilter, Reset = ResetFilter };
             mt = new MoveTo { Move = Move };
             ne = new NewEventList
@@ -30,7 +31,9 @@ namespace Lifes_log
 
         private void EL_Loaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            El.ItemsSource = ds;
+            ds = new (DateTime.Today);
+            dls = new (ds);
+            El.ItemsSource = dls;
         }
 
         private void Add(DateTime dt, Int16 tp)
@@ -49,27 +52,27 @@ namespace Lifes_log
 
         private void Move(string ss)
         {
-            ds.RefreshAsync();
+            dls.RefreshAsync();
             if (ss == "Today")
             {
-                ds.Dt = DateTime.Today;
+                ds.dt = DateTime.Today;
                 ne.DatePic = DateTime.Today;
             }
             else
-                ds.Dt = new DateTime(Int32.Parse(ss), 12, 31);
+                ds.dt = new DateTime(Int32.Parse(ss), 12, 31);
             HidePane();
         }
 
         private void ApplyFilter(String tpd)
         {
-            ds.Etps = tpd;
+            ds.etps = tpd;
             foreach (object d in El.Items)
                 if (d.GetType().Name == "Day") (d as Day).ApllyFilter(tpd);
         }
 
         private void ResetFilter()
         {
-            ds.Etps = "0";
+            ds.etps = "0";
             foreach (var d in El.Items) if (d.GetType().Name == "Day") (d as Day)?.ResetFilter();
         }
 

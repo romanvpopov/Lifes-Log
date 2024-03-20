@@ -5,14 +5,14 @@ using System;
 
 namespace Lifes_log.Healths
 {
-    public sealed partial class HQHead : UserControl
+    public sealed partial class HqHead : UserControl
     {
-        public Action<int> Set;
+        public Action<string> Set;
 
-        public HQHead(int cd, string tx)
+        public HqHead(string key, string tx)
         {
             InitializeComponent();
-            BL.Tag = cd.ToString();
+            BL.Tag = key;
             TX.Text = tx;
         }
 
@@ -26,10 +26,9 @@ namespace Lifes_log.Healths
             ((Border)sender).BorderBrush = (SolidColorBrush)Resources["ButtonBorderThemeBrush"];
         }
 
-        private void BL_Tapped(object sender, TappedRoutedEventArgs e)
+        private void BL_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Set(int.Parse(((Border)sender).Tag.ToString()!));
+            Set(((Border)sender).Tag.ToString());
         }
-
     }
 }

@@ -6,40 +6,40 @@ using System;
 
 namespace Lifes_log.Healths
 {
-    public sealed partial class HQDay : UserControl
+    public sealed partial class HqDay : UserControl
     {
-        private readonly string cmt;
-        public HQDay(int cd, DateTime dt, string etp, int cdf, string Cmt)
+        public HqDay(int cd, DateTime dt, string key, string cmt, string values)
         {
             InitializeComponent();
             DT.Text = dt.ToString("d");
-            cmt = Cmt;
             if (cmt != "")
             {
                 DT.Foreground = new SolidColorBrush { Color = Colors.Blue };
                 ToolTipService.SetToolTip(DT, new ToolTip { Content = cmt });
             }
             var cmd = App.NpDs.CreateCommand($@"
-                    Select Distinct le.Code,isNull(lv.FieldValue,'')
-                    From LLFieldEvent le join LLUnit lu on le.UnitCode = lu.Code 
-                    join LLEvent l on l.EventTypeCode = le.EventTypeCode
-                    left join LLEventValue lv on lv.EventCode = l.Code and lv.FieldEventCode = le.Code
-                    Where l.Code = {cd} and le.Code in ({etp}) Order by le.Code");
+                    Select vt.key,lv.dec_value
+                    From ll_value_type vt left join ll_value lv on
+                        vt.key = lv.value_type_key and lv.event_id ={cd}
+                    Where vt.key in ({values})
+                    Order by vt.{App.lang}_name");
                 var rd = cmd.ExecuteReader();
                 while (rd.Read())
                 {
-                    VS.Children.Add(new HQValue(rd.GetString(1), (rd.GetInt32(0) == cdf)));
+                    VS.Children.Add(new HQValue(rd.IsDBNull(1) ? "" : rd.GetDecimal(1).ToString(),
+                        (rd.GetString(0) == key)));
                 }
-            }
+                rd.Close();
+        }
 
         private void BR_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            (sender as Border).BorderBrush = (SolidColorBrush)Resources["ContentDialogBorderThemeBrush"];
+            ((Border)sender).BorderBrush = (SolidColorBrush)Resources["ContentDialogBorderThemeBrush"];
         }
 
         private void BR_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            (sender as Border).BorderBrush = (SolidColorBrush)Resources["ButtonBorderThemeBrush"];
+            ((Border)sender).BorderBrush = (SolidColorBrush)Resources["ButtonBorderThemeBrush"];
         }
     }
 

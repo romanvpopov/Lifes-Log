@@ -1,42 +1,41 @@
 using Microsoft.UI.Xaml.Controls;
 using System;
+using CommunityToolkit.WinUI.Collections;
 
 namespace Lifes_log.Healths
 {
-    public sealed partial class HQEvent : UserControl
+    public sealed partial class HqEvent : UserControl
     {
-        private string etp;
         private readonly short tp;
+        private readonly string val;
 
-        public HQEvent(short Tp, string HName)
+        public HqEvent(short tps, string hName)
         {
-            this.InitializeComponent();
-            TX.Text = HName;
-            tp = Tp;
-            etp = "0";
-            GetData(tp);
-            DS.ItemsSource = new HQDayList(tp, DateTime.Today, etp, 0);
-        }
-
-        private void SetField(int cd)
-        {
-            DS.ItemsSource = new HQDayList(tp, DateTime.Today, etp, cd);
-        }
-
-        private void GetData(short tps)
-        {
+            InitializeComponent();
+            TX.Text = hName;
+            tp = tps;
+            val="''";
             var cmd = App.NpDs.CreateCommand($@"
-                    Select Distinct le.Code,le.{App.lang}_FieldName
-                    From LLFieldEvent le join LLUnit lu on le.UnitCode = lu.Code
-                    join LLEvent l on l.EventTypeCode = le.EventTypeCode
-                    join LLEventValue lv on lv.EventCode = l.Code and lv.FieldEventCode = le.Code
-                    Where le.EventTypeCode = {tps} Order by le.Code");
+                Select Distinct vt.key,vt.{App.lang}_name
+                From  ll_value_type vt join ll_value lv on vt.key =lv.value_type_key
+                    join ll_event l on lv.event_id=l.id
+                Where l.event_type_id = {tps}
+                Order by vt.{App.lang}_name");
             var rd = cmd.ExecuteReader();
             while (rd.Read())
             {
-                etp = etp + "," + rd.GetInt32(0).ToString();
-                HD.Children.Add(new HQHead(rd.GetInt32(0), rd.GetString(1)) { Set = SetField });
+                HD.Children.Add(new HqHead(rd.GetString(0), rd.GetString(1)) { Set = SetField });
+                val=val+",'"+rd.GetString(0)+"'";
             }
+            rd.Close();
+            DS.ItemsSource = new IncrementalLoadingCollection<HqDayList, HqDay>
+                (new HqDayList(tp, DateTime.Today, val, ""));
         }
+        private void SetField(string key)
+        {
+            DS.ItemsSource = new IncrementalLoadingCollection<HqDayList, HqDay>
+                (new HqDayList(tp, DateTime.Today, val, key));
+        }
+
     }
 }

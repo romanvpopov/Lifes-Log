@@ -1,15 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+		<TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
 		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
 		<RootNamespace>Lifes_log</RootNamespace>
 		<Platforms>x86;x64;ARM64</Platforms>
 		<RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+		<UseRidGraph>true</UseRidGraph>
 		<UseWinUI>true</UseWinUI>
-		<!-- 
-        WindowsPackageType defines whether your app is packaged (MSIX) or unpackaged (None) 
-    -->
 		<WindowsPackageType>None</WindowsPackageType>
 		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 	  <UserSecretsId>2ab7cca3-50b4-4732-ae5e-22c6a3563df7</UserSecretsId>
@@ -19,6 +17,7 @@
 	  <Company>mt-soft.ru</Company>
 	  <PackageProjectUrl>mt-soft.ru/lifes-log</PackageProjectUrl>
 	  <NeutralLanguage>ru</NeutralLanguage>
+	  <PublishAot>False</PublishAot>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -66,13 +65,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Page Update="Healths\HQEvent.xaml">
+	  <Page Update="Healths\HqEvent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Page Update="Healths\HQHead.xaml">
+	  <Page Update="Healths\HqHead.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	</ItemGroup>
@@ -235,7 +234,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Page Update="Healths\HQDay.xaml">
+	  <Page Update="Healths\HqDay.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	</ItemGroup>

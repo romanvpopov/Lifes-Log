@@ -22,16 +22,18 @@ namespace Lifes_log.LLEvents
                   left join ll_value lv on lv.value_type_key=vt.key and lv.event_id = {code}
                 Where lt.id ={ntp}");
             var rd = cmd.ExecuteReader();
-            if (!rd.Read()) return;
-            vkey = rd.GetString(0);
-            Value.Text = rd.GetString(2);
-            Qty.Value = rd.IsDBNull(1) ? double.NaN : (double)rd.GetDecimal(1);
-            Qty.NumberFormatter = new DecimalFormatter
-            {
-                IntegerDigits = 1,
-                FractionDigits = 1,
-                NumberRounder = new IncrementNumberRounder { Increment = 0.1 }
-            }; 
+            if (rd.Read()) {
+                vkey = rd.GetString(0);
+                Value.Text = rd.GetString(2);
+                Qty.Value = rd.IsDBNull(1) ? double.NaN : (double)rd.GetDecimal(1);
+                Qty.NumberFormatter = new DecimalFormatter
+                {
+                    IntegerDigits = 1,
+                    FractionDigits = 1,
+                    NumberRounder = new IncrementNumberRounder { Increment = 0.1 }
+                };
+            }
+            rd.Close();
         }
 
         public override void InsertBody(NpgsqlCommand cmd, Int32 cd)

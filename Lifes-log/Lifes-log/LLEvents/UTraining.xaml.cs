@@ -53,6 +53,7 @@ namespace Lifes_log.LLEvents
                         break;
                 }
             }
+            rd.Close();
         }
 
         public override void GetFocus()
