@@ -22,19 +22,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.0.240109" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.3" />
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000" />
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26031-preview" />
 		<PackageReference Include="Npgsql" Version="8.0.2" />
 		<Manifest Include="$(ApplicationManifest)" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="appsettings.json">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
 	</ItemGroup>
 
 	<ItemGroup>

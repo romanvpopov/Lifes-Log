@@ -2,27 +2,23 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System.Globalization;
-using Microsoft.Extensions.Configuration;
-using System.IO;
+using Microsoft.Win32;
 
 namespace Lifes_log.Settings
 {
     public sealed partial class SetDb
     {
         private MainWindow mp;
-        private readonly Settings sets = new();
-        private readonly ConfigurationBuilder bld = new();
 
         public SetDb()
         {
             InitializeComponent();
-            bld.AddJsonFile("appsettings.json").Build()
-                .GetSection("Settings").Bind(sets);
-            DataSource.Text = sets?.Server;
-            InitialCatalog.Text = sets?.Database;
-            Login.Text = sets?.User;
-            Password.Password = sets?.Password;
-            LLang.SelectedIndex = (int)(sets?.Lang);
+            DataSource.Text = (string) Registry.GetValue(App.RegRoot + "Settings", "Server", "localhost") ?? "localhost";
+            InitialCatalog.Text = (string) Registry.GetValue(App.RegRoot + "Settings", "Database", "ll") ?? "ll"; 
+            Login.Text = (string) Registry.GetValue(App.RegRoot + "Settings", "User", "postgres") ?? "postgres";
+            Password.Password = (string) Registry.GetValue(App.RegRoot + "Settings", "Password", "") ?? "";
+            if (int.TryParse((string) Registry.GetValue(App.RegRoot + "Settings", "Lang","")?? "0", out var b))
+                LLang.SelectedIndex = b; 
             CurLang.Text = CultureInfo.CurrentCulture.Name+" - "+CultureInfo.CurrentCulture.DisplayName;
         }
 
@@ -33,10 +29,10 @@ namespace Lifes_log.Settings
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            using StreamWriter writer = new("appsettings.json", false);
-            writer.WriteLine(
-              $"{{\"Settings\": {{ \"Lang\": \"{(LLang.SelectedItem as ComboBoxItem).Tag}\",\"Server\": \"{DataSource.Text}\","+
-              $"\"Database\": \"{InitialCatalog.Text}\",\"User\": \"{Login.Text}\",\"Password\": \"{Password.Password}\"}}}}");
+            Registry.SetValue(App.RegRoot + "Settings", "Server", DataSource.Text);
+            Registry.SetValue(App.RegRoot + "Settings", "Database", InitialCatalog.Text);
+            Registry.SetValue(App.RegRoot + "Settings", "User", Login.Text);
+            Registry.SetValue(App.RegRoot + "Settings", "Password", Password.Password);
             mp.Login();
         }
 
@@ -55,15 +51,7 @@ namespace Lifes_log.Settings
                     App.lang = "ru";
                     break;
             }
-        }
-
-        private class Settings
-        {
-            public int Lang { get; set; }
-            public string Server { get; set; }
-            public string Database { get; set; }
-            public string User { get; set; }
-            public string Password { get; set; }
+            Registry.SetValue(App.RegRoot + "Settings", "Lang", ss);
         }
 
     }

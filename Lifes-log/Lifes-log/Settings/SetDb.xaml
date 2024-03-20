@@ -46,12 +46,12 @@
                     <TextBox x:Name="Login"/>
                     <TextBlock x:Uid="Password"/>
                     <PasswordBox x:Name="Password"/>
+                    <Button x:Name="BTApply"
+                            x:Uid="BTApply"
+                            Click="Button_Click"
+                            Width="260" Margin="5"/>
                 </StackPanel>
             </Expander.Content>
         </Expander>
-        <Button x:Name="BTApply"
-                x:Uid="BTApply"
-                Click="Button_Click"
-                Width="260" Margin="5"/>
     </StackPanel>
 </Page>

@@ -2,7 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using Npgsql;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Win32;
 
 namespace Lifes_log
 {
@@ -18,12 +18,11 @@ namespace Lifes_log
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            var bld = new ConfigurationBuilder();
-            var sets = new Settings();
-            bld.AddJsonFile("appsettings.json").Build()
-                .GetSection("Settings").Bind(sets);
-            constr = $"Host={sets.Server}; Database={sets.Database};" +
-                        $" Username={sets.User}; Password = {sets.Password}";
+            constr = $@"
+              Host={(string)Registry.GetValue(App.RegRoot + "Settings", "Server", "localhost") ?? "localhost"};
+              Database={(string)Registry.GetValue(App.RegRoot + "Settings", "Database", "ll") ?? "ll"};
+              Username={(string)Registry.GetValue(App.RegRoot + "Settings", "User", "postgres") ?? "postgres"};
+              Password = {(string)Registry.GetValue(App.RegRoot + "Settings", "Password", "") ?? ""}";
             var dataSourceBuilder = new NpgsqlDataSourceBuilder(constr);
             App.NpDs = dataSourceBuilder.Build();
             try
@@ -41,13 +40,6 @@ namespace Lifes_log
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter != null) mp = (MainWindow)e.Parameter;
-        }
-        private class Settings
-        {
-            public string Server { get; set; }
-            public string Database { get; set; }
-            public string User { get; set; }
-            public string Password { get; set; }
         }
     }
 }

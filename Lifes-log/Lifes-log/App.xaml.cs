@@ -1,8 +1,7 @@
 ﻿using Microsoft.UI.Xaml;
 using Npgsql;
 using System.Globalization;
-using Microsoft.Extensions.Configuration;
-//using Microsoft.Extensions.Hosting;
+using Microsoft.Win32;
 
 namespace Lifes_log
 {
@@ -10,27 +9,22 @@ namespace Lifes_log
     {
         public static string lang;
         public static NpgsqlDataSource NpDs;
-        //private readonly HostApplicationBuilder builder = Host.CreateApplicationBuilder();
+        public static readonly string RegRoot = "HKEY_CURRENT_USER\\Software\\mt-soft.ru\\lifes-log\\";
 
         public App()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            /*builder.Services.AddLocalization(options =>
+            if (int.TryParse((string)Registry.GetValue(App.RegRoot + "Settings", "Lang", "") ?? "0", out var b))
             {
-                options.ResourcesPath = "Resources";
-            });*/
-            var bld = new ConfigurationBuilder();
-            var sets = new Settings();
-            bld.AddJsonFile("appsettings.json").Build()
-                .GetSection("Settings").Bind(sets);
-            switch (sets.Lang)
-            {
-                case 1: CultureInfo.CurrentCulture = new CultureInfo("en-US", false); lang = "en"; break;
-                case 2: CultureInfo.CurrentCulture = new CultureInfo("ru-ru", false); lang = "ru"; break;
-                default: lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName[..2]; break;
+                switch (b)
+                {
+                    case 1: CultureInfo.CurrentCulture = new CultureInfo("en-US", false); lang = "en"; break;
+                    case 2: CultureInfo.CurrentCulture = new CultureInfo("ru-ru", false); lang = "ru"; break;
+                    default: lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName[..2]; break;
+                }
             }
             if (lang != "ru" & lang != "en") lang = "en";
             mWindow = new MainWindow();
@@ -38,9 +32,5 @@ namespace Lifes_log
         }
 
         private Window mWindow;
-        private class Settings
-        {
-            public int Lang { get; }
-        }
     }
 }

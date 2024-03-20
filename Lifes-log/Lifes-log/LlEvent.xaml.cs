@@ -1,6 +1,7 @@
 using System;
 using CommunityToolkit.WinUI.Collections;
 using Lifes_log.LLEvents;
+using Microsoft.Win32;
 
 namespace Lifes_log
 {
@@ -24,8 +25,8 @@ namespace Lifes_log
                 Add = Add,
                 Manage = () => { Frame.Navigate(typeof(DBSettings.SetEventType)); }
             };
-            //if (ls.Values.TryGetValue("FixPane", out var value))
-            FixPane.IsOn = true; // (bool)value;
+            if (bool.TryParse((string) Registry.GetValue(App.RegRoot + "LLEvents", "FixPane", "")?? "False", out var b))
+                FixPane.IsOn = b;
             RPane.Content = ne;
         }
 
@@ -83,7 +84,7 @@ namespace Lifes_log
 
         private void FixPane_Toggled(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            //ls.Values["FixPane"] = FixPane.IsOn;
+            Registry.SetValue(App.RegRoot+"LLEvents", "FixPane", FixPane.IsOn);
         }
 
         private void BTMove_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
