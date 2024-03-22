@@ -21,14 +21,13 @@ namespace Lifes_log.Healths
                     LIMIT {pageSize}");
             var rd = cmd.ExecuteReader();
                 //while (await rd.ReadAsync(cancellationToken))
-                while (rd.Read())
+                while (await rd.ReadAsync(cancellationToken))
                 {
                     items.Add(new HqDay(rd.GetInt16(0), rd.GetDateTime(1),
                         keys, rd.GetString(2),values));
                     dts = rd.GetDateTime(1).AddDays(-1);
                 }
-            rd.Close();
-            await Task.Delay(1, cancellationToken);
+            await rd.CloseAsync();
             return items;
         }
     }

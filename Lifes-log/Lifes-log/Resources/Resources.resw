@@ -132,7 +132,7 @@
   <data name="BTApply.Content" xml:space="preserve">
     <value>Применить</value>
   </data>
-  <data name="BTCancel.Content" xml:space="preserve">
+  <data name="BTCancel" xml:space="preserve">
     <value>Отменить</value>
   </data>
   <data name="BTClose.Content" xml:space="preserve">
@@ -141,13 +141,13 @@
   <data name="BTDay.Content" xml:space="preserve">
     <value>День</value>
   </data>
-  <data name="BTDel.Content" xml:space="preserve">
+  <data name="BTDel" xml:space="preserve">
     <value>Удалить</value>
   </data>
   <data name="BTEvening.Content" xml:space="preserve">
     <value>вечер</value>
   </data>
-  <data name="BTLog.Content" xml:space="preserve">
+  <data name="BTLog" xml:space="preserve">
     <value>Записать</value>
   </data>
   <data name="BTMorning.Content" xml:space="preserve">
@@ -180,7 +180,7 @@
   <data name="DBServer.Text" xml:space="preserve">
     <value>Сервер</value>
   </data>
-  <data name="DelConfirm.Text" xml:space="preserve">
+  <data name="DelConfirm" xml:space="preserve">
     <value>Событие будет удалено. Подтвердите</value>
   </data>
   <data name="DispLang.Text" xml:space="preserve">

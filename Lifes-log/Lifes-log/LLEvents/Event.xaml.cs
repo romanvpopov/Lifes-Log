@@ -24,7 +24,7 @@ namespace Lifes_log.LLEvents
             }
             else
             {
-                Body.Content = new UNote(tp, this);
+                Body.Content = new UEvent(tp, this);
                 exp = true;
             }
         }
@@ -35,7 +35,7 @@ namespace Lifes_log.LLEvents
             Code = 0;
             tp = eventType;
             Dt = dt;
-            Body.Content = new UNote(tp, this);
+            Body.Content = new UEvent(tp, this);
             exp = true;
             BD.Background = (SolidColorBrush)Resources["TextBoxBackgroundThemeBrush"];
         }
@@ -44,7 +44,7 @@ namespace Lifes_log.LLEvents
         private void UserControl_Tapped(object sender, Microsoft.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             if (!(!exp & Code > 0)) return;
-            Body.Content = new UNote(Code, this);
+            Body.Content = new UEvent(Code, this);
             BD.BorderBrush = (SolidColorBrush)Resources["ButtonBorderThemeBrush"];
             //BD.Background = (SolidColorBrush)Resources["TextBoxBackgroundThemeBrush"];
             exp = true;

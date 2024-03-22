@@ -16,8 +16,8 @@
 	  <Authors>Roman Popov</Authors>
 	  <Company>mt-soft.ru</Company>
 	  <PackageProjectUrl>mt-soft.ru/lifes-log</PackageProjectUrl>
-	  <NeutralLanguage>ru</NeutralLanguage>
 	  <PublishAot>False</PublishAot>
+	  <PublishTrimmed>False</PublishTrimmed>
   </PropertyGroup>
 
 	<ItemGroup>

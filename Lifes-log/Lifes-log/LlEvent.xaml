@@ -40,7 +40,6 @@
                 <AppBarButton x:Uid="FilterL" Icon="Filter" Click="BTFilter_Click"/>
             </CommandBar>
             <ListView x:Name="El" 
-                      Loaded="EL_Loaded"
                       RelativePanel.Below="Cb"
                       RelativePanel.AlignBottomWithPanel="True"/>
         </RelativePanel>

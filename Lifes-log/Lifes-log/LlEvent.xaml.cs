@@ -8,8 +8,8 @@ namespace Lifes_log
     public sealed partial class LlEvent
     {
 
-        private DayList ds;
-        private IncrementalLoadingCollection<DayList, Day> dls;
+        private readonly DayList ds;
+        private readonly IncrementalLoadingCollection<DayList, Day> dls;
         private readonly EventFilter ef;
         private readonly NewEventList ne;
         private readonly MoveTo mt;
@@ -25,16 +25,14 @@ namespace Lifes_log
                 Add = Add,
                 Manage = () => { Frame.Navigate(typeof(DBSettings.SetEventType)); }
             };
-            if (bool.TryParse((string) Registry.GetValue(App.RegRoot + "LLEvents", "FixPane", "")?? "False", out var b))
+            //----
+            ds = new(DateTime.Today);
+            dls = new(ds);
+            El.ItemsSource = dls;
+            //----
+            if (bool.TryParse((string)Registry.GetValue(App.RegRoot + "LLEvents", "FixPane", "") ?? "False", out var b))
                 FixPane.IsOn = b;
             RPane.Content = ne;
-        }
-
-        private void EL_Loaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-        {
-            ds = new (DateTime.Today);
-            dls = new (ds);
-            El.ItemsSource = dls;
         }
 
         private void Add(DateTime dt, Int16 tp)
